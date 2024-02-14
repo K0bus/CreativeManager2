@@ -101,14 +101,14 @@ protections:
       helmet:
         name: '&6Creative Helmet'
         lore:
-          - '&7This creative Helmet is bind to your Gamemode !'
+          - '&7This creative Helmet is bind to your Game mode !'
         material: BEDROCK
         model-data: 0
         items-adder: ''
       chest-plate:
         name: '&6Creative Chestplate'
         lore:
-          - '&7This &6Creative Chestplate&7 is bind to your Gamemode !'
+          - '&7This &6Creative Chestplate&7 is bind to your Game mode !'
         material: LEATHER_CHESTPLATE
         leather-color:
           red: 255
@@ -119,14 +119,14 @@ protections:
       leggings:
         name: '&6Creative Leggings'
         lore:
-          - '&7This &6Creative Leggings&7 is bind to your Gamemode !'
+          - '&7This &6Creative Leggings&7 is bind to your Game mode !'
         material: CHAINMAIL_LEGGINGS
         model-data: 0
         items-adder: ''
       boots:
         name: '&6Creative Boots'
         lore:
-          - '&7This &6Creative Boots&7 is bind to your Gamemode !'
+          - '&7This &6Creative Boots&7 is bind to your Game mode !'
         material: CHAINMAIL_BOOTS
         model-data: 0
         items-adder: ''
