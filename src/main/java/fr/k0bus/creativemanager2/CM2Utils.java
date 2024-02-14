@@ -1,7 +1,6 @@
 package fr.k0bus.creativemanager2;
 
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.protections.generic.*;
 import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -9,7 +8,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
