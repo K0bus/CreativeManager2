@@ -32,6 +32,7 @@ public class ItemTrackProtection extends Protection {
     }
 
     private ItemStack addLore(ItemStack item, HumanEntity p) {
+        //TODO: Rewrite function
         if (item == null)
             return null;
         if (p == null)
