@@ -1,0 +1,4 @@
+name: CreativeManager2
+version: '${project.version}'
+main: fr.k0bus.creativemanager2.CreativeManager2
+api-version: '1.20'

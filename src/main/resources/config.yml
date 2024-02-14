@@ -1,0 +1,132 @@
+plugin:
+  lang: en_US
+  tag: '&fCreativeManager &7>>'
+  debug-mode: false
+  check-update: true
+  antispam-tick: 5
+  save-interval: 300
+  stop-inventory-save: false
+
+database:
+  type: SQLITE
+  sqlite:
+    block-logs-file: 'block-logs.db'
+    inventories-file: 'inventories.db'
+  mysql:
+    address: 127.0.0.1
+    port: 3306
+    user: root
+    password: ''
+    db-name:
+      block-log: 'block-logs'
+      inventories: 'inventories'
+
+multi-inventories:
+  inventory_1:
+    world:
+      - *
+    gamemodes:
+      - SURVIVAL
+      - ADVENTURE
+  inventory_2:
+    world:
+      - *
+    gamemodes:
+      - CREATIVE
+
+protections:
+  place:
+    enabled: false
+    list-mode: BLACKLIST
+    list:
+      - BEDROCK
+  break:
+    enabled: false
+    list-mode: BLACKLIST
+    list:
+      - BEDROCK
+  container:
+    enabled: true
+  spawn:
+    enabled: true
+    multi-block:
+      wither: true
+      snowman: true
+  drop:
+    enabled: true
+  pickup:
+    enabled: true
+  entity:
+    enabled: true
+  combat:
+    pvp:
+      enabled: true
+    pve:
+      enabled: true
+  throw:
+    enabled: true
+  commands:
+    list-mode: BLACKLIST
+    list:
+      - trade
+  use:
+    list-mode: BLACKLIST
+    list:
+      - LAVA_BUCKET
+      - FLINT_AND_STEEL
+      - FIRE_CHARGE
+  get:
+    list-mode: BLACKLIST
+    list:
+      - DIAMOND
+      - BEDROCK
+  use-block:
+    list-mode: BLACKLIST
+    list: []
+  player-claim:
+    enabled:
+    plugins:
+      - WorldGuard
+      - GriefPrevention
+      - Lands
+  creative-lore:
+    enabled: true
+    lore:
+    - '&5Creative {ITEM}'
+    - '&7Generate by {PLAYER}'
+    - '&7{UUID}'
+  creative_armor:
+    enabled: false
+    armors:
+      helmet:
+        name: '&6Creative Helmet'
+        lore:
+          - '&7This creative Helmet is bind to your Gamemode !'
+        material: BEDROCK
+        model-data: 0
+        items-adder: ''
+      chest-plate:
+        name: '&6Creative Chestplate'
+        lore:
+          - '&7This &6Creative Chestplate&7 is bind to your Gamemode !'
+        material: LEATHER_CHESTPLATE
+        leather-color:
+          red: 255
+          green: 255
+          blue: 255
+        model-data: 0
+        items-adder: ''
+      leggings:
+        name: '&6Creative Leggings'
+        lore:
+          - '&7This &6Creative Leggings&7 is bind to your Gamemode !'
+        material: CHAINMAIL_LEGGINGS
+        model-data: 0
+        items-adder: ''
+      boots:
+        name: '&6Creative Boots'
+        lore:
+          - '&7This &6Creative Boots&7 is bind to your Gamemode !'
+        material: CHAINMAIL_BOOTS
+        model-data: 0
+        items-adder: ''
