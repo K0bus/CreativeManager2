@@ -131,5 +131,10 @@
             <artifactId>chestshop</artifactId>
             <version>3.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.LoneDev6</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <version>3.2.5</version>
+        </dependency>
     </dependencies>
 </project>
