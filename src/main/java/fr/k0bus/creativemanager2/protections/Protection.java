@@ -34,10 +34,14 @@ public abstract class Protection implements Listener {
     }
 
     public boolean isDisabled() {
-        return !enabled;
+        return !enabled || !isCompatible();
     }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isCompatible() {
+        return true;
     }
 }

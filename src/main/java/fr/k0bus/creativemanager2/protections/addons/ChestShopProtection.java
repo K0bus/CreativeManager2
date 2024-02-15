@@ -15,6 +15,11 @@ public class ChestShopProtection extends Protection {
         super(plugin);
     }
 
+    @Override
+    public boolean isCompatible() {
+        return getPlugin().getServer().getPluginManager().isPluginEnabled("ChestShop");
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onShopCreation(PreShopCreationEvent event)
     {

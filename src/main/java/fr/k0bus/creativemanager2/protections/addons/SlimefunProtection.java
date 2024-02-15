@@ -22,6 +22,11 @@ public class SlimefunProtection extends Protection {
         super(plugin);
     }
 
+    @Override
+    public boolean isCompatible() {
+        return getPlugin().getServer().getPluginManager().isPluginEnabled("Slimefun");
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onMultiBlockInteract(MultiBlockInteractEvent event)
     {
