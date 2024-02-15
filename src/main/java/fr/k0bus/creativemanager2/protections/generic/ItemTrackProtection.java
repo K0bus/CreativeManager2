@@ -33,14 +33,12 @@ public class ItemTrackProtection extends Protection {
 
     private ItemStack addLore(ItemStack item, HumanEntity p) {
         //TODO: Rewrite function
-        if (item == null)
-            return null;
-        if (p == null)
+        if (item == null || p == null)
             return null;
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) {
+        if (meta == null)
             return item;
-        }
+
         List<?> lore = new ArrayList<>(); //TODO: Setting Lore
         List<String> lore_t = new ArrayList<>();
 
@@ -50,7 +48,7 @@ public class ItemTrackProtection extends Protection {
                     string = string.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
                             .replace("{ITEM}", StringUtils.proper(item.getType().name()));
-                    lore_t.add(ChatColor.translateAlternateColorCodes('&',string));
+                    lore_t.add(StringUtils.translateColor(string));
                 }
             }
         }
