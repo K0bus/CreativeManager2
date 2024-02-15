@@ -1,7 +1,5 @@
 package fr.k0bus.creativemanager2.protections.addons;
 
-import com.Acrobot.ChestShop.Events.PreShopCreationEvent;
-import com.Acrobot.ChestShop.Events.PreTransactionEvent;
 import dev.lone.itemsadder.api.Events.*;
 import fr.k0bus.creativemanager2.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;

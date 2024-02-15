@@ -5,10 +5,8 @@ import com.Acrobot.ChestShop.Events.PreTransactionEvent;
 import fr.k0bus.creativemanager2.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 public class ChestShopProtection extends Protection {
     public ChestShopProtection(CreativeManager2 plugin) {
