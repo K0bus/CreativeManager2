@@ -126,5 +126,10 @@
             <version>17.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.acrobot.chestshop</groupId>
+            <artifactId>chestshop</artifactId>
+            <version>3.12</version>
+        </dependency>
     </dependencies>
 </project>
