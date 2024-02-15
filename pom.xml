@@ -136,5 +136,10 @@
             <artifactId>api-itemsadder</artifactId>
             <version>3.2.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.Slimefun</groupId>
+            <artifactId>Slimefun4</artifactId>
+            <version>RC-30</version>
+        </dependency>
     </dependencies>
 </project>
