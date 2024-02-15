@@ -4,7 +4,6 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.RegionResultSet;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
@@ -36,7 +35,7 @@ public class ClaimProtection extends Protection {
         if(isDisabled()) return;
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
-        if(!isMember(event.getPlayer(), event.getBlock().getLocation())) return;
+        if(notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
         //TODO: Message sender
     }
@@ -47,26 +46,26 @@ public class ClaimProtection extends Protection {
         if(isDisabled()) return;
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
-        if(!isMember(event.getPlayer(), event.getBlock().getLocation())) return;
+        if(notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
         //TODO: Message sender
     }
 
-    private boolean isMember(Player player, Location location)
+    private boolean notMember(Player player, Location location)
     {
         if(getPlugin().getServer().getPluginManager().isPluginEnabled("WorldGuard"))
         {
-            if(isMemberWG(player, location)) return true;
+            if(isMemberWG(player, location)) return false;
         }
         if(getPlugin().getServer().getPluginManager().isPluginEnabled("Lands"))
         {
-            if(isMemberLands(player, location)) return true;
+            if(isMemberLands(player, location)) return false;
         }
         if(getPlugin().getServer().getPluginManager().isPluginEnabled("GriefPrevention"))
         {
-            if(isMemberGP(player, location)) return true;
+            if(isMemberGP(player, location)) return false;
         }
-        return false;
+        return true;
     }
 
     private boolean isMemberWG(Player player, Location location)
