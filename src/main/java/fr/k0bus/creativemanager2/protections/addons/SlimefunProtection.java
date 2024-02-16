@@ -52,7 +52,6 @@ public class SlimefunProtection extends Protection {
             event.setCancelled(true);
             event.setCurrentItem(null);
             event.getWhoClicked().setItemOnCursor(null);
-            ((Player)event.getWhoClicked()).updateInventory();
             sendPermissionMessage(event.getWhoClicked());
             return;
         }
