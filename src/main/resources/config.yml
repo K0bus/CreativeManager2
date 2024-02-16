@@ -10,8 +10,10 @@ plugin:
 database:
   type: SQLITE
   sqlite:
-    block-logs-file: 'block-logs.db'
-    inventories-file: 'inventories.db'
+    file: 'data.db'
+    db-name:
+      block-log: 'block-logs'
+      inventories: 'inventories'
   mysql:
     address: 127.0.0.1
     port: 3306
@@ -22,17 +24,15 @@ database:
       inventories: 'inventories'
 
 multi-inventories:
-  inventory_1:
-    world:
-      - *
-    gamemodes:
-      - SURVIVAL
-      - ADVENTURE
-  inventory_2:
-    world:
-      - *
-    gamemodes:
-      - CREATIVE
+  world:
+    _GLOBAL:
+      survival: survival
+      adventure: survival
+      creative: creative
+    world_nether:
+      survival: survival_nether
+      adventure: survival_nether
+      creative: creative_nether
 
 protections:
   place:
@@ -89,7 +89,7 @@ protections:
       - WorldGuard
       - GriefPrevention
       - Lands
-  creative-lore:
+  itemtrack:
     enabled: true
     lore:
     - '&5Creative {ITEM}'
