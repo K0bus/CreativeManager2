@@ -32,24 +32,21 @@ public class ItemTrackProtection extends Protection {
     }
 
     private ItemStack addLore(ItemStack item, HumanEntity p) {
-        //TODO: Rewrite function
         if (item == null || p == null)
             return null;
         ItemMeta meta = item.getItemMeta();
         if (meta == null)
             return item;
 
-        List<?> lore = new ArrayList<>(); //TODO: Setting Lore
+        List<String> lore = CreativeManager2.API.getSettings().getStringList("protections.itemtrack.lore");
         List<String> lore_t = new ArrayList<>();
 
         if (lore != null) {
-            for (Object obj : lore) {
-                if (obj instanceof String string) {
-                    string = string.replace("{PLAYER}", p.getName())
+            for (String line : lore) {
+                line = line.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
                             .replace("{ITEM}", StringUtils.proper(item.getType().name()));
-                    lore_t.add(StringUtils.translateColor(string));
-                }
+                    lore_t.add(StringUtils.translateColor(line));
             }
         }
         meta.setLore(lore_t);
