@@ -78,6 +78,6 @@ public class CM2Utils {
 
     public static String parse(String string)
     {
-        return string.replace("{TAG}", StringUtils.parse(CreativeManager2.API.getSettings().getTag()));
+        return string.replace("{TAG}", CreativeManager2.API.TAG);
     }
 }
