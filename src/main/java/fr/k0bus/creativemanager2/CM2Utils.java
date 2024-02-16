@@ -1,7 +1,9 @@
 package fr.k0bus.creativemanager2;
 
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.utils.StringUtils;
 import org.bukkit.GameMode;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -63,5 +65,19 @@ public class CM2Utils {
             }
         }
         return protectionHashMap;
+    }
+
+    public static void sendMessage(CommandSender messageTo, String text)
+    {
+        messageTo.sendMessage(parse(StringUtils.parse(CreativeManager2.API.getLang().getString(text))));
+    }
+    public static void sendRawMessage(CommandSender messageTo, String text)
+    {
+        messageTo.sendMessage(parse(StringUtils.parse(text)));
+    }
+
+    public static String parse(String string)
+    {
+        return string.replace("{TAG}", StringUtils.parse(CreativeManager2.API.getSettings().getTag()));
     }
 }

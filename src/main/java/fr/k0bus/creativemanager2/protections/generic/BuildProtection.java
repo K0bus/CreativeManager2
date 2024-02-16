@@ -20,7 +20,7 @@ public class BuildProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -30,6 +30,6 @@ public class BuildProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
 }

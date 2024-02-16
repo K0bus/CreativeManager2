@@ -22,7 +22,7 @@ public class AttackProtection extends Protection {
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(player);
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onProjectileAttack(ProjectileHitEvent event)
@@ -32,6 +32,6 @@ public class AttackProtection extends Protection {
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(player);
     }
 }

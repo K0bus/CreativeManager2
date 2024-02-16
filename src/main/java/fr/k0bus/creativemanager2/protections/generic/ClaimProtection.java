@@ -37,7 +37,7 @@ public class ClaimProtection extends Protection {
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         if(notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -48,7 +48,7 @@ public class ClaimProtection extends Protection {
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         if(notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
 
     private boolean notMember(Player player, Location location)

@@ -28,7 +28,7 @@ public class ItemTrackProtection extends Protection {
         if(!CM2Utils.isCreativePlayer(event.getWhoClicked())) return;
         event.setCurrentItem(addLore(event.getCurrentItem(), event.getWhoClicked()));
         event.setCursor(addLore(event.getCursor(), event.getWhoClicked()));
-        //TODO: Message sender
+        sendPermissionMessage(event.getWhoClicked());
     }
 
     private ItemStack addLore(ItemStack item, HumanEntity p) {

@@ -20,6 +20,6 @@ public class GuiProtection extends Protection {
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         if(CM2Utils.isProtectedChest(event.getInventory())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
 }

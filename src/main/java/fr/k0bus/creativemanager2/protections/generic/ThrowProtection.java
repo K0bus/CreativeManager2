@@ -21,6 +21,6 @@ public class ThrowProtection extends Protection {
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(player);
     }
 }

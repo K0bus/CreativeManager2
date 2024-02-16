@@ -25,7 +25,7 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockPlace(CustomBlockPlaceEvent event)
@@ -34,7 +34,7 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(CustomBlockBreakEvent event)
@@ -43,7 +43,7 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockInteract(CustomBlockInteractEvent event)
@@ -52,7 +52,7 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onFurnitureInteract(FurnitureInteractEvent event)
@@ -61,7 +61,7 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDie(CustomEntityDeathEvent event)
@@ -71,6 +71,6 @@ public class ItemsAdderProtection extends Protection {
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         player.setLastDamage(0);
-        //TODO: Message sender
+        sendPermissionMessage(player);
     }
 }

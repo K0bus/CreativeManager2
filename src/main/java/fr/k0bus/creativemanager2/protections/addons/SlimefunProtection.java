@@ -30,7 +30,7 @@ public class SlimefunProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void protectBreakWithSlimefun(BlockBreakEvent event)
@@ -39,7 +39,7 @@ public class SlimefunProtection extends Protection {
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
-        //TODO: Message sender
+        sendPermissionMessage(event.getPlayer());
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void protectSlimefunItemInventory(InventoryClickEvent event)
@@ -53,14 +53,14 @@ public class SlimefunProtection extends Protection {
             event.setCurrentItem(null);
             event.getWhoClicked().setItemOnCursor(null);
             ((Player)event.getWhoClicked()).updateInventory();
+            sendPermissionMessage(event.getWhoClicked());
             return;
-            //TODO: Message sender
         }
         if(SlimefunItem.getByItem(event.getCursor()) != null)
         {
             event.getWhoClicked().setItemOnCursor(null);
             event.setCancelled(true);
-            //TODO: Message sender
+            sendPermissionMessage(event.getWhoClicked());
         }
     }
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -74,7 +74,7 @@ public class SlimefunProtection extends Protection {
             event.setUseBlock(Event.Result.DENY);
             event.setUseItem(Event.Result.DENY);
             event.cancel();
-            //TODO: Message sender
+            sendPermissionMessage(event.getPlayer());
         }
     }
 }
