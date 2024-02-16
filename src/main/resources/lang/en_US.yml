@@ -1,0 +1,11 @@
+permission:
+  attack: '{TAG} &cYou can''t attack in Creative'
+  build: '{TAG} &cYou can''t build in Creative'
+  claim: '{TAG} &cYou can''t build outside of your claim in Creative'
+  container: '{TAG} &cYou can''t use container'
+  drop: '{TAG} &cYou can''t drop item in Creative'
+  gui: '{TAG} &cYou can''t open gui in Creative'
+  throw: '{TAG} &cYou can''t throw anything in Creative'
+  chestshop: '{TAG} &cYou can''t use ChestShop in Creative'
+  itemsadder: '{TAG} &cYou can''t use ItemsAdder in Creative'
+  slimefun: '{TAG} &cYou can''t use SlimeFun in Creative'
