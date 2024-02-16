@@ -1,6 +1,8 @@
 package fr.k0bus.creativemanager2.protections;
 
+import fr.k0bus.creativemanager2.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 
@@ -16,8 +18,15 @@ public abstract class Protection implements Listener {
     {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase();
         this.plugin = plugin;
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        plugin.getLogger().log(Level.INFO, "Protection '" + id + "' loaded from class (" + this.getClass().getSimpleName() + ")");
+        if(isCompatible())
+        {
+            plugin.getServer().getPluginManager().registerEvents(this, plugin);
+            plugin.getLogger().log(Level.INFO, "Protection '" + id + "' loaded from class (" + this.getClass().getSimpleName() + ")");
+        }
+        else
+        {
+            plugin.getLogger().log(Level.INFO, "Protection '" + id + "' unloaded for incompatibility");
+        }
     }
 
     public boolean hasPermission(LivingEntity player)
@@ -43,5 +52,10 @@ public abstract class Protection implements Listener {
 
     public boolean isCompatible() {
         return true;
+    }
+
+    public void sendPermissionMessage(CommandSender toMessage)
+    {
+        CM2Utils.sendMessage(toMessage, "permission." + getId());
     }
 }
