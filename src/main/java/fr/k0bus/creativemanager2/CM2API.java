@@ -1,0 +1,43 @@
+package fr.k0bus.creativemanager2;
+
+import fr.k0bus.config.Lang;
+import fr.k0bus.creativemanager2.file.Settings;
+import fr.k0bus.creativemanager2.protections.Protection;
+
+import java.util.HashMap;
+
+public class CM2API {
+    private final Settings settings;
+    private final Lang lang;
+    private final HashMap<String, Protection> protections;
+    private final CreativeManager2 instance;
+    public CM2API(CreativeManager2 instance)
+    {
+        this.instance = instance;
+        this.protections = CM2Utils.loadProtections(instance);
+        this.settings = new Settings(instance);
+        this.lang = new Lang(settings.getLang(), instance);
+    }
+
+    public CreativeManager2 getInstance() {
+        return instance;
+    }
+
+    public HashMap<String, Protection> getProtections() {
+        return protections;
+    }
+
+    public Lang getLang() {
+        return lang;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void reloadSettings()
+    {
+        settings.loadConfig();
+        lang.loadConfig();
+    }
+}
