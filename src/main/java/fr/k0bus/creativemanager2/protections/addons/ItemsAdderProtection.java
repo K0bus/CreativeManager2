@@ -1,7 +1,7 @@
 package fr.k0bus.creativemanager2.protections.addons;
 
 import dev.lone.itemsadder.api.Events.*;
-import fr.k0bus.creativemanager2.CM2Utils;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.entity.Player;

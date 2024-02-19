@@ -3,6 +3,7 @@ package fr.k0bus.creativemanager2;
 import fr.k0bus.config.Lang;
 import fr.k0bus.creativemanager2.file.Settings;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.utils.StringUtils;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class CM2API {
     private final HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
     public String TAG;
+
     public CM2API(CreativeManager2 instance)
     {
         this.instance = instance;

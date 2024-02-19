@@ -1,4 +1,4 @@
-package fr.k0bus.creativemanager2;
+package fr.k0bus.creativemanager2.utils;
 
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.utils.StringUtils;

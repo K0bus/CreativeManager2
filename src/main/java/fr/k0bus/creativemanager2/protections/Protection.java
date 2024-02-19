@@ -1,6 +1,6 @@
 package fr.k0bus.creativemanager2.protections;
 
-import fr.k0bus.creativemanager2.CM2Utils;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;

@@ -1,7 +1,7 @@
 package fr.k0bus.creativemanager2.commands;
 
 import fr.k0bus.commands.Command;
-import fr.k0bus.creativemanager2.CM2Utils;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
 import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
