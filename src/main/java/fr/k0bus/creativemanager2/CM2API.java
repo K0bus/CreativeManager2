@@ -5,6 +5,8 @@ import fr.k0bus.creativemanager2.file.Settings;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.utils.StringUtils;
+import org.bukkit.GameMode;
+import org.bukkit.World;
 
 import java.util.HashMap;
 
@@ -45,5 +47,15 @@ public class CM2API {
         settings.loadConfig();
         lang.loadConfig();
         this.TAG = StringUtils.parse(settings.getTag());
+    }
+
+    public String getInventoryName(World world, GameMode gameMode) {
+        if(this.settings.isString("multi-inventories." + world.getName() + "." + gameMode.name().toLowerCase()))
+        {
+            return this.settings
+                    .getString("multi-inventories." + world.getName() + "." + gameMode.name().toLowerCase());
+        }
+        return this.settings
+                .getString("multi-inventories._GLOBAL." + gameMode.name().toLowerCase());
     }
 }
