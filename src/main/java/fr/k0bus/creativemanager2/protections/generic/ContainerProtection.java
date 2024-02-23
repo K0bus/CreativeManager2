@@ -35,7 +35,7 @@ public class ContainerProtection extends Protection {
         if(event.getBlock() instanceof Container container)
         {
             container.getInventory().clear();
+            sendPermissionMessage(event.getPlayer());
         }
-        sendPermissionMessage(event.getPlayer());
     }
 }
