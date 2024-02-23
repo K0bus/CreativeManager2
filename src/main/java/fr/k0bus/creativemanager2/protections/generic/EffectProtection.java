@@ -19,7 +19,6 @@ public class EffectProtection extends Protection {
         if(isDisabled()) return;
         if(hasPermission(event.getPlayer())) return;
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
-        event.setCancelled(true);
         for (PotionEffect effect: event.getPlayer().getActivePotionEffects()) {
             event.getPlayer().removePotionEffect(effect.getType());
         }
