@@ -24,15 +24,14 @@ database:
       inventories: 'inventories'
 
 multi-inventories:
-  world:
-    _GLOBAL:
-      survival: survival
-      adventure: survival
-      creative: creative
-    world_nether:
-      survival: survival_nether
-      adventure: survival_nether
-      creative: creative_nether
+  _GLOBAL:
+    survival: survival
+    adventure: survival
+    creative: creative
+  world_nether:
+    survival: survival_nether
+    adventure: survival_nether
+    creative: creative_nether
 
 protections:
   place:
