@@ -5,12 +5,14 @@ import fr.k0bus.creativemanager2.utils.BlockUtils;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,6 +21,8 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -160,5 +164,68 @@ public class LogBlockProtection extends Protection {
             }
         }
     }
+    @EventHandler
+    public void onEntityBreak(EntityChangeBlockEvent event) {
+        if (event.getTo().equals(Material.AIR)) {
+            UUID uuid = CM2BlockData.findPlayer(event.getBlock());
+            if (uuid != null) {
+                event.setCancelled(true);
+                event.getBlock().setType(Material.AIR);
+            }
+        }
+    }
+    @EventHandler
+    public void onExtend(BlockPistonExtendEvent event) {
+        BlockFace pistonDirection = event.getDirection();
+        List<Block> blocks = new ArrayList<>(event.getBlocks());
+        this.pistonCheck(pistonDirection, blocks);
 
+        Block pistonHead = event.getBlock().getRelative(event.getDirection());
+        UUID uuid = CM2BlockData.findPlayer(pistonHead);
+        if(uuid != null)
+        {
+            if(pistonHead.getType().equals(Material.PISTON_HEAD))
+            {
+                CM2BlockData.register(pistonHead, uuid);
+            }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onRetract(BlockPistonRetractEvent event) {
+        BlockFace pistonDirection = event.getDirection();
+        List<Block> blocks = new ArrayList<>(event.getBlocks());
+
+        Block pistonHead = event.getBlock().getRelative(event.getDirection().getOppositeFace());
+        UUID uuid = CM2BlockData.findPlayer(pistonHead);
+        if(uuid != null)
+        {
+            if(pistonHead.getType().equals(Material.PISTON_HEAD))
+            {
+                CM2BlockData.unregister(pistonHead);
+            }
+        }
+
+        this.pistonCheck(pistonDirection, blocks);
+    }
+
+    private void pistonCheck(BlockFace blockFace, List<Block> blocks) {
+        Collections.reverse(blocks);
+        for (Block toMoveBlock : blocks) {
+            UUID uuid = CM2BlockData.findPlayer(toMoveBlock);
+            if (uuid != null) {
+                if(toMoveBlock.getPistonMoveReaction().equals(PistonMoveReaction.BREAK))
+                {
+                    toMoveBlock.setType(Material.AIR);
+                    CM2BlockData.unregister(toMoveBlock);
+                }
+                else
+                {
+                    Location movedBlock = toMoveBlock.getRelative(blockFace).getLocation();
+                    CM2BlockData.register(movedBlock, uuid);
+                    CM2BlockData.unregister(toMoveBlock);
+                }
+            }
+        }
+    }
 }
