@@ -1,6 +1,6 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.CM2BlockData;
+import fr.k0bus.creativemanager2.utils.CM2BlockData;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
