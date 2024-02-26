@@ -21,7 +21,7 @@ public class CM2API {
     private final HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
     public String TAG;
-    private HashMap<String, Set<Material>> tagMap;
+    private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
 
     public CM2API(CreativeManager2 instance)
     {
@@ -30,6 +30,7 @@ public class CM2API {
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
         this.TAG = StringUtils.parse(settings.getTag());
+        loadTags();
     }
 
     public CreativeManager2 getInstance() {
