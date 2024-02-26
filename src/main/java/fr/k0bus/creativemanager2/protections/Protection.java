@@ -31,8 +31,14 @@ public abstract class Protection implements Listener {
 
     public boolean hasPermission(LivingEntity player)
     {
-        return player.hasPermission("creativemanager." + id);
+        return player.hasPermission(getPermission());
     }
+
+    public String getPermission()
+    {
+        return "creativemanager." + id;
+    }
+
 
     public String getId() {
         return id;
