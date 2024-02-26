@@ -38,16 +38,23 @@ public class ItemTrackProtection extends Protection {
 
         List<String> lore = CreativeManager2.API.getSettings().getStringList("protections.itemtrack.lore");
         List<String> lore_t = new ArrayList<>();
+        String displayname = CreativeManager2.API.getSettings().getString("protections.itemtrack.displayname");
 
-        if (lore != null) {
+        if(displayname != null && !displayname.isEmpty())
+        {
+            meta.setDisplayName(
+                    displayname.replace("{ITEM}", StringUtils.proper(item.getType().name()))
+            );
+        }
+        if (lore != null && !lore.isEmpty()) {
             for (String line : lore) {
                 line = line.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
                             .replace("{ITEM}", StringUtils.proper(item.getType().name()));
                     lore_t.add(StringUtils.translateColor(line));
             }
+            meta.setLore(lore_t);
         }
-        meta.setLore(lore_t);
         item.setItemMeta(meta);
         return item;
     }
