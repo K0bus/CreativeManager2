@@ -17,4 +17,8 @@ public class Settings extends Configuration {
         return getString("plugin.lang");
     }
     public String getTag(){return getString("plugin.tag");}
+
+    public boolean debugMode(){
+        return getBoolean("plugin.debug-mode");
+    }
 }
