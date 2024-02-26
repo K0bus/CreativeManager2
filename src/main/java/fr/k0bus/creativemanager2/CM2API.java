@@ -6,9 +6,14 @@ import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.utils.StringUtils;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.logging.Level;
 
 public class CM2API {
     private final Settings settings;
@@ -16,6 +21,7 @@ public class CM2API {
     private final HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
     public String TAG;
+    private HashMap<String, Set<Material>> tagMap;
 
     public CM2API(CreativeManager2 instance)
     {
@@ -57,5 +63,29 @@ public class CM2API {
         }
         return this.settings
                 .getString("multi-inventories._GLOBAL." + gameMode.name().toLowerCase());
+    }
+
+    private void loadTags()
+    {
+        try
+        {
+            Field[] fieldlist = Tag.class.getDeclaredFields();
+            for (Field fld : fieldlist) {
+                try {
+                    Set<Material> set = ((Tag<Material>) fld.get(null)).getValues();
+                    tagMap.put(fld.getName(), set);
+                }catch (Exception ignored)
+                {}
+            }
+            instance.getLogger().log(Level.INFO, "&2Tag loaded from Spigot ! &7[" + tagMap.size() + "]");
+        }
+        catch (Exception e)
+        {
+            instance.getLogger().log(Level.WARNING, "&cThis minecraft version could not use the TAG system.");
+        }
+    }
+
+    public HashMap<String, Set<Material>> getTagMap() {
+        return tagMap;
     }
 }
