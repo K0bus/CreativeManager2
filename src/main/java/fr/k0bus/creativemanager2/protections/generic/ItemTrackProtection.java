@@ -20,7 +20,7 @@ public class ItemTrackProtection extends Protection {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onInventoryOpen(InventoryCreativeEvent event)
+    public void onInventoryCreative(InventoryCreativeEvent event)
     {
         if(isDisabled()) return;
         if(hasPermission(event.getWhoClicked())) return;
