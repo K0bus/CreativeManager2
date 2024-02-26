@@ -6,13 +6,11 @@ pipeline {
                 sh 'mvn -B -DskipTests clean install'
             }
         }
-        stage('Archive artifacts') {
-            steps {
-                sh 'rm -rf artifacts'
-                sh 'mkdir artifacts'
-                sh 'cp build/libs/CreativeManager2*.jar artifacts/'
-                archiveArtifacts artifacts: 'artifacts/*.jar', followSymlinks: false
-            }
-        }
     }
+    post {
+            always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+        }
+        }
 }
