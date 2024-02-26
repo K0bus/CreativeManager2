@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.CM2Inventory;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,8 @@ public class InventoryProtection extends Protection {
         String inventoryFromName = CreativeManager2.API.getInventoryName(world, GMFrom);
         String inventoryToName = CreativeManager2.API.getInventoryName(world, GMTo);
         if(inventoryFromName.equals(inventoryToName)) return;
-        //TODO: Inventory save & load
+        CM2Inventory.saveInventory(event.getPlayer(), inventoryFromName);
+        CM2Inventory.loadInventory(event.getPlayer(), inventoryToName);
     }
 
     @EventHandler
@@ -38,7 +40,8 @@ public class InventoryProtection extends Protection {
         String inventoryToName = CreativeManager2.API
                 .getInventoryName(event.getTo().getWorld(), event.getPlayer().getGameMode());
         if(inventoryToName.equals(inventoryFromName)) return;
-        //TODO: Inventory save & load
+        CM2Inventory.saveInventory(event.getPlayer(), inventoryFromName);
+        CM2Inventory.loadInventory(event.getPlayer(), inventoryToName);
     }
 
 }
