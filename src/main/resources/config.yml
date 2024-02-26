@@ -7,22 +7,6 @@ plugin:
   save-interval: 300
   stop-inventory-save: false
 
-database:
-  type: SQLITE
-  sqlite:
-    file: 'data.db'
-    db-name:
-      block-log: 'block-logs'
-      inventories: 'inventories'
-  mysql:
-    address: 127.0.0.1
-    port: 3306
-    user: root
-    password: ''
-    db-name:
-      block-log: 'block-logs'
-      inventories: 'inventories'
-
 multi-inventories:
   _GLOBAL:
     survival: survival
