@@ -87,6 +87,6 @@ public class CM2API {
     }
 
     public HashMap<String, Set<Material>> getTagMap() {
-        return tagMap;
+        return this.tagMap;
     }
 }
