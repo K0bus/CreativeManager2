@@ -9,8 +9,7 @@ pipeline {
     }
     post {
             always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
+            archiveArtifacts artifacts: 'target/CreativeManager2*.jar', fingerprint: true
         }
-        }
+    }
 }
