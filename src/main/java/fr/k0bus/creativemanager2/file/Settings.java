@@ -5,11 +5,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Settings extends Configuration {
 
-    JavaPlugin instance;
-
     public Settings(JavaPlugin instance) {
         super("config.yml", instance);
-        this.instance = instance;
     }
 
     public String getLang()
