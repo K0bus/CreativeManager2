@@ -34,6 +34,11 @@ public abstract class Protection implements Listener {
         return player.hasPermission(getPermission());
     }
 
+    public boolean hasPermission(LivingEntity player, String permission)
+    {
+        return player.hasPermission(getPermission() + "." + permission);
+    }
+
     public String getPermission()
     {
         return "creativemanager." + id;
@@ -63,5 +68,9 @@ public abstract class Protection implements Listener {
     public void sendPermissionMessage(CommandSender toMessage)
     {
         CM2Utils.sendMessage(toMessage, "permission." + getId());
+    }
+    public void sendPermissionMessage(CommandSender toMessage, String custom)
+    {
+        CM2Utils.sendMessage(toMessage, "permission." + getId() + "." + custom);
     }
 }
