@@ -4,11 +4,14 @@ import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.utils.StringUtils;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class CM2Utils {
     public static boolean isProtectedChest(Inventory inventory) {
@@ -80,5 +84,51 @@ public class CM2Utils {
     public static String parse(String string)
     {
         return string.replace("{TAG}", CreativeManager2.API.TAG);
+    }
+    public static boolean inList(ItemStack itemStack, List<String> strings)
+    {
+        return inList(itemStack.getType(), strings);
+    }
+    public static boolean inList(Block block, List<String> strings)
+    {
+        return inList(block.getType(), strings);
+    }
+    public static boolean inList(Material material, List<String> strings)
+    {
+        return inList(material.name().toLowerCase(), strings);
+    }
+
+    public static boolean inList(String search, List<String> list) {
+        for(String s : list)
+        {
+            s = s.toLowerCase();
+            if(s.equals("*")) return true;
+            if(s.isEmpty()) continue;
+            if(s.startsWith("*") && s.endsWith("*"))
+                if(search.contains(s.substring(1, s.length() -1)))
+                    return true;
+            if(s.startsWith("*"))
+                if(search.endsWith(s.substring(1)))
+                    return true;
+            if(s.endsWith("*"))
+                if(search.startsWith(s.substring(0, s.length() -1)))
+                    return true;
+            if(s.equals(search))
+                return true;
+            if(s.startsWith("#"))
+            {
+                Set<Material> set = CreativeManager2.API.getTagMap().get(s.substring(1).toUpperCase());
+                if(set != null)
+                {
+                    if(set.contains(Material.valueOf(search))) return true;
+                }
+                else
+                {
+                    CreativeManager2.API.getInstance().getLogger()
+                            .log(Level.WARNING, "Unable to find " + s + " tags");
+                }
+            }
+        }
+        return false;
     }
 }
