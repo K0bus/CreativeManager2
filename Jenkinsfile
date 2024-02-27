@@ -10,7 +10,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/CreativeManager2*.jar', fingerprint: true
-            withCredentials([string(credentialsId: 'discord-hook-cm2', variable: 'URL')]) {
+            withCredentials([string(credentialsId: 'discord-hook-cm2', variable: 'DISCORD_URL')]) {
                         discordSend webhookURL: $DISCORD_URL,
                             title: JOB_NAME,
                             thumbnail: "https://i.imgur.com/wMJWATd.png",
