@@ -13,6 +13,6 @@ public class SettingsSubCommand extends SubCommands {
 
     @Override
     public void run(CommandSender sender, String[] args) {
-        CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " &6Opening settings GUI...");
+        CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " &6Settings GUI not implemented yet.");
     }
 }
