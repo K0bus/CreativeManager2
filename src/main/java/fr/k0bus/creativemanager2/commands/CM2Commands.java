@@ -14,8 +14,8 @@ public class CM2Commands extends Command {
         addSubCommands(new SettingsSubCommand());
         addSubCommands(new ReloadSubCommand());
         addSubCommands(new CheckBlockCommand());
-        setUsage("/lagg <argument>");
-        setDescription("All command added to LaggManager");
+        setUsage("/cm2 <argument>");
+        setDescription("All command added to CreativeManager2");
     }
 
     @Override
