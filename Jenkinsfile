@@ -12,9 +12,9 @@ pipeline {
             archiveArtifacts artifacts: 'target/CreativeManager2*.jar', fingerprint: true
             withCredentials([string(credentialsId: 'discord-hook-cm2', variable: 'DISCORD_URL')]) {
                         discordSend webhookURL: DISCORD_URL,
-                            title: JOB_NAME,
+                            title: "$JOB_NAME #$BUILD_NUMBER",
                             thumbnail: "https://i.imgur.com/wMJWATd.png",
-                            description: "Jenkins Pipeline Build",
+                            description: "CI Automated in Jenkins",
                             footer: "by K0bus",
                             successful: true,
                             link: env.BUILD_URL,
