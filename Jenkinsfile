@@ -10,7 +10,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/CreativeManager2*.jar', fingerprint: true
-            discordSend webhookURL: $DISCORD_HOOK,
+            discordSend webhookURL: $params.DISCORD_HOOK,
                 title: JOB_NAME,
                 thumbnail: "https://i.imgur.com/wMJWATd.png",
                 description: "Jenkins Pipeline Build",
