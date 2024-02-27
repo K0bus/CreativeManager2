@@ -20,14 +20,8 @@ multi-inventories:
 protections:
   place:
     enabled: false
-    list-mode: BLACKLIST
-    list:
-      - BEDROCK
   break:
     enabled: false
-    list-mode: BLACKLIST
-    list:
-      - BEDROCK
   container:
     enabled: true
   spawn:
@@ -48,26 +42,8 @@ protections:
       enabled: true
   throw:
     enabled: true
-  commands:
-    list-mode: BLACKLIST
-    list:
-      - trade
-  use:
-    list-mode: BLACKLIST
-    list:
-      - LAVA_BUCKET
-      - FLINT_AND_STEEL
-      - FIRE_CHARGE
-  get:
-    list-mode: BLACKLIST
-    list:
-      - DIAMOND
-      - BEDROCK
-  use-block:
-    list-mode: BLACKLIST
-    list: []
   player-claim:
-    enabled:
+    enabled: true
     plugins:
       - WorldGuard
       - GriefPrevention
@@ -114,3 +90,23 @@ protections:
         material: CHAINMAIL_BOOTS
         model-data: 0
         items-adder: ''
+  custom:
+    enabled: false
+    commands:
+      type: BLACKLIST
+      list: []
+    place:
+      type: BLACKLIST
+      list: []
+    break:
+      type: BLACKLIST
+      list: []
+    item-use:
+      type: BLACKLIST
+      list: []
+    block-use:
+      type: BLACKLIST
+      list: []
+    store-item:
+      type: BLACKLIST
+      list: []
