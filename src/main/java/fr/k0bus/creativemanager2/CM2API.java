@@ -4,6 +4,7 @@ import fr.k0bus.config.Lang;
 import fr.k0bus.creativemanager2.file.Settings;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.menu.MenuListener;
 import fr.k0bus.utils.StringUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -20,6 +21,7 @@ public class CM2API {
     private final Lang lang;
     private final HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
+    private final MenuListener menuListener = new MenuListener();
     public String TAG;
     private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
 
@@ -30,6 +32,7 @@ public class CM2API {
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
         this.TAG = StringUtils.parse(settings.getTag());
+        instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         loadTags();
     }
 
@@ -88,5 +91,9 @@ public class CM2API {
 
     public HashMap<String, Set<Material>> getTagMap() {
         return this.tagMap;
+    }
+
+    public MenuListener getMenuListener() {
+        return menuListener;
     }
 }
