@@ -3,6 +3,7 @@ package fr.k0bus.creativemanager2.protections.generic;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,7 +12,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class AttackProtection extends Protection {
     public AttackProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.GOLDEN_SWORD);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

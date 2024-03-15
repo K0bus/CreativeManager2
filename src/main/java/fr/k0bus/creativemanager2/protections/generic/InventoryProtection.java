@@ -4,6 +4,7 @@ import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Inventory;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class InventoryProtection extends Protection {
     public InventoryProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.PLAYER_HEAD);
     }
 
     @EventHandler

@@ -4,6 +4,7 @@ import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.utils.StringUtils;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class ItemTrackProtection extends Protection {
     public ItemTrackProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.NAME_TAG);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

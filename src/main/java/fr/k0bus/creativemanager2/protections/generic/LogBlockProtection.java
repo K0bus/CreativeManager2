@@ -28,7 +28,7 @@ import java.util.UUID;
 
 public class LogBlockProtection extends Protection {
     public LogBlockProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.MAP);
     }
 
     @EventHandler

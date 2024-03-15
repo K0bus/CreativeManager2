@@ -16,6 +16,7 @@ import me.angeschossen.lands.api.land.Area;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,7 +27,7 @@ import java.util.Set;
 
 public class ClaimProtection extends Protection {
     public ClaimProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.OAK_SIGN);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

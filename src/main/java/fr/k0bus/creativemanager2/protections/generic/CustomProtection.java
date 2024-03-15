@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CustomProtection extends Protection {
     public CustomProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.WRITTEN_BOOK);
     }
     public ListType getType(CustomType type)
     {

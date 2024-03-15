@@ -4,13 +4,14 @@ import dev.lone.itemsadder.api.Events.*;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
 public class ItemsAdderProtection extends Protection {
     public ItemsAdderProtection(CreativeManager2 plugin) {
-        super(plugin);
+        super(plugin, Material.WRITABLE_BOOK);
     }
 
     @Override
