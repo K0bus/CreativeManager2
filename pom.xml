@@ -6,7 +6,7 @@
 
     <groupId>fr.k0bus</groupId>
     <artifactId>CreativeManager2</artifactId>
-    <version>0.3.0-${build.number}</version>
+    <version>0.3.1-${build.number}</version>
     <packaging>jar</packaging>
 
     <name>CreativeManager2</name>
