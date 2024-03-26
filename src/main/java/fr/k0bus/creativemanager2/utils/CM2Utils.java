@@ -74,11 +74,13 @@ public class CM2Utils {
 
     public static void sendMessage(CommandSender messageTo, String text)
     {
-        messageTo.sendMessage(parse(StringUtils.parse(CreativeManager2.API.getLang().getString(text))));
+        if(!CreativeManager2.API.getLang().getString(text).isEmpty())
+            messageTo.sendMessage(parse(StringUtils.parse(CreativeManager2.API.getLang().getString(text))));
     }
     public static void sendRawMessage(CommandSender messageTo, String text)
     {
-        messageTo.sendMessage(parse(StringUtils.parse(text)));
+        if(!text.isEmpty())
+            messageTo.sendMessage(parse(StringUtils.parse(text)));
     }
 
     public static String parse(String string)
