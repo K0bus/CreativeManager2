@@ -84,20 +84,4 @@ public class MenuListener implements Listener {
             menuMap.get(e.getInventory()).onInteract(e);
         }
     }
-
-    @EventHandler
-    public void onLogin(PlayerJoinEvent e)
-    {
-        Player p = e.getPlayer();
-        NamespacedKey key = new NamespacedKey(plugin, "gui-inventory-k0bus");
-        String inventoryString = p.getPersistentDataContainer().get(key, PersistentDataType.STRING);
-        if(inventoryString == null) return;
-        try {
-            p.getInventory().setContents(new ItemStack[36]);
-            p.getInventory().setContents(InventoryUtils.fromBase64(inventoryString).getContents());
-            p.getPersistentDataContainer().remove(key);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
 }
