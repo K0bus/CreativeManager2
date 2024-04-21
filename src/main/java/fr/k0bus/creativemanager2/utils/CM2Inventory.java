@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.utils;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.file.UserData;
-import fr.k0bus.utils.InventoryUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;

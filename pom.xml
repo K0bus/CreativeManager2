@@ -63,9 +63,8 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>k0bus-repository-spigot</id>
-            <name>K0bus Repository</name>
-            <url>https://maven.k0bus.fr/spigot</url>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
         <repository>
             <id>sk89q-repo</id>
@@ -89,29 +88,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>fr.k0bus</groupId>
-            <artifactId>Commands</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.k0bus</groupId>
-            <artifactId>Configs</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.k0bus</groupId>
-            <artifactId>Menu</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.k0bus</groupId>
-            <artifactId>Utils</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
@@ -148,6 +133,12 @@
             <artifactId>Slimefun4</artifactId>
             <version>RC-30</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

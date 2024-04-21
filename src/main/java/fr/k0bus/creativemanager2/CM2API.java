@@ -1,11 +1,10 @@
 package fr.k0bus.creativemanager2;
 
-import fr.k0bus.config.Lang;
-import fr.k0bus.creativemanager2.file.Settings;
+import fr.k0bus.creativemanager2.file.*;
+import fr.k0bus.creativemanager2.gui.MenuListener;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
-import fr.k0bus.menu.MenuListener;
-import fr.k0bus.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.StringUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -24,10 +23,17 @@ public class CM2API {
     private final MenuListener menuListener;
     public String TAG;
     private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
+    private boolean paper = false;
 
     public CM2API(CreativeManager2 instance)
     {
         this.instance = instance;
+
+        try {
+            Class.forName("com.destroystokyo.paper.ParticleBuilder");
+            this.paper = true;
+        } catch (ClassNotFoundException ignored) {}
+
         this.menuListener = new MenuListener(instance);
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
@@ -92,6 +98,10 @@ public class CM2API {
         {
             instance.getLogger().log(Level.WARNING, "&cThis minecraft version could not use the TAG system.");
         }
+    }
+
+    public boolean isPaper() {
+        return paper;
     }
 
     public HashMap<String, Set<Material>> getTagMap() {

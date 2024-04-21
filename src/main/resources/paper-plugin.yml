@@ -20,8 +20,3 @@ dependencies:
       load: BEFORE
       required: false
       join-classpath: true
-commands:
-  cm2:
-    usage: "/cm2"
-    permission: "cm2.admin"
-    description: "CreativeManager2 commands"

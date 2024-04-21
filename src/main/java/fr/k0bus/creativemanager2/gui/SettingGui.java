@@ -2,10 +2,8 @@ package fr.k0bus.creativemanager2.gui;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.menu.MenuItems;
-import fr.k0bus.menu.PagedMenuExtended;
-import fr.k0bus.utils.Serializer;
-import fr.k0bus.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.Serializer;
+import fr.k0bus.creativemanager2.utils.StringUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -14,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SettingGui extends PagedMenuExtended {
+public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
         super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.API.getMenuListener());
         setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));

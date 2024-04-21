@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.utils;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.utils.StringUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
