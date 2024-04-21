@@ -4,14 +4,15 @@ import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-public class AttackProtection extends Protection {
-    public AttackProtection(CreativeManager2 plugin) {
+public class AttackMonstersProtection extends Protection {
+    public AttackMonstersProtection(CreativeManager2 plugin) {
         super(plugin, Material.GOLDEN_SWORD);
     }
 
@@ -20,6 +21,8 @@ public class AttackProtection extends Protection {
     {
         if(isDisabled()) return;
         if(!(event.getDamager() instanceof Player player)) return;
+        if(!(event.getEntity() instanceof LivingEntity)) return;
+        if(event.getEntity() instanceof Player) return;
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
@@ -30,6 +33,8 @@ public class AttackProtection extends Protection {
     {
         if(isDisabled()) return;
         if(!(event.getEntity().getShooter() instanceof Player player)) return;
+        if(!(event.getHitEntity() instanceof LivingEntity)) return;
+        if(event.getHitEntity() instanceof Player) return;
         if(hasPermission(player)) return;
         if(!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
