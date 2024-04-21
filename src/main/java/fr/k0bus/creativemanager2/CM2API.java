@@ -21,13 +21,14 @@ public class CM2API {
     private final Lang lang;
     private HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
-    private final MenuListener menuListener = new MenuListener();
+    private final MenuListener menuListener;
     public String TAG;
     private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
 
     public CM2API(CreativeManager2 instance)
     {
         this.instance = instance;
+        this.menuListener = new MenuListener(instance);
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
         this.TAG = StringUtils.parse(settings.getTag());
