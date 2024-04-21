@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.utils.language;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
