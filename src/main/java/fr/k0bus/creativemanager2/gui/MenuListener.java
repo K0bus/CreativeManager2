@@ -1,29 +1,16 @@
 package fr.k0bus.creativemanager2.gui;
 
-import fr.k0bus.creativemanager2.utils.InventoryUtils;
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class MenuListener implements Listener {
 
-    private final JavaPlugin plugin;
     private final HashMap<Inventory, Menu> menuMap = new HashMap<>();
-
-    public MenuListener(JavaPlugin plugin)
-    {
-        this.plugin = plugin;
-    }
 
     public void add(Menu menu)
     {
@@ -33,7 +20,7 @@ public class MenuListener implements Listener {
     public void remove(Menu menu)
     {
         if(!menuMap.containsKey(menu.getInventory())) return;
-        if(menu.getInventory().getViewers().size()>0) return;
+        if(!menu.getInventory().getViewers().isEmpty()) return;
         menuMap.remove(menu.getInventory());
     }
 
