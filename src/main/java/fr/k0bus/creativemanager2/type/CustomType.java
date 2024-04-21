@@ -6,7 +6,8 @@ public enum CustomType {
     BREAK("break"),
     ITEMUSE("itemuse"),
     BLOCKUSE("blockuse"),
-    STOREITEM("storeitem");
+    STOREITEM("storeitem"),
+    NBT("nbt");
 
     private String id;
 
