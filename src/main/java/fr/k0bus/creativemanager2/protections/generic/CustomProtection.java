@@ -57,18 +57,23 @@ public class CustomProtection extends Protection {
     @EventHandler
     public void onBlockInteract(PlayerInteractEvent event)
     {
-        if(event.getClickedBlock() != null && needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCKUSE))
+        if(event.getClickedBlock() != null)
         {
-            event.setCancelled(true);
-            sendPermissionMessage(event.getPlayer(), CustomType.BLOCKUSE.getId());
-        } else if (event.getItem() != null && needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEMUSE)) {
-            event.setCancelled(true);
-            sendPermissionMessage(event.getPlayer(), CustomType.ITEMUSE.getId());
+            if(needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCKUSE)){
+                event.setCancelled(true);
+                sendPermissionMessage(event.getPlayer(), CustomType.BLOCKUSE.getId());
+            }
+        } else if (event.getItem() != null) {
+            if(needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEMUSE)){
+                event.setCancelled(true);
+                sendPermissionMessage(event.getPlayer(), CustomType.ITEMUSE.getId());
+            }
         }
     }
     @EventHandler
     public void onCreativeInventory(InventoryCreativeEvent event)
     {
+        if(event.getCursor().getType().equals(Material.AIR)) return;
         if(needCancel(event.getWhoClicked(), event.getCursor().getType().name(), CustomType.STOREITEM))
         {
             event.setCancelled(true);
@@ -76,6 +81,7 @@ public class CustomProtection extends Protection {
             sendPermissionMessage(event.getWhoClicked(), CustomType.STOREITEM.getId());
         }
         //TODO: Implement NBT
+
     }
 
     @EventHandler
