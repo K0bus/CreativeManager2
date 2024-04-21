@@ -41,6 +41,15 @@ public abstract class Protection implements Listener {
         {
             config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
         }
+        loadSettings();
+    }
+
+    public void loadSettings()
+    {
+        if(CreativeManager2.API.getSettings().contains("protections." + id))
+        {
+            config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
+        }
     }
 
     public boolean hasPermission(LivingEntity player)

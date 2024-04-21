@@ -68,6 +68,13 @@ public class CM2API {
         settings.loadConfig();
         lang.loadConfig();
         this.TAG = StringUtils.parse(settings.getTag());
+        if(!protections.isEmpty())
+        {
+            for(Protection protection: protections.values())
+            {
+                protection.loadSettings();
+            }
+        }
     }
 
     public String getInventoryName(World world, GameMode gameMode) {
