@@ -34,7 +34,7 @@ public class CM2API {
             this.paper = true;
         } catch (ClassNotFoundException ignored) {}
 
-        this.menuListener = new MenuListener(instance);
+        this.menuListener = new MenuListener();
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
         this.TAG = StringUtils.parse(settings.getTag());
