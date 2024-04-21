@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 
 public class StringUtils {
 
-    private static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");
-
     public static String parse(String s)
     {
         return Utils.PAPIParse(translateColor(s));
@@ -23,11 +21,8 @@ public class StringUtils {
             String replaceSharp = hexCode.replace('#', 'x');
             char[] ch = replaceSharp.toCharArray();
             StringBuilder builder = new StringBuilder();
-            char[] var7 = ch;
-            int var8 = ch.length;
 
-            for(int var9 = 0; var9 < var8; ++var9) {
-                char c = var7[var9];
+            for (char c : ch) {
                 builder.append("&").append(c);
             }
 
