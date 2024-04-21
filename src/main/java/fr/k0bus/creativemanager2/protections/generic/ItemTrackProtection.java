@@ -44,14 +44,14 @@ public class ItemTrackProtection extends Protection {
         if(displayname != null && !displayname.isEmpty())
         {
             meta.setDisplayName(
-                    displayname.replace("{ITEM}", StringUtils.proper(item.getType().name()))
+                    displayname.replace("{ITEM}", CreativeManager2.API.getMinecraftLang().get(item))
             );
         }
         if (!lore.isEmpty()) {
             for (String line : lore) {
                 line = line.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
-                            .replace("{ITEM}", StringUtils.proper(item.getType().name()));
+                            .replace("{ITEM}", CreativeManager2.API.getMinecraftLang().get(item));
                     lore_t.add(StringUtils.translateColor(line));
             }
             meta.setLore(lore_t);

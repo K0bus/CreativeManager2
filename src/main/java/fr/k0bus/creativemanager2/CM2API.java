@@ -5,6 +5,7 @@ import fr.k0bus.creativemanager2.gui.MenuListener;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.language.MinecraftLang;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -24,6 +25,8 @@ public class CM2API {
     public String TAG;
     private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
     private boolean paper = false;
+    private MinecraftLang minecraftLang;
+
 
     public CM2API(CreativeManager2 instance)
     {
@@ -37,6 +40,7 @@ public class CM2API {
         this.menuListener = new MenuListener();
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
+        this.minecraftLang = new MinecraftLang(getInstance(), getSettings().getLang());
         this.TAG = StringUtils.parse(settings.getTag());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         loadTags();
@@ -65,8 +69,9 @@ public class CM2API {
 
     public void reloadSettings()
     {
-        settings.loadConfig();
-        lang.loadConfig();
+        this.settings.loadConfig();
+        this.lang.loadConfig();
+        this.minecraftLang = new MinecraftLang(getInstance(), getSettings().getLang());
         this.TAG = StringUtils.parse(settings.getTag());
         if(!protections.isEmpty())
         {
@@ -99,11 +104,11 @@ public class CM2API {
                 }catch (Exception ignored)
                 {}
             }
-            instance.getLogger().log(Level.INFO, "&2Tag loaded from Spigot ! &7[" + tagMap.size() + "]");
+            instance.getLogger().log(Level.INFO, "§2Tag loaded from Spigot ! &7[" + tagMap.size() + "]");
         }
         catch (Exception e)
         {
-            instance.getLogger().log(Level.WARNING, "&cThis minecraft version could not use the TAG system.");
+            instance.getLogger().log(Level.WARNING, "§cThis minecraft version could not use the TAG system.");
         }
     }
 
@@ -117,5 +122,9 @@ public class CM2API {
 
     public MenuListener getMenuListener() {
         return menuListener;
+    }
+
+    public MinecraftLang getMinecraftLang() {
+        return minecraftLang;
     }
 }
