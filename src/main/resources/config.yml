@@ -50,7 +50,7 @@ protections:
       - Lands
   itemtrack:
     enabled: true
-    displayname: '#e863ff{item}'
+    displayname: '#e863ff{ITEM}'
     lore:
     - '&5Creative {ITEM}'
     - '&7Generate by {PLAYER}'
