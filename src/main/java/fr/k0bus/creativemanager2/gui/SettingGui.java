@@ -8,6 +8,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,11 +43,20 @@ public class SettingGui extends PagedMenu {
                 menuItems.setDisplayname(StringUtils.translateColor(
                                 "§7【§a§l✔§r§7】 §r§f" + StringUtils.proper(protection.getId())
                         )
-                );            }
-            for(ItemFlag flag : ItemFlag.values())
-            {
-                menuItems.addItemFlags(flag);
+                );
             }
+            if(CreativeManager2.API.isPaper())
+                for(ItemFlag flag : ItemFlag.values())
+                {
+                    menuItems.addItemFlags(flag);
+                }
+            else
+                for(ItemFlag flag : ItemFlag.values())
+                {
+                    ItemMeta meta = menuItems.getItemMeta();
+                    meta.addItemFlags(flag);
+                    menuItems.setItemMeta(meta);
+                }
             add(menuItems);
         }
         if(hasPreviousPage())
