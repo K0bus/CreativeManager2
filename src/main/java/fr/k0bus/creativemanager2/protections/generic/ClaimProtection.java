@@ -54,15 +54,18 @@ public class ClaimProtection extends Protection {
 
     private boolean notMember(Player player, Location location)
     {
-        if(getPlugin().getServer().getPluginManager().isPluginEnabled("WorldGuard"))
+        if(getPlugin().getServer().getPluginManager().isPluginEnabled("WorldGuard") &&
+                getConfig().getStringList("plugins").contains("WorldGuard"))
         {
             if(isMemberWG(player, location)) return false;
         }
-        if(getPlugin().getServer().getPluginManager().isPluginEnabled("Lands"))
+        if(getPlugin().getServer().getPluginManager().isPluginEnabled("Lands") &&
+                getConfig().getStringList("plugins").contains("Lands"))
         {
             if(isMemberLands(player, location)) return false;
         }
-        if(getPlugin().getServer().getPluginManager().isPluginEnabled("GriefPrevention"))
+        if(getPlugin().getServer().getPluginManager().isPluginEnabled("GriefPrevention") &&
+                getConfig().getStringList("plugins").contains("GriefPrevention"))
         {
             if(isMemberGP(player, location)) return false;
         }
