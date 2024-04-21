@@ -39,7 +39,7 @@ public class ItemTrackProtection extends Protection {
 
         List<String> lore = getConfig().getStringList("lore");
         List<String> lore_t = new ArrayList<>();
-        String displayname = getConfig().getString("displayname");
+        String displayname = StringUtils.parse(getConfig().getString("displayname"));
 
         if(displayname != null && !displayname.isEmpty())
         {

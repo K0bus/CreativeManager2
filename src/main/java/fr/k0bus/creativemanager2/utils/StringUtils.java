@@ -16,18 +16,25 @@ public class StringUtils {
 
     public static String translateColor(String s) {
 
-        if (VersionUtils.getMCVersion() < 16) {
-            return ChatColor.translateAlternateColorCodes('&', s);
+        Pattern pattern = Pattern.compile("#[a-fA-F\u0000-9]{6}");
+
+        for(Matcher matcher = pattern.matcher(s); matcher.find(); matcher = pattern.matcher(s)) {
+            String hexCode = s.substring(matcher.start(), matcher.end());
+            String replaceSharp = hexCode.replace('#', 'x');
+            char[] ch = replaceSharp.toCharArray();
+            StringBuilder builder = new StringBuilder();
+            char[] var7 = ch;
+            int var8 = ch.length;
+
+            for(int var9 = 0; var9 < var8; ++var9) {
+                char c = var7[var9];
+                builder.append("&").append(c);
+            }
+
+            s = s.replace(hexCode, builder.toString());
         }
 
-        Matcher matcher = HEX_PATTERN.matcher(s);
-        StringBuffer buffer = new StringBuffer();
-
-        while(matcher.find()) {
-            matcher.appendReplacement(buffer, ChatColor.of("#" + matcher.group(1)).toString());
-        }
-
-        return ChatColor.translateAlternateColorCodes('&', matcher.appendTail(buffer).toString());
+        return ChatColor.translateAlternateColorCodes('&', s);
     }
 
     public static String proper(String str)
