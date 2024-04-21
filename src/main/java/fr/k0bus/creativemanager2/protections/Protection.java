@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections;
 
-import fr.k0bus.creativemanager2.CM2API;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.Material;
