@@ -47,7 +47,7 @@ public class ItemTrackProtection extends Protection {
                     displayname.replace("{ITEM}", StringUtils.proper(item.getType().name()))
             );
         }
-        if (lore != null && !lore.isEmpty()) {
+        if (!lore.isEmpty()) {
             for (String line : lore) {
                 line = line.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
