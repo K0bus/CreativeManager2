@@ -110,3 +110,12 @@ protections:
     store-item:
       type: BLACKLIST
       list: []
+    nbt:
+      type: WHITELIST
+      list:
+        - 'down'
+        - 'east'
+        - 'north'
+        - 'south'
+        - 'up'
+        - 'west'
