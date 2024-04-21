@@ -19,7 +19,7 @@ import java.util.logging.Level;
 public class CM2API {
     private final Settings settings;
     private final Lang lang;
-    private final HashMap<String, Protection> protections;
+    private HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
     private final MenuListener menuListener = new MenuListener();
     public String TAG;
@@ -28,12 +28,16 @@ public class CM2API {
     public CM2API(CreativeManager2 instance)
     {
         this.instance = instance;
-        this.protections = CM2Utils.loadProtections(instance);
         this.settings = new Settings(instance);
         this.lang = new Lang(settings.getLang(), instance);
         this.TAG = StringUtils.parse(settings.getTag());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         loadTags();
+    }
+
+    public void loadProtections()
+    {
+        this.protections = CM2Utils.loadProtections(instance);
     }
 
     public CreativeManager2 getInstance() {

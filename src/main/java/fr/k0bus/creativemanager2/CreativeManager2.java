@@ -11,6 +11,7 @@ public final class CreativeManager2 extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         API = new CM2API(this);
+        API.loadProtections();
         new CM2Commands().register(this);
     }
 
