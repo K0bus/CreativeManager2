@@ -1,9 +1,11 @@
 package fr.k0bus.creativemanager2.protections;
 
+import fr.k0bus.creativemanager2.CM2API;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 
@@ -13,6 +15,7 @@ public abstract class Protection implements Listener {
 
     private final String id;
     private boolean enabled = true;
+    private ConfigurationSection config;
     private final CreativeManager2 plugin;
 
     private Material icon;
@@ -30,6 +33,14 @@ public abstract class Protection implements Listener {
         else
         {
             plugin.getLogger().log(Level.INFO, "Protection '" + id + "' unloaded for incompatibility");
+        }
+        if(!CreativeManager2.API.getSettings().getBoolean("protections." + id + ".enabled"))
+        {
+            setEnabled(false);
+        }
+        if(CreativeManager2.API.getSettings().contains("protections." + id))
+        {
+            config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
         }
     }
 
@@ -84,5 +95,9 @@ public abstract class Protection implements Listener {
 
     public Material getIcon() {
         return icon;
+    }
+
+    public ConfigurationSection getConfig() {
+        return config;
     }
 }

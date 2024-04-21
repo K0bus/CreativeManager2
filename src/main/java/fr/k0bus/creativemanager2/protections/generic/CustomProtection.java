@@ -24,15 +24,15 @@ public class CustomProtection extends Protection {
     public ListType getType(CustomType type)
     {
         return ListType.fromString(
-                CreativeManager2.API.getSettings().getString(
-                        "protections." + getId() + "." + type.getId() + ".type"
+                getConfig().getString(
+                        type.getId() + ".type"
                 )
         );
     }
     public List<String> getList(CustomType type)
     {
-        return CreativeManager2.API.getSettings().getStringList(
-                "protections." + getId() + "." + type.getId() + ".list"
+        return getConfig().getStringList(
+                type.getId() + ".list"
         );
     }
 

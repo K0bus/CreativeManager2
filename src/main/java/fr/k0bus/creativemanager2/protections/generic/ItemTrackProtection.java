@@ -37,9 +37,9 @@ public class ItemTrackProtection extends Protection {
         if (meta == null)
             return item;
 
-        List<String> lore = CreativeManager2.API.getSettings().getStringList("protections.itemtrack.lore");
+        List<String> lore = getConfig().getStringList("lore");
         List<String> lore_t = new ArrayList<>();
-        String displayname = CreativeManager2.API.getSettings().getString("protections.itemtrack.displayname");
+        String displayname = getConfig().getString("displayname");
 
         if(displayname != null && !displayname.isEmpty())
         {
