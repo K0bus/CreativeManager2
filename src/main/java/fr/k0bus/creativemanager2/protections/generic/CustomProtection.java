@@ -73,13 +73,9 @@ public class CustomProtection extends Protection {
         {
             event.setCancelled(true);
             event.setCursor(new ItemStack(Material.AIR));
-            sendPermissionMessage(event.getWhoClicked(), CustomType.BLOCKUSE.getId());
+            sendPermissionMessage(event.getWhoClicked(), CustomType.STOREITEM.getId());
         }
-        if (event.getCurrentItem() != null && needCancel(event.getWhoClicked(), event.getCurrentItem().getType().name(), CustomType.ITEMUSE)) {
-            event.setCancelled(true);
-            event.setCurrentItem(new ItemStack(Material.AIR));
-            sendPermissionMessage(event.getWhoClicked(), CustomType.ITEMUSE.getId());
-        }
+        //TODO: Implement NBT
     }
 
     @EventHandler
