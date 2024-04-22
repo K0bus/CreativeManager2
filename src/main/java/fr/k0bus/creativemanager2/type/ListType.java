@@ -13,6 +13,7 @@ public enum ListType {
 
     public static ListType fromString(String s)
     {
+        if(s == null) return BLACKLIST;
         for(ListType type:ListType.values())
         {
             if(type.name().toLowerCase().equals(s.toLowerCase())) return type;
