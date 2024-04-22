@@ -74,6 +74,7 @@ public class Command implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String label, @NotNull String[] args) {
         if(!isAllowed(sender)){
             sender.sendMessage("Not allowed");
+            return true;
         }
         if(!subCommands.isEmpty()) {
             if (args.length > 0) {
