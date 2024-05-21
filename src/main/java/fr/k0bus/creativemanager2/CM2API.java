@@ -112,6 +112,12 @@ public class CM2API {
         }
     }
 
+    public void debug(String string)
+    {
+        if(settings.debugMode())
+            instance.getLogger().info(StringUtils.parse(string));
+    }
+
     public boolean isPaper() {
         return paper;
     }
