@@ -29,6 +29,8 @@ public class SettingGui extends PagedMenu {
                     1,
                     inventoryClickEvent -> {
                         protection.setEnabled(protection.isDisabled());
+                        CreativeManager2.API.getSettings().set("protections." + protection.getId() + ".enabled", true);
+                        CreativeManager2.API.getSettings().save();
                         init();
                     }
             );
