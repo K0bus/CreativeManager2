@@ -1,18 +1,16 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.utils.CM2BlockData;
+import fr.k0bus.creativemanager2.utils.CM2Data;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.block.data.Attachable;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -38,7 +36,7 @@ public class LogBlockProtection extends Protection {
         if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
         for (Block block:blocks) {
-            CM2BlockData.register(block, event.getPlayer());
+            CM2Data.register(block, event.getPlayer());
         }
     }
     @EventHandler
@@ -48,33 +46,39 @@ public class LogBlockProtection extends Protection {
         {
             List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
             for (Block block:blocks) {
-                CM2BlockData.unregister(block);
+                CM2Data.unregister(block);
             }
             return;
         }
 
-        UUID uuid = CM2BlockData.findPlayer(event.getBlock());
+        UUID uuid = CM2Data.findPlayer(event.getBlock());
         if(uuid == null) return;
         event.setCancelled(true);
         event.getBlock().setType(Material.AIR);
         List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
         for (Block block:blocks) {
-            CM2BlockData.unregister(block);
+            CM2Data.unregister(block);
         }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     void onBlockPhysicsEvent(BlockPhysicsEvent event){
-        Block block = event.getBlock();
-        if(block.getType().equals(Material.AIR)) return;
-        if(block.getBlockData().isSupported(block)) return;
-        UUID uuid = CM2BlockData.findPlayer(block);
-        if(uuid != null)
+        if(CM2Data.findPlayer(event.getBlock()) == null) return;
+
+        CreativeManager2.API.debug(event.getBlock().getType().name() + " > " + event.getSourceBlock().getType().name());
+        CreativeManager2.API.debug("onBlockPhysicsEvent : isSolid = " + event.getSourceBlock().getType().isSolid());
+        CreativeManager2.API.debug("onBlockPhysicsEvent : isSupported = " + event.getBlock().getBlockData().isSupported(event.getSourceBlock()));
+        CreativeManager2.API.debug("onBlockPhysicsEvent : instanceof Attachable = " + (event.getBlock().getBlockData() instanceof Attachable));
+
+        /*if(!event.getSourceBlock().getType().isSolid())
         {
+            CreativeManager2.API.debug(
+                    event.getBlock().getType().name() + ">>" + event.getSourceBlock().getType().name()
+            );
             event.setCancelled(true);
-            block.setType(Material.AIR);
-            CM2BlockData.unregister(block);
-        }
+            event.getBlock().setType(Material.AIR);
+            CM2BlockData.unregister(event.getBlock());
+        }*/
     }
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     void onBlockGrow(BlockGrowEvent event)
@@ -86,10 +90,10 @@ public class LogBlockProtection extends Protection {
         {
             case CACTUS:
             case SUGAR_CANE:
-                uuid = CM2BlockData.findPlayer(block.getRelative(BlockFace.DOWN));
+                uuid = CM2Data.findPlayer(block.getRelative(BlockFace.DOWN));
                 if(uuid != null)
                 {
-                    CM2BlockData.register(block, uuid);
+                    CM2Data.register(block, uuid);
                 }
                 break;
             case PUMPKIN:
@@ -98,10 +102,10 @@ public class LogBlockProtection extends Protection {
                 {
                     if(Tag.CROPS.isTagged(b.getType()))
                     {
-                        uuid = CM2BlockData.findPlayer(block);
+                        uuid = CM2Data.findPlayer(block);
                         if(uuid != null)
                         {
-                            CM2BlockData.register(block, uuid);
+                            CM2Data.register(block, uuid);
                         }
                     }
                 }
@@ -111,12 +115,12 @@ public class LogBlockProtection extends Protection {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     void onStructureGrow(StructureGrowEvent event){
-        UUID uuid = CM2BlockData.findPlayer(event.getLocation());
+        UUID uuid = CM2Data.findPlayer(event.getLocation());
         if(uuid != null)
         {
             for(BlockState block: event.getBlocks())
             {
-                CM2BlockData.register(block.getBlock(), uuid);
+                CM2Data.register(block.getBlock(), uuid);
             }
         }
     }
@@ -125,49 +129,44 @@ public class LogBlockProtection extends Protection {
     void onBlockSpread(BlockSpreadEvent event)
     {
         //TODO: Check function don't work
-        UUID uuid = CM2BlockData.findPlayer(event.getSource());
+        UUID uuid = CM2Data.findPlayer(event.getSource());
         if(uuid != null)
         {
-            CM2BlockData.register(event.getBlock(), uuid);
+            CM2Data.register(event.getBlock(), uuid);
         }
     }
 
     @EventHandler
     public void onFallBlock(EntityChangeBlockEvent event) {
 
-        UUID uuid = CM2BlockData.findPlayer(event.getBlock());
+        UUID uuid = CM2Data.findPlayer(event.getBlock());
         if(uuid == null) return;
         if(event.getEntity() instanceof FallingBlock fallingBlock)
         {
-            NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), "UUID");
-            fallingBlock.getPersistentDataContainer()
-                    .set(namespacedKeyUuid, PersistentDataType.STRING, uuid.toString());
+            CM2Data.register(fallingBlock, uuid);
             fallingBlock.setDropItem(false);
         }
         if(event.getTo().equals(Material.AIR))
         {
-            CM2BlockData.unregister(event.getBlock());
+            CM2Data.unregister(event.getBlock());
         }
     }
     @EventHandler
     public void onFallBlockStop(EntityChangeBlockEvent event) {
         if(event.getEntity() instanceof FallingBlock fallingBlock)
         {
-            NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), "UUID");
-            String s = fallingBlock.getPersistentDataContainer()
-                    .get(namespacedKeyUuid, PersistentDataType.STRING);
-            if(s == null) return;
-            UUID uuid = UUID.fromString(s);
+            UUID uuid = CM2Data.findPlayer(fallingBlock);
+            if(uuid == null) return;
             if(!event.getTo().equals(Material.AIR))
             {
-                CM2BlockData.register(event.getBlock(), uuid);
+                CM2Data.register(event.getBlock(), uuid);
             }
         }
     }
     @EventHandler
     public void onEntityBreak(EntityChangeBlockEvent event) {
         if (event.getTo().equals(Material.AIR)) {
-            UUID uuid = CM2BlockData.findPlayer(event.getBlock());
+            UUID uuid = CM2Data.findPlayer(event.getBlock());
             if (uuid != null) {
                 event.setCancelled(true);
                 event.getBlock().setType(Material.AIR);
@@ -181,12 +180,12 @@ public class LogBlockProtection extends Protection {
         this.pistonCheck(pistonDirection, blocks);
 
         Block pistonHead = event.getBlock().getRelative(event.getDirection());
-        UUID uuid = CM2BlockData.findPlayer(pistonHead);
+        UUID uuid = CM2Data.findPlayer(pistonHead);
         if(uuid != null)
         {
             if(pistonHead.getType().equals(Material.PISTON_HEAD))
             {
-                CM2BlockData.register(pistonHead, uuid);
+                CM2Data.register(pistonHead, uuid);
             }
         }
     }
@@ -197,12 +196,12 @@ public class LogBlockProtection extends Protection {
         List<Block> blocks = new ArrayList<>(event.getBlocks());
 
         Block pistonHead = event.getBlock().getRelative(event.getDirection().getOppositeFace());
-        UUID uuid = CM2BlockData.findPlayer(pistonHead);
+        UUID uuid = CM2Data.findPlayer(pistonHead);
         if(uuid != null)
         {
             if(pistonHead.getType().equals(Material.PISTON_HEAD))
             {
-                CM2BlockData.unregister(pistonHead);
+                CM2Data.unregister(pistonHead);
             }
         }
 
@@ -212,18 +211,18 @@ public class LogBlockProtection extends Protection {
     private void pistonCheck(BlockFace blockFace, List<Block> blocks) {
         Collections.reverse(blocks);
         for (Block toMoveBlock : blocks) {
-            UUID uuid = CM2BlockData.findPlayer(toMoveBlock);
+            UUID uuid = CM2Data.findPlayer(toMoveBlock);
             if (uuid != null) {
                 if(toMoveBlock.getPistonMoveReaction().equals(PistonMoveReaction.BREAK))
                 {
                     toMoveBlock.setType(Material.AIR);
-                    CM2BlockData.unregister(toMoveBlock);
+                    CM2Data.unregister(toMoveBlock);
                 }
                 else
                 {
                     Location movedBlock = toMoveBlock.getRelative(blockFace).getLocation();
-                    CM2BlockData.register(movedBlock, uuid);
-                    CM2BlockData.unregister(toMoveBlock);
+                    CM2Data.register(movedBlock, uuid);
+                    CM2Data.unregister(toMoveBlock);
                 }
             }
         }
