@@ -11,8 +11,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-public class AttackMonstersProtection extends Protection {
-    public AttackMonstersProtection(CreativeManager2 plugin) {
+public class AttackMonsterProtection extends Protection {
+    public AttackMonsterProtection(CreativeManager2 plugin) {
         super(plugin, Material.GOLDEN_SWORD);
     }
 
