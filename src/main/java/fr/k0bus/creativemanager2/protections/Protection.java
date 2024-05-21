@@ -33,19 +33,15 @@ public abstract class Protection implements Listener {
         {
             plugin.getLogger().log(Level.INFO, "Protection '" + id + "' unloaded for incompatibility");
         }
-        if(!CreativeManager2.API.getSettings().getBoolean("protections." + id + ".enabled"))
-        {
-            setEnabled(false);
-        }
-        if(CreativeManager2.API.getSettings().contains("protections." + id))
-        {
-            config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
-        }
         loadSettings();
     }
 
     public void loadSettings()
     {
+        if(!CreativeManager2.API.getSettings().getBoolean("protections." + id + ".enabled"))
+        {
+            setEnabled(false);
+        }
         if(CreativeManager2.API.getSettings().contains("protections." + id))
         {
             config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
