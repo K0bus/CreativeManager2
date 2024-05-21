@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class SettingsSubCommand extends SubCommands {
     public SettingsSubCommand() {
-        super("settings", "cm2.admin", Player.class);
+        super("settings", "cm2.admin.settings", Player.class);
     }
 
     @Override

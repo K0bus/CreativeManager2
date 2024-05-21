@@ -1,7 +1,7 @@
 package fr.k0bus.creativemanager2.commands.cm2;
 
 import fr.k0bus.creativemanager2.commands.SubCommands;
-import fr.k0bus.creativemanager2.utils.CM2BlockData;
+import fr.k0bus.creativemanager2.utils.CM2Data;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.utils.StringUtils;
@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class CheckBlockCommand extends SubCommands {
     public CheckBlockCommand() {
-        super("checkblock", "cm2.admin", Player.class);
+        super("checkblock", "cm2.admin.checkblock", Player.class);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class CheckBlockCommand extends SubCommands {
             return;
         }
 
-        String locationString = CM2BlockData.properLocation(block.getLocation());
+        String locationString = CM2Data.properLocation(block.getLocation());
         String blockString = StringUtils.proper(block.getType().name());
         String playerString;
         String dateString;
 
-        UUID uuid = CM2BlockData.findPlayer(block);
+        UUID uuid = CM2Data.findPlayer(block);
         if(uuid == null)
         {
             CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " &8No log on this block !");
@@ -47,7 +47,7 @@ public class CheckBlockCommand extends SubCommands {
             playerString = "UNKNOWN";
         else
             playerString = offlinePlayer.getName();
-        Long dateLong = CM2BlockData.findDate(block);
+        Long dateLong = CM2Data.findDate(block);
         if(dateLong == null)
             dateString = "UNKNOWN";
         else
