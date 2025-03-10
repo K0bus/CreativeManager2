@@ -18,9 +18,7 @@ multi-inventories:
     creative: creative_nether
 
 protections:
-  place:
-    enabled: false
-  break:
+  build:
     enabled: false
   container:
     enabled: true
