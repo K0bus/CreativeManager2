@@ -49,4 +49,13 @@ public class BlockUtils {
                 block.getRelative(BlockFace.SOUTH),
                 block.getRelative(BlockFace.WEST));
     }
+    public static List<Block> getAdjacentBlocksComplete(Block block)
+    {
+        return List.of(block.getRelative(BlockFace.NORTH),
+                block.getRelative(BlockFace.EAST),
+                block.getRelative(BlockFace.SOUTH),
+                block.getRelative(BlockFace.WEST),
+                block.getRelative(BlockFace.DOWN),
+                block.getRelative(BlockFace.UP));
+    }
 }

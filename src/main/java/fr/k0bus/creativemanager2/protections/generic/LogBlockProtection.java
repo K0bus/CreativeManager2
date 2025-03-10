@@ -10,7 +10,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
-import org.bukkit.block.data.Attachable;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -73,25 +72,6 @@ public class LogBlockProtection extends Protection {
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
-    void onBlockPhysicsEvent(BlockPhysicsEvent event){
-        if(CM2Data.findPlayer(event.getBlock()) == null) return;
-
-        CreativeManager2.API.debug(event.getBlock().getType().name() + " > " + event.getSourceBlock().getType().name());
-        CreativeManager2.API.debug("onBlockPhysicsEvent : isSolid = " + event.getSourceBlock().getType().isSolid());
-        CreativeManager2.API.debug("onBlockPhysicsEvent : isSupported = " + event.getBlock().getBlockData().isSupported(event.getSourceBlock()));
-        CreativeManager2.API.debug("onBlockPhysicsEvent : instanceof Attachable = " + (event.getBlock().getBlockData() instanceof Attachable));
-
-        /*if(!event.getSourceBlock().getType().isSolid())
-        {
-            CreativeManager2.API.debug(
-                    event.getBlock().getType().name() + ">>" + event.getSourceBlock().getType().name()
-            );
-            event.setCancelled(true);
-            event.getBlock().setType(Material.AIR);
-            CM2BlockData.unregister(event.getBlock());
-        }*/
-    }
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     void onBlockGrow(BlockGrowEvent event)
     {
         //TODO: Check function don't work
@@ -111,12 +91,28 @@ public class LogBlockProtection extends Protection {
             case MELON:
                 for(Block b: BlockUtils.getAdjacentBlocks(block))
                 {
-                    if(Tag.CROPS.isTagged(b.getType()))
+                    if(b.getType().equals(Material.PUMPKIN_STEM) || b.getType().equals(Material.MELON_STEM))
                     {
-                        uuid = CM2Data.findPlayer(block);
+                        uuid = CM2Data.findPlayer(b);
                         if(uuid != null)
                         {
                             CM2Data.register(block, uuid);
+                            break;
+                        }
+                    }
+                }
+                break;
+            case CHORUS_FLOWER:
+            case CHORUS_PLANT:
+                for(Block b: BlockUtils.getAdjacentBlocksComplete(block))
+                {
+                    if(b.getType().equals(Material.CHORUS_FLOWER) || b.getType().equals(Material.CHORUS_PLANT))
+                    {
+                        uuid = CM2Data.findPlayer(b);
+                        if(uuid != null)
+                        {
+                            CM2Data.register(block, uuid);
+                            break;
                         }
                     }
                 }
