@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.protections;
 
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,37 +15,44 @@ public abstract class Protection implements Listener {
 
     private final String id;
     private boolean enabled = true;
-    private ConfigurationSection config;
+    protected ConfigurationSection config;
     private final CreativeManager2 plugin;
+    private String customId;
 
     private Material icon;
 
-    public Protection(CreativeManager2 plugin, Material icon)
+    public Protection(CreativeManager2 plugin, Material icon, String customId)
     {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase();
         this.plugin = plugin;
+        setCustomId(customId);
         setIcon(icon);
         if(isCompatible())
         {
             plugin.getServer().getPluginManager().registerEvents(this, plugin);
-            plugin.getLogger().log(Level.INFO, "Protection '" + id + "' loaded from class (" + this.getClass().getSimpleName() + ")");
+            plugin.getLogger().log(Level.INFO, "Protection '" + getCustomId() + "' loaded from class (" + this.getClass().getSimpleName() + ")");
         }
         else
         {
-            plugin.getLogger().log(Level.INFO, "Protection '" + id + "' unloaded for incompatibility");
+            plugin.getLogger().log(Level.INFO, "Protection '" + getCustomId() + "' unloaded for incompatibility");
         }
         loadSettings();
     }
 
+    public Protection(CreativeManager2 plugin, Material icon)
+    {
+        this(plugin, icon, null);
+    }
+
     public void loadSettings()
     {
-        if(!CreativeManager2.API.getSettings().getBoolean("protections." + id + ".enabled"))
+        if(!CreativeManager2.API.getSettings().getBoolean("protections." + getCustomId() + ".enabled"))
         {
             setEnabled(false);
         }
-        if(CreativeManager2.API.getSettings().contains("protections." + id))
+        if(CreativeManager2.API.getSettings().contains("protections." + getCustomId()))
         {
-            config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + id);
+            config = CreativeManager2.API.getSettings().getConfigurationSection("protections." + getCustomId());
         }
     }
 
@@ -60,7 +68,7 @@ public abstract class Protection implements Listener {
 
     public String getPermission()
     {
-        return "creativemanager." + id;
+        return "creativemanager." + getCustomId();
     }
 
 
@@ -103,5 +111,14 @@ public abstract class Protection implements Listener {
 
     public ConfigurationSection getConfig() {
         return config;
+    }
+
+    public void setCustomId(String customId) {
+        this.customId = customId;
+    }
+
+    public String getCustomId() {
+        if(customId == null) return id;
+        else return customId;
     }
 }
