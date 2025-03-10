@@ -97,7 +97,7 @@ public class LogBlockProtection extends Protection {
         //TODO: Check function don't work
         Block block = event.getBlock();
         UUID uuid;
-        switch (event.getBlock().getType())
+        switch (event.getNewState().getBlockData().getMaterial())
         {
             case CACTUS:
             case SUGAR_CANE:
