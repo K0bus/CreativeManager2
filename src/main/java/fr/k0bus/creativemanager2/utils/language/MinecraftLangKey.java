@@ -21,7 +21,14 @@ public class MinecraftLangKey {
         if(itemMeta instanceof PotionMeta potionMeta)
         {
             if(!potionMeta.hasCustomEffects()) return getTranslationKey(m);
-            return getTranslationKey(m, potionMeta.getCustomEffects().get(0));
+            if(!potionMeta.getCustomEffects().isEmpty())
+            {
+                return getTranslationKey(m, potionMeta.getCustomEffects().get(0));
+            }
+            else
+            {
+                potionMeta.getBasePotionType().getPotionEffects().get(0);
+            }
         }
 
         return getTranslationKey(m);
@@ -53,7 +60,7 @@ public class MinecraftLangKey {
 
     private static @NotNull String getTranslationKey(Material m, PotionEffect potionEffect)
     {
-        return "item.minecraft." + m.name().toLowerCase() + ".effect." + potionEffect.getType().getName().toLowerCase();
+        return "item.minecraft." + m.name().toLowerCase() + ".effect." + potionEffect.getType().translationKey().toLowerCase();
     }
 
 }
