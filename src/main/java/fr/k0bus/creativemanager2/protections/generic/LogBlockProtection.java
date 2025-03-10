@@ -162,6 +162,16 @@ public class LogBlockProtection extends Protection {
             CM2Data.unregister(event.getBlock());
         }
     }
+
+    @EventHandler
+    public void onLeaveDecay(LeavesDecayEvent event)
+    {
+        UUID uuid = CM2Data.findPlayer(event.getBlock());
+        if(uuid == null) return;
+        event.setCancelled(true);
+        event.getBlock().setType(Material.AIR);
+    }
+
     @EventHandler
     public void onFallBlockStop(EntityChangeBlockEvent event) {
         if(event.getEntity() instanceof FallingBlock fallingBlock)
