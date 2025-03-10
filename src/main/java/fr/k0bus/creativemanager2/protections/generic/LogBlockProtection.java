@@ -39,6 +39,18 @@ public class LogBlockProtection extends Protection {
             CM2Data.register(block, event.getPlayer());
         }
     }
+
+    @EventHandler
+    public void onMultiPlace(BlockMultiPlaceEvent event)
+    {
+        if(isDisabled()) return;
+        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        for(BlockState state: event.getReplacedBlockStates())
+        {
+            CM2Data.register(state.getBlock(), event.getPlayer());
+        }
+    }
+
     @EventHandler
     public void onBreak(BlockBreakEvent event)
     {
