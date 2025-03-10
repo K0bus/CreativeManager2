@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    tools {
+        maven "3.9.9"
+        jdk "openjdk-23.0.2"
+    }
+    options {
+        disableConcurrentBuilds()
+    }
     stages {
         stage('Build') {
             steps {
