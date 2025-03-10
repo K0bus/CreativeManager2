@@ -11,8 +11,8 @@ import org.bukkit.event.entity.EntityPlaceEvent;
 
 
 public class LogEntityProtection extends Protection {
-    public LogEntityProtection(CreativeManager2 plugin, Material icon) {
-        super(plugin, icon);
+    public LogEntityProtection(CreativeManager2 plugin) {
+        super(plugin, Material.ZOMBIE_HEAD);
     }
 
     @EventHandler
