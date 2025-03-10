@@ -6,11 +6,13 @@ import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +22,36 @@ public class ItemTrackProtection extends Protection {
         super(plugin, Material.NAME_TAG);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onInventoryCreative(InventoryCreativeEvent event)
     {
         if(isDisabled()) return;
-        if(hasPermission(event.getWhoClicked())) return;
-        if(!CM2Utils.isCreativePlayer(event.getWhoClicked())) return;
-        event.setCurrentItem(addLore(event.getCurrentItem(), event.getWhoClicked()));
-        event.setCursor(addLore(event.getCursor(), event.getWhoClicked()));
+        if(event.getWhoClicked() instanceof Player player)
+        {
+            if(hasPermission(player)) return;
+            if(!CM2Utils.isCreativePlayer(player)) return;
+            reloadInventoryLore(player);
+        }
     }
 
-    private ItemStack addLore(ItemStack item, HumanEntity p) {
+    private void reloadInventoryLore(Player player)
+    {
+        new BukkitRunnable(){
+            public void run(){
+                for(ItemStack is : player.getInventory().getContents()){
+                    if(is==null)continue;
+                    addLore(is, player);
+                }
+            }
+        }.runTaskTimer(getPlugin(), 0L, 0L);
+    }
+
+    private void addLore(ItemStack item, HumanEntity p) {
         if (item == null || p == null)
-            return null;
+            return;
         ItemMeta meta = item.getItemMeta();
         if (meta == null)
-            return item;
+            return;
 
         List<String> lore = getConfig().getStringList("lore");
         List<String> lore_t = new ArrayList<>();
@@ -57,6 +73,5 @@ public class ItemTrackProtection extends Protection {
             meta.setLore(lore_t);
         }
         item.setItemMeta(meta);
-        return item;
     }
 }
