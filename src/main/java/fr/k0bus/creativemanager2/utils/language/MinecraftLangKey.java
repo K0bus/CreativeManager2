@@ -12,8 +12,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class MinecraftLangKey {
     public static @NotNull String getTranslationKey(ItemStack itemStack)
     {
@@ -47,7 +45,7 @@ public class MinecraftLangKey {
     }
     public static @NotNull String getTranslationKey(Enchantment e)
     {
-        return "enchantment.minecraft." + e.getName().toLowerCase();
+        return "enchantment.minecraft." + e.getKey().getKey().toLowerCase();
     }
     public static @NotNull String getTranslationKey(EntityType e)
     {
