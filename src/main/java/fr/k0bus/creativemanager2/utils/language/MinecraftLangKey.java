@@ -9,7 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class MinecraftLangKey {
     public static @NotNull String getTranslationKey(ItemStack itemStack)
@@ -27,7 +30,9 @@ public class MinecraftLangKey {
             }
             else
             {
-                potionMeta.getBasePotionType().getPotionEffects().get(0);
+                PotionType potionType = potionMeta.getBasePotionType();
+                if(potionType != null)
+                    return getTranslationKey(m, potionType.getPotionEffects().get(0));
             }
         }
 
