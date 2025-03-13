@@ -16,8 +16,8 @@ pipeline {
         }
         stage('PMD') {
             steps {
-                sh 'mvn pmd:pmd'
-                recordIssues(tools: [pmd(reportEncoding: 'UTF-8')])
+                sh 'mvn pmd:check'
+                recordIssues(tools: [pmdParser(reportEncoding: 'UTF-8')])
             }
         }
         stage('Build') {
