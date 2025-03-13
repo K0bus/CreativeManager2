@@ -37,7 +37,6 @@ public class InventoryProtection extends Protection {
         if(isDisabled()) return;
         if(hasPermission(event.getPlayer())) return;
         if(event.getFrom().getWorld() == null) return;
-        if(event.getTo() == null) return;
         if(event.getTo().getWorld() == null) return;
 
         String inventoryFromName = CreativeManager2.API
