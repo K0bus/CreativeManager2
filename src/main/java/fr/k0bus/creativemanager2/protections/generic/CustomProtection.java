@@ -59,14 +59,16 @@ public class CustomProtection extends Protection {
     {
         if(event.getClickedBlock() != null)
         {
-            if(needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCKUSE)){
+            if(needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCK_USE)){
                 event.setCancelled(true);
-                sendPermissionMessage(event.getPlayer(), CustomType.BLOCKUSE.getId());
+                sendPermissionMessage(event.getPlayer(), CustomType.BLOCK_USE.getId());
+                return;
             }
-        } else if (event.getItem() != null) {
-            if(needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEMUSE)){
+        }
+        if (event.getItem() != null) {
+            if(needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEM_USE)){
                 event.setCancelled(true);
-                sendPermissionMessage(event.getPlayer(), CustomType.ITEMUSE.getId());
+                sendPermissionMessage(event.getPlayer(), CustomType.ITEM_USE.getId());
             }
         }
     }
@@ -74,14 +76,13 @@ public class CustomProtection extends Protection {
     public void onCreativeInventory(InventoryCreativeEvent event)
     {
         if(event.getCursor().getType().equals(Material.AIR)) return;
-        if(needCancel(event.getWhoClicked(), event.getCursor().getType().name(), CustomType.STOREITEM))
+        if(needCancel(event.getWhoClicked(), event.getCursor().getType().name(), CustomType.STORE_ITEM))
         {
             event.setCancelled(true);
             event.setCursor(new ItemStack(Material.AIR));
-            sendPermissionMessage(event.getWhoClicked(), CustomType.STOREITEM.getId());
+            sendPermissionMessage(event.getWhoClicked(), CustomType.STORE_ITEM.getId());
         }
         //TODO: Implement NBT
-
     }
 
     @EventHandler
