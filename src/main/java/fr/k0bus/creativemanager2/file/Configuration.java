@@ -172,7 +172,9 @@ public class Configuration {
         FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
         FileConfiguration conf = loadConfiguration(file);
         for (String path : default_conf.getKeys(true)) {
-            if(!conf.contains(path) || (conf.get(path).getClass().equals(default_conf.get(path).getClass())))
+            Object configObj = conf.get(path);
+            Object dConfigObj = default_conf.get(path);
+            if(configObj == null || (dConfigObj != null && configObj.getClass().equals(dConfigObj.getClass())))
             {
                 plugin.getLogger().log(Level.WARNING, path + " added to " + cfg);
                 conf.set(path, default_conf.get(path));
