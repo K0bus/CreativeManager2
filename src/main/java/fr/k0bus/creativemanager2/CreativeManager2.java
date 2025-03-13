@@ -13,7 +13,11 @@ public final class CreativeManager2 extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         API = new CM2API(this);
-        API.loadProtections();
+        registerCommands();
+    }
+
+    public void registerCommands()
+    {
         if(CM2Utils.isPaper())
             new CM2BrigadierCommand(this).build();
         else
