@@ -11,8 +11,7 @@ pipeline {
         stage('CheckStyle') {
             steps {
                 sh 'mvn checkstyle:check'
-                def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
-                publishIssues issues: [checkstyle]
+                recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
             }
         }
         stage('Build') {
