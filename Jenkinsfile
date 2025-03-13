@@ -14,6 +14,12 @@ pipeline {
                 recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
             }
         }
+        stage('PMD') {
+            steps {
+                sh 'mvn pmd:pmd'
+                recordIssues(tools: [pmd(reportEncoding: 'UTF-8')])
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package -B -Dbuild.number=${BUILD_NUMBER}'

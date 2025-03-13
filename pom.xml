@@ -81,6 +81,12 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Plugin PMD -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.26.0</version>
+            </plugin>
         </plugins>
         <resources>
             <resource>
