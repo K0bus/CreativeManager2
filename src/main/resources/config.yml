@@ -18,6 +18,8 @@ multi-inventories:
     creative: creative_nether
 
 protections:
+  logblock:
+    enabled: true
   build:
     enabled: false
   container:
