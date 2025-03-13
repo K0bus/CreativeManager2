@@ -11,6 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class CM2Data {
 
     private static final String UUID_ID = "/UUID";
