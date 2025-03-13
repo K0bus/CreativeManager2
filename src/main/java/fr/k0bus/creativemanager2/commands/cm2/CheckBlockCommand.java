@@ -22,6 +22,11 @@ public class CheckBlockCommand extends SubCommands {
 
     @Override
     public void run(CommandSender sender, String[] args) {
+        execute(sender);
+    }
+
+    public void execute(CommandSender sender)
+    {
         Player player = (Player) sender;
         Block block = player.getTargetBlockExact(5);
         if(block == null)
