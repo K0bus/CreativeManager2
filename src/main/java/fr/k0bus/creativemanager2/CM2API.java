@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CM2API {
     private final Settings settings;
@@ -132,5 +133,15 @@ public class CM2API {
 
     public MinecraftLang getMinecraftLang() {
         return minecraftLang;
+    }
+
+    public Logger getLogger()
+    {
+        return instance.getLogger();
+    }
+
+    public void logException(Exception e)
+    {
+        getLogger().log(Level.SEVERE, "An error has occurred.", e);
     }
 }

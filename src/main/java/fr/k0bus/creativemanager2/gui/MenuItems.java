@@ -105,8 +105,7 @@ public class MenuItems extends ItemStack {
     public void onClick(InventoryClickEvent e)
     {
         if(!isClickable()) return;
-        if(!(e.getWhoClicked() instanceof Player)) return;
-        Player p = (Player) e.getWhoClicked();
+        if(!(e.getWhoClicked() instanceof Player p)) return;
         if(sound != null)
             p.playSound(p.getLocation(), sound, 0.5f, 1);
         consumer.accept(e);

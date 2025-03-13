@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.file;
 
+import fr.k0bus.creativemanager2.CreativeManager2;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -16,10 +17,10 @@ import java.util.logging.Level;
 
 public class Configuration {
 
-    JavaPlugin plugin;
-    File file;
-    FileConfiguration configuration;
-    String filename;
+    protected final JavaPlugin plugin;
+    private final File file;
+    protected FileConfiguration configuration;
+    private final String filename;
 
     public Configuration(String filename, JavaPlugin instance)
     {
@@ -57,29 +58,13 @@ public class Configuration {
                 try {
                     this.file.createNewFile();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    CreativeManager2.API.logException(e);
                 }
             }
         }
         if(file.exists())
         {
-            try {
-                this.configuration = loadConfiguration(this.file);
-            } catch (InvalidConfigurationException e)
-            {
-                plugin.getLogger().log(Level.SEVERE, filename + " can't be loaded ! Check file syntax first !");
-                plugin.getLogger().log(Level.SEVERE, e.getMessage());
-                File renamed = new File(file.getParentFile(), filename + ".old");
-                if(renamed.exists())
-                    renamed.delete();
-                file.renameTo(renamed);
-                loadConfig();
-            }
-            catch (IOException ex)
-            {
-                plugin.getLogger().log(Level.SEVERE, "Can't read file " + filename);
-                this.configuration = new YamlConfiguration();
-            }
+            this.configuration = loadConfiguration(this.file);
         }
         else
         {
@@ -87,15 +72,15 @@ public class Configuration {
         }
     }
 
-    private static YamlConfiguration loadConfiguration(File file) throws IOException, InvalidConfigurationException {
+    private static YamlConfiguration loadConfiguration(File file){
         Validate.notNull(file, "File cannot be null");
 
         YamlConfiguration config = new YamlConfiguration();
 
         try {
             config.load(file);
-        } catch (IOException | InvalidConfigurationException ex) {
-            ex.printStackTrace();
+        } catch (IOException | InvalidConfigurationException e) {
+            CreativeManager2.API.logException(e);
         }
 
         return config;
@@ -105,7 +90,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            e.printStackTrace();
+            CreativeManager2.API.logException(e);
         }
     }
     public String getString(String path)
@@ -142,7 +127,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            e.printStackTrace();
+            CreativeManager2.API.logException(e);
         }
     }
     public static void updateConfig(String cfg, JavaPlugin plugin)
@@ -153,22 +138,7 @@ public class Configuration {
             plugin.saveResource(cfg, false);
         FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(cfg)));
         FileConfiguration conf = null;
-        try {
-            conf = loadConfiguration(file);
-        } catch (InvalidConfigurationException e)
-        {
-            plugin.getLogger().log(Level.SEVERE, cfg + " can't be loaded ! Check file syntax first !");
-            plugin.getLogger().log(Level.SEVERE, e.getMessage());
-            File renamed = new File(file.getParentFile(), cfg + ".old");
-            if(renamed.exists())
-                renamed.delete();
-            file.renameTo(renamed);
-            return;
-        }
-        catch (IOException ex)
-        {
-            plugin.getLogger().log(Level.SEVERE, "Can't read file " + cfg);
-        }
+        conf = loadConfiguration(file);
         for (String path : default_conf.getKeys(true)) {
             if(!conf.contains(path) || conf.get(path).getClass().getName() != default_conf.get(path).getClass().getName())
             {
@@ -192,7 +162,7 @@ public class Configuration {
         try {
             conf.save(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            CreativeManager2.API.logException(e);
         }
     }
 

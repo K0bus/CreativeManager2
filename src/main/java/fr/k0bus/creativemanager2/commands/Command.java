@@ -10,18 +10,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+@SuppressWarnings({"rawtypes"})
 public class Command implements CommandExecutor, TabCompleter {
 
-    HashMap<String, SubCommands> subCommands = new HashMap<>();
-    String permission;
-    String command;
+    private final HashMap<String, SubCommands> subCommands = new HashMap<>();
+    private final String permission;
+    private final String command;
 
-    String description = "Default command description";
-    String usage = "/<cmd>";
+    private String description = "Default command description";
+    private String usage = "/<cmd>";
 
-    Class senderClass;
+    private final Class senderClass;
 
-    HashMap<Integer, List<String>> completer = new HashMap<>();
+    private final HashMap<Integer, List<String>> completer = new HashMap<>();
 
     public Command(String command, String permission, Class senderClass)
     {
@@ -40,7 +41,7 @@ public class Command implements CommandExecutor, TabCompleter {
 
     public void addSubCommands(SubCommands subCommands)
     {
-        this.subCommands.put(subCommands.command, subCommands);
+        this.subCommands.put(subCommands.getCommand(), subCommands);
     }
 
     public HashMap<String, SubCommands> getSubCommands() {
@@ -81,13 +82,12 @@ public class Command implements CommandExecutor, TabCompleter {
             if (args.length > 0) {
                 if (subCommands.containsKey(args[0])) {
                     subCommands.get(args[0]).onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
-                    return true;
                 }
                 else
                 {
                     sender.sendMessage("Bad commands");
-                    return true;
                 }
+                return true;
             } else {
                 sender.sendMessage("Bad commands");
             }

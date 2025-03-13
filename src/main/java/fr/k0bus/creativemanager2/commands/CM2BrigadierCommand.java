@@ -13,6 +13,7 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.Plugin;
 
+@SuppressWarnings("UnstableApiUsage")
 public class CM2BrigadierCommand {
 
     private final CreativeManager2 plugin;

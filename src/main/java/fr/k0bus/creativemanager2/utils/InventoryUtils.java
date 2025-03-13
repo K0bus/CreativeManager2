@@ -18,7 +18,6 @@ public class InventoryUtils {
      *
      * @param playerInventory to turn into an array of strings.
      * @return Array of strings: [ main content, armor content ]
-     * @throws IllegalStateException
      */
     public static String[] playerInventoryToBase64(PlayerInventory playerInventory) throws IllegalStateException {
         //get the main content part, this doesn't return the armor
@@ -31,14 +30,12 @@ public class InventoryUtils {
     /**
      *
      * A method to serialize an {@link ItemStack} array to Base64 String.
-     *
      * <p />
      *
      * Based off of {@link #toBase64(Inventory)}.
      *
      * @param items to turn into a Base64 String.
      * @return Base64 string of the items.
-     * @throws IllegalStateException
      */
     public static String itemStackArrayToBase64(ItemStack[] items) throws IllegalStateException {
         try {
@@ -49,8 +46,8 @@ public class InventoryUtils {
             dataOutput.writeInt(items.length);
 
             // Save every element in the list
-            for (int i = 0; i < items.length; i++) {
-                dataOutput.writeObject(items[i]);
+            for (ItemStack item : items) {
+                dataOutput.writeObject(item);
             }
 
             // Serialize that array
@@ -63,17 +60,14 @@ public class InventoryUtils {
 
     /**
      * A method to serialize an inventory to Base64 string.
-     *
      * <p />
      *
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
-     *
      * <a href="https://gist.github.com/aadnk/8138186">Original Source</a>
      *
      * @param inventory to serialize
      * @return Base64 string of the provided inventory
-     * @throws IllegalStateException
      */
     public static String toBase64(Inventory inventory) throws IllegalStateException {
         try {
@@ -99,17 +93,14 @@ public class InventoryUtils {
     /**
      *
      * A method to get an {@link Inventory} from an encoded, Base64, string.
-     *
      * <p />
      *
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
-     *
      * <a href="https://gist.github.com/aadnk/8138186">Original Source</a>
      *
      * @param data Base64 string of data containing an inventory.
      * @return Inventory created from the Base64 string.
-     * @throws IOException
      */
     public static Inventory fromBase64(String data) throws IOException {
         try {
@@ -131,14 +122,12 @@ public class InventoryUtils {
 
     /**
      * Gets an array of ItemStacks from Base64 string.
-     *
      * <p />
      *
      * Base off of {@link #fromBase64(String)}.
      *
      * @param data Base64 string to convert to ItemStack array.
      * @return ItemStack array created from the Base64 string.
-     * @throws IOException
      */
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
         try {

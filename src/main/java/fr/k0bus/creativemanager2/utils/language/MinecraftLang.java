@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 public class MinecraftLang {
 
 
-    String mcVersion;
-    String lang;
+    private final String mcVersion;
+    private final String lang;
 
     JsonObject jsonObject;
 
@@ -27,6 +27,15 @@ public class MinecraftLang {
     {
         this.mcVersion = mcVersion.toLowerCase();
         this.lang = lang.toLowerCase();
+        loadLang(plugin);
+    }
+    public MinecraftLang(JavaPlugin plugin, String lang)
+    {
+        this(plugin, lang, Bukkit.getBukkitVersion().split("-")[0]);
+    }
+
+    private void loadLang(JavaPlugin plugin)
+    {
         String FILE_URL = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/" + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
         File dir = new File(plugin.getDataFolder(), "locale");
         if(!dir.exists()) dir.mkdir();
@@ -61,11 +70,6 @@ public class MinecraftLang {
             else
                 plugin.getLogger().info("§2File loaded successfully !");
         }
-
-    }
-    public MinecraftLang(JavaPlugin plugin, String lang)
-    {
-        this(plugin, lang, Bukkit.getBukkitVersion().split("-")[0]);
     }
 
     public String get(String k)

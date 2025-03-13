@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.CM2API;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Inventory;
