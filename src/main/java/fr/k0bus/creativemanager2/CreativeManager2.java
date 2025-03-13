@@ -26,6 +26,7 @@ public final class CreativeManager2 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        if(API != null)
+            API = null;
     }
 }
