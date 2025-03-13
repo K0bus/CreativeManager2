@@ -4,12 +4,12 @@ public enum CustomType {
     COMMANDS("commands"),
     PLACE("place"),
     BREAK("break"),
-    ITEMUSE("itemuse"),
-    BLOCKUSE("blockuse"),
-    STOREITEM("storeitem"),
+    ITEM_USE("item-use"),
+    BLOCK_USE("block-use"),
+    STORE_ITEM("store-item"),
     NBT("nbt");
 
-    private String id;
+    private final String id;
 
     CustomType(String id) {
         this.id = id;
