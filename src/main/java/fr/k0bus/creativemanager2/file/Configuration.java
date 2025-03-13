@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +38,11 @@ public class Configuration {
         this.filename = filename;
         File dir = new File(plugin.getDataFolder(), dirName);
         if(!dir.exists())
-            dir.mkdirs();
+            if(!dir.mkdirs())
+            {
+                CreativeManager2.API.logException(new Exception("Can't create directory"));
+                CreativeManager2.API.disableCM2();
+            }
         if(dir.isDirectory())
             this.file = new File(dir, filename);
         else
@@ -55,9 +60,18 @@ public class Configuration {
             }
             else
             {
-                this.file.getParentFile().mkdirs();
+                if(!this.file.getParentFile().mkdirs()){
+                    CreativeManager2.API.logException(new Exception("Can't create directory"));
+                    CreativeManager2.API.disableCM2();
+                    return;
+                }
                 try {
-                    this.file.createNewFile();
+                    if(!this.file.createNewFile())
+                    {
+                        CreativeManager2.API.logException(new Exception("Can't write config file"));
+                        CreativeManager2.API.disableCM2();
+                        return;
+                    }
                 } catch (IOException e) {
                     CreativeManager2.API.logException(e);
                 }
@@ -114,7 +128,13 @@ public class Configuration {
     public boolean contains(String path){ return this.configuration.contains(path); }
     public boolean isString(String path) { return this.configuration.isString(path); }
     public Set<String> getKeys(boolean deep){return this.configuration.getKeys(deep); }
-    public Set<String> getKeysFromPath(String path, boolean deep){return this.configuration.getConfigurationSection(path).getKeys(deep); }
+    public Set<String> getKeysFromPath(String path, boolean deep){
+        ConfigurationSection cs = this.configuration.getConfigurationSection(path);
+        if(cs != null)
+            return cs.getKeys(deep);
+        else
+            return null;
+    }
     public List<String> getStringList(String path){return this.configuration.getStringList(path);}
     public List<?> getList(String path){return this.configuration.getList(path);}
 
@@ -134,14 +154,25 @@ public class Configuration {
     public static void updateConfig(String cfg, JavaPlugin plugin)
     {
         File file = new File(plugin.getDataFolder(), cfg);
-        file.getParentFile().mkdirs();
+        if(!file.getParentFile().mkdirs())
+        {
+            CreativeManager2.API.logException(new Exception("Can't create directory"));
+            CreativeManager2.API.disableCM2();
+            return;
+        }
         if(!file.exists())
             plugin.saveResource(cfg, false);
-        FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(cfg)));
-        FileConfiguration conf = null;
-        conf = loadConfiguration(file);
+        InputStream is = plugin.getResource(cfg);
+        if(is == null)
+        {
+            CreativeManager2.API.logException(new Exception("Can't found default config file"));
+            CreativeManager2.API.disableCM2();
+            return;
+        }
+        FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        FileConfiguration conf = loadConfiguration(file);
         for (String path : default_conf.getKeys(true)) {
-            if(!conf.contains(path) || conf.get(path).getClass().getName() != default_conf.get(path).getClass().getName())
+            if(!conf.contains(path) || (conf.get(path).getClass().equals(default_conf.get(path).getClass())))
             {
                 plugin.getLogger().log(Level.WARNING, path + " added to " + cfg);
                 conf.set(path, default_conf.get(path));
