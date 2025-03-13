@@ -10,3 +10,14 @@ permission:
   chestshop: '{TAG} &cYou can''t use ChestShop in Creative'
   itemsadder: '{TAG} &cYou can''t use ItemsAdder in Creative'
   slimefun: '{TAG} &cYou can''t use SlimeFun in Creative'
+  custom:
+    commands: '{TAG} &cYou can''t use this command in Creative'
+    place: '{TAG} &cYou can''t place this block in Creative'
+    break: '{TAG} &cYou can''t break this block in Creative'
+    item-use: '{TAG} &cYou can''t use this item in Creative'
+    block-use: '{TAG} &cYou can''t use this block in Creative'
+    store-item: '{TAG} &cYou can''t store this item in Creative'
+    nbt: '{TAG} &cSome illegal data removed from your items because you are on Creative'
+commands:
+  iteminfos:
+    no-items: '{TAG} &cYou need an items to inspect'
