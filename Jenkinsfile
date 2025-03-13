@@ -7,14 +7,14 @@ pipeline {
     options {
         disableConcurrentBuilds()
     }
-    stage('CheckStyle') {
-        steps {
-            sh 'mvn checkstyle:check'
-            def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
-            publishIssues issues: [checkstyle]
-        }
-    }
     stages {
+        stage('CheckStyle') {
+            steps {
+                sh 'mvn checkstyle:check'
+                def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
+                publishIssues issues: [checkstyle]
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package -B -Dbuild.number=${BUILD_NUMBER}'
