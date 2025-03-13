@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 public class InventoryUtils {
     /**
      * Converts the player inventory to a String array of Base64 strings. First string is the content and second string is the armor.

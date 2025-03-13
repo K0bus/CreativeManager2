@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 
+@SuppressWarnings("unused")
 public abstract class Menu {
 
     private final Inventory inventory;

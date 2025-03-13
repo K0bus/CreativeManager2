@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.function.BiConsumer;
 
-@SuppressWarnings({"UnstableApiUsage", "rawtypes"})
+@SuppressWarnings({"UnstableApiUsage", "rawtypes", "unused"})
 public abstract class SubCommands extends Command{
 
     BiConsumer<CommandSender,String[]> consumer;

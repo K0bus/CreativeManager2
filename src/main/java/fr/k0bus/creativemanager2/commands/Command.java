@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@SuppressWarnings({"rawtypes"})
+@SuppressWarnings({"rawtypes", "unused"})
 public class Command implements CommandExecutor, TabCompleter {
 
     private final HashMap<String, SubCommands> subCommands = new HashMap<>();

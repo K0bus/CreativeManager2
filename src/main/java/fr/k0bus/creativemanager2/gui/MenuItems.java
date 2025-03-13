@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class MenuItems extends ItemStack {
 
     private Consumer<InventoryClickEvent> consumer;
