@@ -13,6 +13,11 @@ public class SettingsSubCommand extends SubCommands {
 
     @Override
     public void run(CommandSender sender, String[] args) {
+        execute(sender);
+    }
+
+    public void execute(CommandSender sender)
+    {
         if(sender instanceof Player p)
             new SettingGui(CreativeManager2.API.getInstance()).open(p);
     }

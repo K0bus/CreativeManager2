@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.commands;
 
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -154,18 +155,14 @@ public class Command implements CommandExecutor, TabCompleter {
 
     public void register(JavaPlugin plugin)
     {
-        boolean isPaper = false;
-        try {
-            Class.forName("com.destroystokyo.paper.ParticleBuilder");
-            isPaper = true;
-        } catch (ClassNotFoundException ignored) {}
 
-        if(isPaper)
+        if(CM2Utils.isPaper())
         {
-            plugin.getServer().getCommandMap().register(this.command, getRawCommand());
-            if(plugin.getServer().getCommandMap().getCommand(this.command) instanceof PluginCommand pluginCommand) {
-                pluginCommand.setExecutor(this);
-                pluginCommand.setTabCompleter(this);
+            PluginCommand cmd = plugin.getCommand(getCommand());
+            if(cmd != null)
+            {
+                cmd.setExecutor(this);
+                cmd.setTabCompleter(this);
             }
         }
         else
