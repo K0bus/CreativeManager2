@@ -44,8 +44,8 @@ public class MinecraftLang {
         {
             if(!dir.mkdir())
             {
-                CreativeManager2.API.logException(new Exception("Can't create MC Lang directory"));
-                CreativeManager2.API.disableCM2();
+                CreativeManager2.api.logException(new Exception("Can't create MC Lang directory"));
+                CreativeManager2.api.disableCM2();
                 return;
             }
         }

@@ -1,6 +1,11 @@
 package fr.k0bus.creativemanager2.commands;
 
 import fr.k0bus.creativemanager2.utils.CM2Utils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -8,11 +13,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-
+/**
+ * Main command class.
+ */
 @SuppressWarnings({"rawtypes", "unused"})
 public class Command implements CommandExecutor, TabCompleter {
-
     private final HashMap<String, SubCommands> subCommands = new HashMap<>();
     private final String permission;
     private final String command;

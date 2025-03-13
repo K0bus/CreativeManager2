@@ -70,7 +70,7 @@ public abstract class Menu {
     public void onDrag(InventoryDragEvent e) {
         e.setCancelled(true);
     }
-    public void onOpen(InventoryOpenEvent e) {}
-    public void onClose(InventoryCloseEvent e) {}
-    public void onInteract(InventoryInteractEvent e) {}
+    public abstract void onOpen(InventoryOpenEvent e);
+    public abstract void onClose(InventoryCloseEvent e);
+    public abstract void onInteract(InventoryInteractEvent e);
 }

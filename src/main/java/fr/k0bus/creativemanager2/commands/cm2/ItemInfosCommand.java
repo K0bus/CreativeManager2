@@ -32,7 +32,7 @@ public class ItemInfosCommand extends SubCommands {
             return;
         }
         StringBuilder tags = new StringBuilder();
-        for(Map.Entry<String, Set<Material>> entry: CreativeManager2.API.getTagMap().entrySet())
+        for(Map.Entry<String, Set<Material>> entry: CreativeManager2.api.getTagMap().entrySet())
         {
             if(entry.getValue().contains(itemStack.getType()))
             {

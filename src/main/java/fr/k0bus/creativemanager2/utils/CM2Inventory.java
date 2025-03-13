@@ -10,9 +10,9 @@ import java.util.logging.Level;
 public class CM2Inventory {
     public static void loadInventory(Player player, String inventoryName)
     {
-        if(CreativeManager2.API.getSettings().getBoolean("stop-inventory-save")) return;
+        if(CreativeManager2.api.getSettings().getBoolean("stop-inventory-save")) return;
         if(player.hasPermission("creativemanager.inventory.bypass")) return;
-        UserData data = new UserData(player, CreativeManager2.API.getInstance());
+        UserData data = new UserData(player, CreativeManager2.api.getInstance());
         if(data.contains(inventoryName + ".content") && data.contains(inventoryName + ".armor"))
         {
             try {
@@ -22,33 +22,33 @@ public class CM2Inventory {
                 player.getInventory().setArmorContents(
                         InventoryUtils.itemStackArrayFromBase64(data.getString(inventoryName + ".armor"))
                 );
-                if(CreativeManager2.API.getSettings().debugMode())
-                    CreativeManager2.API.getInstance().getLogger()
+                if(CreativeManager2.api.getSettings().debugMode())
+                    CreativeManager2.api.getInstance().getLogger()
                             .log(Level.INFO, "Load inventory '" + inventoryName + "' of user '" + player.getDisplayName() + "' in file '" + data.getFile().getName() + "'");
             } catch (IOException e) {
-                CreativeManager2.API.getInstance().getLogger()
+                CreativeManager2.api.getInstance().getLogger()
                         .log(Level.SEVERE, e.getMessage());
             }
         } else
         {
             player.getInventory().clear();
-            if(CreativeManager2.API.getSettings().debugMode())
-                CreativeManager2.API.getInstance().getLogger()
+            if(CreativeManager2.api.getSettings().debugMode())
+                CreativeManager2.api.getInstance().getLogger()
                         .log(Level.INFO, "Clear inventory of user '" + player.getDisplayName());
         }
 
     }
     public static void saveInventory(Player player, String inventoryName)
     {
-        if(CreativeManager2.API.getSettings().getBoolean("stop-inventory-save")) return;
+        if(CreativeManager2.api.getSettings().getBoolean("stop-inventory-save")) return;
         if(player.hasPermission("creativemanager.inventory.bypass")) return;
-        UserData data = new UserData(player, CreativeManager2.API.getInstance());
+        UserData data = new UserData(player, CreativeManager2.api.getInstance());
         String[] encoded = InventoryUtils.playerInventoryToBase64(player.getInventory());
         data.set(inventoryName + ".content", encoded[0]);
         data.set(inventoryName + ".armor", encoded[1]);
         data.save();
-        if(CreativeManager2.API.getSettings().debugMode())
-            CreativeManager2.API.getInstance().getLogger()
+        if(CreativeManager2.api.getSettings().debugMode())
+            CreativeManager2.api.getInstance().getLogger()
                     .log(Level.INFO, "Save inventory '" + inventoryName + "' of user '" + player.getDisplayName() + "' in file '" + data.getFile().getName() + "'");
     }
 }

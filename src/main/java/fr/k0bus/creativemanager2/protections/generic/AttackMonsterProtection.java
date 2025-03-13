@@ -1,8 +1,8 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -17,8 +17,7 @@ public class AttackMonsterProtection extends Protection {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onAttack(EntityDamageByEntityEvent event)
-    {
+    public void onAttack(EntityDamageByEntityEvent event) {
         if(isDisabled()) return;
         if(!(event.getDamager() instanceof Player player)) return;
         if(!(event.getEntity() instanceof LivingEntity)) return;

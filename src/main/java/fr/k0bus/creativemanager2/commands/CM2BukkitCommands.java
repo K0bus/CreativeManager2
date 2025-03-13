@@ -26,6 +26,6 @@ public class CM2BukkitCommands extends Command {
 
     public static void sendMainMessage(CommandSender sender)
     {
-        CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " CreativeManager2 loaded in the server !");
+        CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " CreativeManager2 loaded in the server !");
     }
 }

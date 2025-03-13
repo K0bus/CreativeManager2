@@ -19,6 +19,6 @@ public class SettingsSubCommand extends SubCommands {
     public void execute(CommandSender sender)
     {
         if(sender instanceof Player p)
-            new SettingGui(CreativeManager2.API.getInstance()).open(p);
+            new SettingGui(CreativeManager2.api.getInstance()).open(p);
     }
 }

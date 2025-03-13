@@ -1,5 +1,8 @@
 package fr.k0bus.creativemanager2.gui;
 
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -21,6 +24,21 @@ public class PagedMenu extends Menu {
     @Override
     public void init() {
         getInventory().clear();
+    }
+
+    @Override
+    public void onOpen(InventoryOpenEvent e) {
+
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent e) {
+
+    }
+
+    @Override
+    public void onInteract(InventoryInteractEvent e) {
+
     }
 
     public boolean hasNextPage()

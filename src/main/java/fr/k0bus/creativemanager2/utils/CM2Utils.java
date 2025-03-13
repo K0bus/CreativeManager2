@@ -82,8 +82,8 @@ public class CM2Utils {
 
     public static void sendMessage(CommandSender messageTo, String text)
     {
-        if(!CreativeManager2.API.getLang().getString(text).isEmpty())
-            messageTo.sendMessage(parse(StringUtils.parse(CreativeManager2.API.getLang().getString(text))));
+        if(!CreativeManager2.api.getLang().getString(text).isEmpty())
+            messageTo.sendMessage(parse(StringUtils.parse(CreativeManager2.api.getLang().getString(text))));
     }
     public static void sendRawMessage(CommandSender messageTo, String text)
     {
@@ -93,7 +93,7 @@ public class CM2Utils {
 
     public static String parse(String string)
     {
-        return string.replace("{TAG}", CreativeManager2.API.TAG);
+        return string.replace("{TAG}", CreativeManager2.api.tag);
     }
     public static boolean inList(ItemStack itemStack, List<String> strings)
     {
@@ -127,14 +127,14 @@ public class CM2Utils {
                 return true;
             if(s.startsWith("#"))
             {
-                Set<Material> set = CreativeManager2.API.getTagMap().get(s.substring(1).toUpperCase());
+                Set<Material> set = CreativeManager2.api.getTagMap().get(s.substring(1).toUpperCase());
                 if(set != null)
                 {
                     if(set.contains(Material.valueOf(search.toUpperCase()))) return true;
                 }
                 else
                 {
-                    CreativeManager2.API.getInstance().getLogger()
+                    CreativeManager2.api.getInstance().getLogger()
                             .log(Level.WARNING, "Unable to find " + s + " tags");
                 }
             }

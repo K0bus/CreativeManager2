@@ -40,8 +40,8 @@ public class Configuration {
         if(!dir.exists())
             if(!dir.mkdirs())
             {
-                CreativeManager2.API.logException(new Exception("Can't create directory"));
-                CreativeManager2.API.disableCM2();
+                CreativeManager2.api.logException(new Exception("Can't create directory"));
+                CreativeManager2.api.disableCM2();
             }
         if(dir.isDirectory())
             this.file = new File(dir, filename);
@@ -61,19 +61,19 @@ public class Configuration {
             else
             {
                 if(!this.file.getParentFile().mkdirs()){
-                    CreativeManager2.API.logException(new Exception("Can't create directory"));
-                    CreativeManager2.API.disableCM2();
+                    CreativeManager2.api.logException(new Exception("Can't create directory"));
+                    CreativeManager2.api.disableCM2();
                     return;
                 }
                 try {
                     if(!this.file.createNewFile())
                     {
-                        CreativeManager2.API.logException(new Exception("Can't write config file"));
-                        CreativeManager2.API.disableCM2();
+                        CreativeManager2.api.logException(new Exception("Can't write config file"));
+                        CreativeManager2.api.disableCM2();
                         return;
                     }
                 } catch (IOException e) {
-                    CreativeManager2.API.logException(e);
+                    CreativeManager2.api.logException(e);
                 }
             }
         }
@@ -95,7 +95,7 @@ public class Configuration {
         try {
             config.load(file);
         } catch (IOException | InvalidConfigurationException e) {
-            CreativeManager2.API.logException(e);
+            CreativeManager2.api.logException(e);
         }
 
         return config;
@@ -105,7 +105,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            CreativeManager2.API.logException(e);
+            CreativeManager2.api.logException(e);
         }
     }
     public String getString(String path)
@@ -148,7 +148,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            CreativeManager2.API.logException(e);
+            CreativeManager2.api.logException(e);
         }
     }
     public static void updateConfig(String cfg, JavaPlugin plugin)
@@ -156,8 +156,8 @@ public class Configuration {
         File file = new File(plugin.getDataFolder(), cfg);
         if(!file.getParentFile().mkdirs())
         {
-            CreativeManager2.API.logException(new Exception("Can't create directory"));
-            CreativeManager2.API.disableCM2();
+            CreativeManager2.api.logException(new Exception("Can't create directory"));
+            CreativeManager2.api.disableCM2();
             return;
         }
         if(!file.exists())
@@ -165,8 +165,8 @@ public class Configuration {
         InputStream is = plugin.getResource(cfg);
         if(is == null)
         {
-            CreativeManager2.API.logException(new Exception("Can't found default config file"));
-            CreativeManager2.API.disableCM2();
+            CreativeManager2.api.logException(new Exception("Can't found default config file"));
+            CreativeManager2.api.disableCM2();
             return;
         }
         FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
@@ -196,7 +196,7 @@ public class Configuration {
         try {
             conf.save(file);
         } catch (IOException e) {
-            CreativeManager2.API.logException(e);
+            CreativeManager2.api.logException(e);
         }
     }
 

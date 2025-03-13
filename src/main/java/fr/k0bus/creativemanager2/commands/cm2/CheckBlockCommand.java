@@ -31,7 +31,7 @@ public class CheckBlockCommand extends SubCommands {
         Block block = player.getTargetBlockExact(5);
         if(block == null)
         {
-            CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " &7No block targeted !");
+            CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " &7No block targeted !");
             return;
         }
 
@@ -43,7 +43,7 @@ public class CheckBlockCommand extends SubCommands {
         UUID uuid = CM2Data.findPlayer(block);
         if(uuid == null)
         {
-            CM2Utils.sendRawMessage(sender, CreativeManager2.API.TAG + " &8No log on this block !");
+            CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " &8No log on this block !");
             return;
         }
 

@@ -16,22 +16,22 @@ import java.util.Collections;
 @SuppressWarnings("deprecation")
 public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
-        super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.API.getMenuListener());
+        super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.api.getMenuListener());
         setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));
         init();
     }
     public void init()
     {
         clearContent();
-        for(Protection protection:CreativeManager2.API.getProtections().values())
+        for(Protection protection:CreativeManager2.api.getProtections().values())
         {
             MenuItems menuItems = new MenuItems(
                     protection.getIcon(),
                     1,
                     inventoryClickEvent -> {
                         protection.setEnabled(protection.isDisabled());
-                        CreativeManager2.API.getSettings().set("protections." + protection.getCustomId() + ".enabled", true);
-                        CreativeManager2.API.getSettings().save();
+                        CreativeManager2.api.getSettings().set("protections." + protection.getCustomId() + ".enabled", true);
+                        CreativeManager2.api.getSettings().save();
                         init();
                     }
             );
@@ -48,7 +48,7 @@ public class SettingGui extends PagedMenu {
                         )
                 );
             }
-            if(CreativeManager2.API.isPaper())
+            if(CreativeManager2.api.isPaper())
                 for(ItemFlag flag : ItemFlag.values())
                 {
                     menuItems.addItemFlags(flag);

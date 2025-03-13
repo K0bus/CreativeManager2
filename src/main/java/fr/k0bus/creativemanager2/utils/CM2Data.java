@@ -32,43 +32,43 @@ public class CM2Data {
     public static void register(Location location, UUID uuid)
     {
         String serializedLocation = serializeLocation(location);
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + UUID_ID);
         location.getChunk().getPersistentDataContainer()
                 .set(namespacedKeyUuid, PersistentDataType.STRING, uuid.toString());
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + DATE_ID);
         location.getChunk().getPersistentDataContainer()
                 .set(namespacedKeyDate, PersistentDataType.LONG, System.currentTimeMillis());
     }
 
     public static void register(Entity entity, Player player)
     {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), UUID_ID);
         entity.getPersistentDataContainer()
                 .set(namespacedKeyUuid, PersistentDataType.STRING, player.getUniqueId().toString());
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), DATE_ID);
         entity.getPersistentDataContainer()
                 .set(namespacedKeyDate, PersistentDataType.LONG, System.currentTimeMillis());
     }
     public static void register(Entity entity, UUID uuid)
     {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), UUID_ID);
         entity.getPersistentDataContainer()
                 .set(namespacedKeyUuid, PersistentDataType.STRING, uuid.toString());
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), DATE_ID);
         entity.getPersistentDataContainer()
                 .set(namespacedKeyDate, PersistentDataType.LONG, System.currentTimeMillis());
     }
     public static void unregister(Entity entity)
     {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), UUID_ID);
         entity.getPersistentDataContainer().remove(namespacedKeyUuid);
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), DATE_ID);
         entity.getPersistentDataContainer().remove(namespacedKeyDate);
     }
     @Nullable
     public static UUID findPlayer(Entity entity)
     {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), UUID_ID);
         String UUIDText = entity.getPersistentDataContainer().get(namespacedKeyUuid, PersistentDataType.STRING);
         if(UUIDText == null)
             return null;
@@ -77,7 +77,7 @@ public class CM2Data {
     public static long findDate(Entity entity)
     {
         if(entity == null) return 0;
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), DATE_ID);
         Object o = entity.getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
         if(o == null) return -1;
         return (long) o;
@@ -90,16 +90,16 @@ public class CM2Data {
     public static void unregister(Location location)
     {
         String serializedLocation = serializeLocation(location);
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + UUID_ID);
+        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + UUID_ID);
         location.getChunk().getPersistentDataContainer().remove(namespacedKeyUuid);
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + DATE_ID);
         location.getChunk().getPersistentDataContainer().remove(namespacedKeyDate);
     }
     @Nullable
     public static UUID findPlayer(Location location)
     {
         String serializedLocation = serializeLocation(location);
-        NamespacedKey namespacedKey = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + UUID_ID);
+        NamespacedKey namespacedKey = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + UUID_ID);
         String value = location.getChunk().getPersistentDataContainer()
                 .get(namespacedKey, PersistentDataType.STRING);
         if(value == null) return null;
@@ -113,7 +113,7 @@ public class CM2Data {
     public static long findDate(Location location)
     {
         String serializedLocation = serializeLocation(location);
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + DATE_ID);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.api.getInstance(), serializedLocation + DATE_ID);
         Object o = location.getChunk().getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
         if(o == null) return -1;
         return (long) o;

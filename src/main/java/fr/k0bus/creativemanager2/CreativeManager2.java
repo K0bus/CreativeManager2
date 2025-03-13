@@ -7,14 +7,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CreativeManager2 extends JavaPlugin {
 
-    public static CM2API API;
+    public static CM2API api;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        API = new CM2API(this);
+        api = new CM2API(this);
         registerCommands();
-        API.loadProtections();
+        api.loadProtections();
     }
 
     public void registerCommands()
@@ -27,7 +27,7 @@ public final class CreativeManager2 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if(API != null)
-            API = null;
+        if(api != null)
+            api = null;
     }
 }
