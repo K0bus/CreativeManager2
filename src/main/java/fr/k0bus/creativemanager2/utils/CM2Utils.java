@@ -47,6 +47,15 @@ public class CM2Utils {
         return typeList;
     }
 
+    public static boolean isPaper()
+    {
+        try {
+            Class.forName("com.destroystokyo.paper.ParticleBuilder");
+            return true;
+        } catch (ClassNotFoundException ignored) {}
+        return false;
+    }
+
     public static boolean isCreativePlayer(LivingEntity entity)
     {
         if(entity instanceof Player p)
@@ -121,7 +130,7 @@ public class CM2Utils {
                 Set<Material> set = CreativeManager2.API.getTagMap().get(s.substring(1).toUpperCase());
                 if(set != null)
                 {
-                    if(set.contains(Material.valueOf(search))) return true;
+                    if(set.contains(Material.valueOf(search.toUpperCase()))) return true;
                 }
                 else
                 {
