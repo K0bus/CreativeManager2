@@ -145,4 +145,9 @@ public class CM2API {
     {
         getLogger().log(Level.SEVERE, "An error has occurred.", e);
     }
+
+    public void disableCM2()
+    {
+        instance.getServer().getPluginManager().disablePlugin(instance);
+    }
 }
