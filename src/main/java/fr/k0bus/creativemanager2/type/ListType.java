@@ -16,7 +16,7 @@ public enum ListType {
         if(s == null) return BLACKLIST;
         for(ListType type:ListType.values())
         {
-            if(type.name().toLowerCase().equals(s.toLowerCase())) return type;
+            if(type.name().equalsIgnoreCase(s)) return type;
         }
         return BLACKLIST;
     }

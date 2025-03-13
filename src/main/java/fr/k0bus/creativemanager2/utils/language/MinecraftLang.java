@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.utils.language;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -38,7 +39,15 @@ public class MinecraftLang {
     {
         String FILE_URL = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/" + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
         File dir = new File(plugin.getDataFolder(), "locale");
-        if(!dir.exists()) dir.mkdir();
+        if(!dir.exists())
+        {
+            if(!dir.mkdir())
+            {
+                CreativeManager2.API.logException(new Exception("Can't create MC Lang directory"));
+                CreativeManager2.API.disableCM2();
+                return;
+            }
+        }
         File localeFile = new File(dir, lang.toLowerCase() + ".json");
         if(!localeFile.exists()) {
             plugin.getLogger().info("§Starting downloading " + lang + ".json on version" + mcVersion.toLowerCase());

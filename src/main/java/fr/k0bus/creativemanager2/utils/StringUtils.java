@@ -39,7 +39,7 @@ public class StringUtils {
         StringBuilder finalString = new StringBuilder();
         for (String s:strings) {
             s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
-            if(!finalString.toString().equals("")) finalString.append(" ");
+            if(!finalString.toString().isEmpty()) finalString.append(" ");
             finalString.append(s);
         }
         return finalString.toString();

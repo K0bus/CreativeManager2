@@ -56,6 +56,7 @@ public class SettingGui extends PagedMenu {
                 for(ItemFlag flag : ItemFlag.values())
                 {
                     ItemMeta meta = menuItems.getItemMeta();
+                    if(meta == null) continue;
                     meta.addItemFlags(flag);
                     menuItems.setItemMeta(meta);
                 }
