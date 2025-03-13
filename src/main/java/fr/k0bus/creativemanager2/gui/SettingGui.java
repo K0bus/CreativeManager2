@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Collections;
 
+@SuppressWarnings("deprecation")
 public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
         super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.API.getMenuListener());

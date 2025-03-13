@@ -19,6 +19,7 @@ public abstract class Menu {
 
     private final MenuListener listener;
 
+    @SuppressWarnings("deprecation")
     public Menu(int size, String name, JavaPlugin plugin, MenuListener listener)
     {
         inventory = Bukkit.createInventory(null,9*size, Utils.PAPIParse(name));
