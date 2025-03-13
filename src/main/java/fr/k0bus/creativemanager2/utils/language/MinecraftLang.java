@@ -13,7 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 public class MinecraftLang {
@@ -51,14 +52,14 @@ public class MinecraftLang {
         File localeFile = new File(dir, lang.toLowerCase() + ".json");
         if(!localeFile.exists()) {
             plugin.getLogger().info("§Starting downloading " + lang + ".json on version" + mcVersion.toLowerCase());
-            try (BufferedInputStream in = new BufferedInputStream(new URL(FILE_URL).openStream());
+            try (BufferedInputStream in = new BufferedInputStream(new URI(FILE_URL).toURL().openStream());
                  FileOutputStream fileOutputStream = new FileOutputStream(localeFile)) {
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;
                 while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                     fileOutputStream.write(dataBuffer, 0, bytesRead);
                 }
-            } catch (IOException e) {
+            } catch (IOException | URISyntaxException e) {
                 // handle exception
                 plugin.getLogger().warning("§Can't download locale file " + lang + ".json");
                 plugin.getLogger().warning("§URL : " + FILE_URL);
