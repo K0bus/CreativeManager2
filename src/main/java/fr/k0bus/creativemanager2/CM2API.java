@@ -46,7 +46,6 @@ public class CM2API {
         this.TAG = StringUtils.parse(settings.getTag());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         loadTags();
-        loadProtections();
     }
 
     public void loadProtections()
