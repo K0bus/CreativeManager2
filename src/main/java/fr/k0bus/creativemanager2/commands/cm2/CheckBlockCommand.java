@@ -52,8 +52,8 @@ public class CheckBlockCommand extends SubCommands {
             playerString = "UNKNOWN";
         else
             playerString = offlinePlayer.getName();
-        Long dateLong = CM2Data.findDate(block);
-        if(dateLong == null)
+        long dateLong = CM2Data.findDate(block);
+        if(dateLong == -1)
             dateString = "UNKNOWN";
         else
         {

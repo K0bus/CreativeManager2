@@ -78,8 +78,9 @@ public class CM2Data {
     {
         if(entity == null) return 0;
         NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), DATE_ID);
-        return entity.getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
-        //TODO: Check warning
+        Object o = entity.getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
+        if(o == null) return -1;
+        return (long) o;
     }
 
     public static void unregister(Block block)
@@ -104,19 +105,18 @@ public class CM2Data {
         if(value == null) return null;
         return UUID.fromString(value);
     }
-    @Nullable
-    public static Long findDate(Block block)
+    public static long findDate(Block block)
     {
         return findDate(block.getLocation());
     }
 
-    @Nullable
-    public static Long findDate(Location location)
+    public static long findDate(Location location)
     {
         String serializedLocation = serializeLocation(location);
-        NamespacedKey namespacedKey = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + DATE_ID);
-        return location.getChunk().getPersistentDataContainer()
-                .get(namespacedKey, PersistentDataType.LONG);
+        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.API.getInstance(), serializedLocation + DATE_ID);
+        Object o = location.getChunk().getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
+        if(o == null) return -1;
+        return (long) o;
     }
     @Nullable
     public static UUID findPlayer(Block block)
