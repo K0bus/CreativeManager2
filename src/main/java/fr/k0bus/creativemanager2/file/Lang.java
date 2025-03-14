@@ -19,13 +19,7 @@ public class Lang extends Configuration {
 
     public void init() {
         loadConfig();
-        FileConfiguration defaultConfig = null;
-        InputStream is = plugin.getResource("lang/" + this.langString + ".yml");
-        if (is != null) defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
-        else {
-            is = plugin.getResource("lang/en_US.yml");
-            if (is != null) defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
-        }
+        FileConfiguration defaultConfig = openDefaultConfigurationFile();
 
         if (defaultConfig != null)
             for (String key : defaultConfig.getKeys(false)) {
@@ -35,6 +29,16 @@ public class Lang extends Configuration {
                     fileConfiguration.set(defaultConfig.getCurrentPath() + "." + key, defaultConfig.get(key));
             }
         super.save();
+    }
+
+    protected FileConfiguration openDefaultConfigurationFile() {
+        InputStream is = plugin.getResource("lang/" + this.langString + ".yml");
+        if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        else {
+            is = plugin.getResource("lang/en_US.yml");
+            if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        }
+        return null;
     }
 
     protected void checkSection(ConfigurationSection section) {

@@ -159,15 +159,8 @@ public class Configuration {
             CreativeManager2.api.disableCM2();
             return;
         }
-        if (!file.exists()) plugin.saveResource(cfg, false);
-        InputStream is = plugin.getResource(cfg);
-        if (is == null) {
-            CM2Logger.exception(new Exception("Can't found default config file"));
-            CreativeManager2.api.disableCM2();
-            return;
-        }
-        FileConfiguration defaultConf =
-                YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+        FileConfiguration defaultConf = getDefaultFileConfiguration(cfg, plugin, file);
         FileConfiguration conf = loadConfiguration(file);
         for (String path : defaultConf.getKeys(true)) {
             Object configObj = conf.get(path);
@@ -192,6 +185,17 @@ public class Configuration {
         } catch (IOException e) {
             CM2Logger.exception(e);
         }
+    }
+
+    public static FileConfiguration getDefaultFileConfiguration(String cfg, JavaPlugin plugin, File file) {
+        if (!file.exists()) plugin.saveResource(cfg, false);
+        InputStream is = plugin.getResource(cfg);
+        if (is == null) {
+            CM2Logger.exception(new Exception("Can't found default config file"));
+            CreativeManager2.api.disableCM2();
+            return null;
+        }
+        return YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));
     }
 
     public FileConfiguration getFileConfiguration() {
