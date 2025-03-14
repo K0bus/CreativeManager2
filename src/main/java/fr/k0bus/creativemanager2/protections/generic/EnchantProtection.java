@@ -24,11 +24,11 @@ public class EnchantProtection extends Protection {
         if (event.getWhoClicked() instanceof Player player) {
             if (hasPermission(player)) return;
             if (!CM2Utils.isCreativePlayer(player)) return;
-            reloadInventoryLore(player);
+            checkInventoryEnchantments(player);
         }
     }
 
-    private void reloadInventoryLore(Player player) {
+    private void checkInventoryEnchantments(Player player) {
         new BukkitRunnable() {
             @Override
             public void run() {
