@@ -75,7 +75,6 @@ public class LogBlockProtection extends Protection {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     void onBlockGrow(BlockGrowEvent event) {
-        // TODO: Check function don't work
         Block block = event.getBlock();
         UUID uuid;
         Material material = event.getNewState().getBlockData().getMaterial();
@@ -119,7 +118,6 @@ public class LogBlockProtection extends Protection {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     void onBlockSpread(BlockSpreadEvent event) {
-        // TODO: Check function don't work
         UUID uuid = CM2Data.findPlayer(event.getSource());
         if (uuid != null) {
             CM2Data.register(event.getBlock(), uuid);
