@@ -86,6 +86,7 @@ public class CM2API {
                 "multi-inventories._GLOBAL." + gameMode.name().toLowerCase(Locale.getDefault()));
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DE_MIGHT_IGNORE")
     private void loadTags() {
         try {
             Field[] fieldlist = Tag.class.getDeclaredFields();
@@ -93,7 +94,7 @@ public class CM2API {
                 try {
                     Set<Material> set = ((Tag<Material>) fld.get(null)).getValues();
                     tagMap.put(fld.getName(), set);
-                } catch (Exception ignored) {
+                } catch (Exception e) { //NOPMD - suppressed EmptyCatchBlock - Try needed to catch Spigot data
                 }
             }
             int size = tagMap.size();
