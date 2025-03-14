@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.gui;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.Serializer;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class SettingGui extends PagedMenu {
                 menuItems.setDisplayname(
                         StringUtils.translateColor("§7【§a§l✔§r§7】 §r§f" + StringUtils.proper(protection.getId())));
             }
-            if (CreativeManager2.api.isPaper())
+            if (CM2Utils.isPaper())
                 for (ItemFlag flag : ItemFlag.values()) {
                     menuItems.addItemFlags(flag);
                 }

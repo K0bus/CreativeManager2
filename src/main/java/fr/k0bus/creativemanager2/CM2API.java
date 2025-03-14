@@ -25,7 +25,6 @@ public class CM2API {
     private MenuListener menuListener;
     public String tag;
     private final Map<String, Set<Material>> tagMap = new HashMap<>();
-    private boolean paper;
     private MinecraftLang minecraftLang;
 
     public CM2API(CreativeManager2 instance) {
@@ -33,12 +32,6 @@ public class CM2API {
     }
 
     public void initialize() {
-        try {
-            Class.forName("com.destroystokyo.paper.ParticleBuilder");
-            this.paper = true;
-        } catch (ClassNotFoundException ignored) {
-        }
-
         this.menuListener = new MenuListener();
         this.settings = new Settings(instance);
         this.settings.loadConfig();
@@ -108,10 +101,6 @@ public class CM2API {
         } catch (Exception e) {
             CM2Logger.info("§cThis minecraft version could not use the TAG system.");
         }
-    }
-
-    public boolean isPaper() {
-        return paper;
     }
 
     public Map<String, Set<Material>> getTagMap() {
