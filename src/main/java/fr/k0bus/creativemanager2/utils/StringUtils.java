@@ -1,6 +1,7 @@
 package fr.k0bus.creativemanager2.utils;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.md_5.bungee.api.ChatColor;
@@ -47,5 +48,18 @@ public class StringUtils {
         }
 
         return finalString.toString();
+    }
+    public static String replacePlaceholders(String template, Map<String, String> values) {
+        Pattern pattern = Pattern.compile("\\{(\\w+)}");
+        Matcher matcher = pattern.matcher(template);
+        StringBuilder sb = new StringBuilder();
+
+        while (matcher.find()) {
+            String key = matcher.group(1);
+            String replacement = values.getOrDefault(key, matcher.group(0));
+            matcher.appendReplacement(sb, replacement);
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 }
