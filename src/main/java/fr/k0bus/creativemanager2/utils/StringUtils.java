@@ -51,6 +51,7 @@ public class StringUtils {
 
         return finalString.toString();
     }
+
     public static String replacePlaceholders(String template, Map<String, String> values) {
         Pattern pattern = Pattern.compile("\\{(\\w+)}");
         Matcher matcher = pattern.matcher(template);
@@ -66,8 +67,6 @@ public class StringUtils {
     }
 
     public static List<String> listToLowerCase(List<String> list) {
-        return list.stream()
-                .map(String::toLowerCase)
-                .collect(Collectors.toList());
+        return list.stream().map(String::toLowerCase).collect(Collectors.toList());
     }
 }

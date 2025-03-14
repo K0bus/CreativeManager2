@@ -167,7 +167,8 @@ public class Configuration {
             for (String path : defaultConf.getKeys(true)) {
                 Object configObj = conf.get(path);
                 Object dConfigObj = defaultConf.get(path);
-                if (configObj == null || (dConfigObj != null && configObj.getClass().equals(dConfigObj.getClass()))) {
+                if (configObj == null
+                        || (dConfigObj != null && configObj.getClass().equals(dConfigObj.getClass()))) {
                     CM2Logger.warn("{0} added to {1}", path, cfg);
                     conf.set(path, defaultConf.get(path));
                 }

@@ -66,10 +66,11 @@ public class ItemTrackProtection extends Protection {
     }
 
     private String getFinalString(String string, Player player, ItemStack itemStack) {
-        return StringUtils.parse(StringUtils.replacePlaceholders(string, Map.of(
-                "PLAYER", player.getName(),
-                "UUID", player.getUniqueId().toString(),
-                "ITEM", CreativeManager2.api.getMinecraftLang().get(itemStack)))
-        );
+        return StringUtils.parse(StringUtils.replacePlaceholders(
+                string,
+                Map.of(
+                        "PLAYER", player.getName(),
+                        "UUID", player.getUniqueId().toString(),
+                        "ITEM", CreativeManager2.api.getMinecraftLang().get(itemStack))));
     }
 }
