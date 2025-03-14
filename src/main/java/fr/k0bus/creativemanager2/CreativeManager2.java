@@ -12,9 +12,13 @@ public final class CreativeManager2 extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        api = new CM2API(this);
+        setApi(this);
         registerCommands();
         api.initialize();
+    }
+
+    public static void setApi(CreativeManager2 instance) {
+        CreativeManager2.api = new CM2API(instance);
     }
 
     public void registerCommands() {
