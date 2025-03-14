@@ -37,12 +37,11 @@ public class Configuration {
         this.plugin = instance;
         this.filename = filename;
         File dir = new File(plugin.getDataFolder(), dirName);
-        if(!dir.exists())
-            if(!dir.mkdirs())
-            {
-                CM2Logger.exception(new Exception("Can't create directory"));
-                CreativeManager2.api.disableCM2();
-            }
+        if(!dir.exists() && !dir.mkdirs())
+        {
+            CM2Logger.exception(new Exception("Can't create directory"));
+            CreativeManager2.api.disableCM2();
+        }
         if(dir.isDirectory())
             this.file = new File(dir, filename);
         else
@@ -182,15 +181,11 @@ public class Configuration {
         for (String path : conf.getKeys(true)) {
             Object confOption = conf.get(path);
             Object confOptionDefault = defaultConf.get(path);
-            if(confOption != null && confOptionDefault != null)
+            if(confOption != null && confOptionDefault != null && !defaultConf.contains(path) || !confOption.getClass().getName().equals(confOptionDefault.getClass().getName()))
             {
-                if(!defaultConf.contains(path) || !confOption.getClass().getName().equals(confOptionDefault.getClass().getName()))
-                {
-                    CM2Logger.warn("{0} removed to {1}", path, cfg);
-                    conf.set(path, null);
-                }
+                CM2Logger.warn("{0} removed to {1}", path, cfg);
+                conf.set(path, null);
             }
-
         }
         try {
             conf.save(file);

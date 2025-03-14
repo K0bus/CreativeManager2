@@ -27,11 +27,8 @@ public class CM2Logger {
 
     public void debug(String string, Object... args)
     {
-        if(CreativeManager2.api.getSettings().debugMode())
-        {
-            if(getLogger().isLoggable(Level.INFO))
-                getLogger().info("Debug >> " + StringUtils.parse(formatMessage(string, args)));
-        }
+        if(CreativeManager2.api.getSettings().debugMode() && getLogger().isLoggable(Level.INFO))
+            getLogger().info("Debug >> " + StringUtils.parse(formatMessage(string, args)));
     }
 
     public static void exception(Exception e)

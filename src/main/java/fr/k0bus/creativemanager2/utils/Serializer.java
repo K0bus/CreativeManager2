@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 public class Serializer {
     public static int[] readIntArray(List<?> objectList)
     {
-        int i = 0;
         List<Integer> values = new ArrayList<>();
         for (Object o:objectList) {
             if(o instanceof Integer)
@@ -23,12 +22,9 @@ public class Serializer {
                     int n1 = Integer.parseInt(args[1])+1;
                     for (int n: IntStream.range(n0, n1).toArray()) {
                         values.add(n);
-                        i++;
                     }
-                    continue;
                 }
             }
-            i++;
         }
         return values.stream().mapToInt(Integer::intValue).toArray();
     }

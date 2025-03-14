@@ -198,13 +198,8 @@ public class LogBlockProtection extends Protection {
 
         Block pistonHead = event.getBlock().getRelative(event.getDirection());
         UUID uuid = CM2Data.findPlayer(pistonHead);
-        if(uuid != null)
-        {
-            if(pistonHead.getType().equals(Material.PISTON_HEAD))
-            {
-                CM2Data.register(pistonHead, uuid);
-            }
-        }
+        if(uuid != null && pistonHead.getType().equals(Material.PISTON_HEAD))
+            CM2Data.register(pistonHead, uuid);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -214,13 +209,8 @@ public class LogBlockProtection extends Protection {
 
         Block pistonHead = event.getBlock().getRelative(event.getDirection().getOppositeFace());
         UUID uuid = CM2Data.findPlayer(pistonHead);
-        if(uuid != null)
-        {
-            if(pistonHead.getType().equals(Material.PISTON_HEAD))
-            {
-                CM2Data.unregister(pistonHead);
-            }
-        }
+        if(uuid != null && pistonHead.getType().equals(Material.PISTON_HEAD))
+            CM2Data.unregister(pistonHead);
 
         this.pistonCheck(pistonDirection, blocks);
     }

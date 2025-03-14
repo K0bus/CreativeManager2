@@ -14,7 +14,7 @@ public enum ListType {
     public static ListType fromString(String s)
     {
         if(s == null) return BLACKLIST;
-        for(ListType type:ListType.values())
+        for(ListType type:values())
         {
             if(type.name().equalsIgnoreCase(s)) return type;
         }

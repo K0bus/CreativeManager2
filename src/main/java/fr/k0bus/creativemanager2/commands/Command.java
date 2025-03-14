@@ -110,12 +110,10 @@ public class Command implements CommandExecutor, TabCompleter {
             if(args.length == 1)
             {
                 for (Map.Entry<String, SubCommands> e:subCommands.entrySet()) {
-                    if(e.getKey() != null)
-                        if(e.getKey().startsWith(args[0].toLowerCase()))
-                        {
-                            if(e.getValue().isAllowed(sender))
-                                complete.add(e.getValue().getCommand());
-                        }
+                    if(e.getKey() != null &&
+                            e.getKey().startsWith(args[0].toLowerCase()) &&
+                            e.getValue().isAllowed(sender))
+                        complete.add(e.getValue().getCommand());
                 }
             }
             else if (args.length == 0)

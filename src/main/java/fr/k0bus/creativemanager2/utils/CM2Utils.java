@@ -21,9 +21,8 @@ import java.util.Set;
 public class CM2Utils {
     public static boolean isProtectedChest(Inventory inventory) {
         if (inventory.getType().equals(InventoryType.ENDER_CHEST)) return true;
-        if (getProtectedType().contains(inventory.getType())) {
-            if (inventory.getHolder() != null)
-                return inventory.getHolder().getClass().toString().contains("org.bukkit");
+        if (getProtectedType().contains(inventory.getType()) && inventory.getHolder() != null) {
+            return inventory.getHolder().getClass().toString().contains("org.bukkit");
         }
         return false;
     }
@@ -113,15 +112,12 @@ public class CM2Utils {
             s = s.toLowerCase();
             if(s.equals("*")) return true;
             if(s.isEmpty()) continue;
-            if(s.startsWith("*") && s.endsWith("*"))
-                if(search.contains(s.substring(1, s.length() -1)))
-                    return true;
-            if(s.startsWith("*"))
-                if(search.endsWith(s.substring(1)))
-                    return true;
-            if(s.endsWith("*"))
-                if(search.startsWith(s.substring(0, s.length() -1)))
-                    return true;
+            if(s.startsWith("*") && s.endsWith("*") && search.contains(s.substring(1, s.length() -1)))
+                return true;
+            if(s.startsWith("*") && search.endsWith(s.substring(1)))
+                return true;
+            if(s.endsWith("*") && search.startsWith(s.substring(0, s.length() -1)))
+                return true;
             if(s.equals(search))
                 return true;
             if(s.startsWith("#"))

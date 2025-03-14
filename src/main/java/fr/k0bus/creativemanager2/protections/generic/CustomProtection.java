@@ -57,19 +57,16 @@ public class CustomProtection extends Protection {
     @EventHandler
     public void onBlockInteract(PlayerInteractEvent event)
     {
-        if(event.getClickedBlock() != null)
+        if(event.getClickedBlock() != null &&
+                needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCK_USE))
         {
-            if(needCancel(event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCK_USE)){
-                event.setCancelled(true);
-                sendPermissionMessage(event.getPlayer(), CustomType.BLOCK_USE.getId());
-                return;
-            }
+            event.setCancelled(true);
+            sendPermissionMessage(event.getPlayer(), CustomType.BLOCK_USE.getId());
         }
-        if (event.getItem() != null) {
-            if(needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEM_USE)){
-                event.setCancelled(true);
-                sendPermissionMessage(event.getPlayer(), CustomType.ITEM_USE.getId());
-            }
+        if (event.getItem() != null &&
+                needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEM_USE)) {
+            event.setCancelled(true);
+            sendPermissionMessage(event.getPlayer(), CustomType.ITEM_USE.getId());
         }
     }
     @EventHandler
