@@ -48,7 +48,8 @@ public class Configuration {
             if (plugin.getResource(filename) != null) {
                 plugin.saveResource(filename, false);
             } else {
-                if (!this.file.getParentFile().exists() && !this.file.getParentFile().mkdirs()) {
+                if (!this.file.getParentFile().exists()
+                        && !this.file.getParentFile().mkdirs()) {
                     CM2Logger.exception(new Exception("Can't create directory"));
                     CreativeManager2.api.disableCM2();
                     return;
