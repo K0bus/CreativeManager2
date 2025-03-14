@@ -31,8 +31,6 @@ pipeline {
                     publishIssues id: 'analysis', name: 'All Issues',
                         issues: [checkstyle, pmd, spotbugs],
                         filters: [includePackage('io.jenkins.plugins.analysis.*')]
-
-                    recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
                 }
             }
         }
