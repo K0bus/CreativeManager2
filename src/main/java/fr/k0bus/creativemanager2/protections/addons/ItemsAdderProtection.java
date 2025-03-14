@@ -1,9 +1,9 @@
 package fr.k0bus.creativemanager2.protections.addons;
 
 import dev.lone.itemsadder.api.Events.*;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,57 +20,56 @@ public class ItemsAdderProtection extends Protection {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlaceFurniture(FurniturePlaceEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+    public void onPlaceFurniture(FurniturePlaceEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockPlace(CustomBlockPlaceEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+    public void onBlockPlace(CustomBlockPlaceEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockBreak(CustomBlockBreakEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+    public void onBlockBreak(CustomBlockBreakEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockInteract(CustomBlockInteractEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+    public void onBlockInteract(CustomBlockInteractEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onFurnitureInteract(FurnitureInteractEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+    public void onFurnitureInteract(FurnitureInteractEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onEntityDie(CustomEntityDeathEvent event)
-    {
-        if(isDisabled()) return;
-        if(!(event.getKiller() instanceof Player player)) return;
-        if(hasPermission(player)) return;
-        if(!CM2Utils.isCreativePlayer(player)) return;
+    public void onEntityDie(CustomEntityDeathEvent event) {
+        if (isDisabled()) return;
+        if (!(event.getKiller() instanceof Player player)) return;
+        if (hasPermission(player)) return;
+        if (!CM2Utils.isCreativePlayer(player)) return;
         player.setLastDamage(0);
         sendPermissionMessage(player);
     }

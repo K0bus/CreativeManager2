@@ -4,6 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -13,34 +19,26 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 public class MinecraftLang {
-
 
     private final String mcVersion;
     private final String lang;
 
     JsonObject jsonObject;
 
-    public MinecraftLang(JavaPlugin plugin, String lang, String mcVersion)
-    {
+    public MinecraftLang(JavaPlugin plugin, String lang, String mcVersion) {
         this.mcVersion = mcVersion.toLowerCase();
         this.lang = lang.toLowerCase();
         loadLang(plugin);
     }
-    public MinecraftLang(JavaPlugin plugin, String lang)
-    {
+
+    public MinecraftLang(JavaPlugin plugin, String lang) {
         this(plugin, lang, Bukkit.getBukkitVersion().split("-")[0]);
     }
 
     private void loadLang(JavaPlugin plugin) {
-        String fileUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/" + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
+        String fileUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/"
+                + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
         Path dir = plugin.getDataFolder().toPath().resolve("locale");
 
         try {
@@ -57,7 +55,7 @@ public class MinecraftLang {
             CM2Logger.info("§Starting downloading {0}.json on version {1}", lang, mcVersion);
 
             try (InputStream in = new URI(fileUrl).toURL().openStream();
-                 OutputStream out = Files.newOutputStream(localeFile)) {
+                    OutputStream out = Files.newOutputStream(localeFile)) {
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;
                 while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
@@ -91,35 +89,33 @@ public class MinecraftLang {
         }
     }
 
-    public String get(String k)
-    {
-        if(jsonObject == null) return "null";
-        if(jsonObject.get(k) == null) return "not contain";
+    public String get(String k) {
+        if (jsonObject == null) return "null";
+        if (jsonObject.get(k) == null) return "not contain";
         return jsonObject.get(k).getAsString();
     }
 
-    public String get(Material material)
-    {
+    public String get(Material material) {
         return get(MinecraftLangKey.getTranslationKey(material));
     }
-    public String get(Effect effect)
-    {
+
+    public String get(Effect effect) {
         return get(MinecraftLangKey.getTranslationKey(effect));
     }
-    public String get(Enchantment enchantment)
-    {
+
+    public String get(Enchantment enchantment) {
         return get(MinecraftLangKey.getTranslationKey(enchantment));
     }
-    public String get(EntityType entityType)
-    {
+
+    public String get(EntityType entityType) {
         return get(MinecraftLangKey.getTranslationKey(entityType));
     }
-    public String get(Statistic statistic)
-    {
+
+    public String get(Statistic statistic) {
         return get(MinecraftLangKey.getTranslationKey(statistic));
     }
-    public String get(ItemStack itemStack)
-    {
+
+    public String get(ItemStack itemStack) {
         return get(MinecraftLangKey.getTranslationKey(itemStack));
     }
 }

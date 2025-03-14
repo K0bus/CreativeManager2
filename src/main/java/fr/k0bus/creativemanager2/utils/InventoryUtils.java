@@ -1,5 +1,8 @@
 package fr.k0bus.creativemanager2.utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -7,10 +10,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 @SuppressWarnings("unused")
 public class InventoryUtils {
@@ -21,11 +20,11 @@ public class InventoryUtils {
      * @return Array of strings: [ main content, armor content ]
      */
     public static String[] playerInventoryToBase64(PlayerInventory playerInventory) throws IllegalStateException {
-        //get the main content part, this doesn't return the armor
+        // get the main content part, this doesn't return the armor
         String content = toBase64(playerInventory);
         String armor = itemStackArrayToBase64(playerInventory.getArmorContents());
 
-        return new String[] { content, armor };
+        return new String[] {content, armor};
     }
 
     /**

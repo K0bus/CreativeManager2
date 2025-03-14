@@ -17,17 +17,13 @@ public final class CreativeManager2 extends JavaPlugin {
         api.initialize();
     }
 
-    public void registerCommands()
-    {
-        if(CM2Utils.isPaper())
-            new CM2BrigadierCommand(this).build();
-        else
-            new CM2BukkitCommands().register(this);
+    public void registerCommands() {
+        if (CM2Utils.isPaper()) new CM2BrigadierCommand(this).build();
+        else new CM2BukkitCommands().register(this);
     }
 
     @Override
     public void onDisable() {
-        if(api != null)
-            api = null;
+        if (api != null) api = null;
     }
 }

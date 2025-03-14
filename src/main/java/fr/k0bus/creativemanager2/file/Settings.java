@@ -8,13 +8,15 @@ public class Settings extends Configuration {
         super("config.yml", instance);
     }
 
-    public String getLang()
-    {
+    public String getLang() {
         return getString("plugin.lang");
     }
-    public String getTag(){return getString("plugin.tag");}
 
-    public boolean debugMode(){
+    public String getTag() {
+        return getString("plugin.tag");
+    }
+
+    public boolean debugMode() {
         return getBoolean("plugin.debug-mode");
     }
 }

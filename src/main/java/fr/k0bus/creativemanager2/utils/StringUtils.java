@@ -1,15 +1,13 @@
 package fr.k0bus.creativemanager2.utils;
 
-import net.md_5.bungee.api.ChatColor;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.md_5.bungee.api.ChatColor;
 
 @SuppressWarnings("deprecation")
 public class StringUtils {
 
-    public static String parse(String s)
-    {
+    public static String parse(String s) {
         return Utils.placeholderApiParse(translateColor(s));
     }
 
@@ -39,7 +37,8 @@ public class StringUtils {
         StringBuilder finalString = new StringBuilder();
 
         for (String word : words) {
-            String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+            String capitalizedWord =
+                    word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
             if (!finalString.isEmpty()) {
                 finalString.append(' ');
             }

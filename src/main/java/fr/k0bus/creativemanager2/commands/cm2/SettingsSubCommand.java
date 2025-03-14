@@ -1,8 +1,8 @@
 package fr.k0bus.creativemanager2.commands.cm2;
 
+import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.SubCommands;
 import fr.k0bus.creativemanager2.gui.SettingGui;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,9 +16,8 @@ public class SettingsSubCommand extends SubCommands {
         execute(sender);
     }
 
-    public void execute(CommandSender sender)
-    {
-        if(sender instanceof Player p)
+    public void execute(CommandSender sender) {
+        if (sender instanceof Player p)
             new SettingGui(CreativeManager2.api.getInstance()).init().open(p);
     }
 }

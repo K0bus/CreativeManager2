@@ -1,11 +1,11 @@
 package fr.k0bus.creativemanager2.commands;
 
-import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.cm2.CheckBlockCommand;
+import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
 import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
 import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.command.CommandSender;
 
 public class CM2BukkitCommands extends Command {
@@ -14,8 +14,7 @@ public class CM2BukkitCommands extends Command {
         this.init();
     }
 
-    private void init()
-    {
+    private void init() {
         super.addSubCommands(new SettingsSubCommand());
         super.addSubCommands(new ReloadSubCommand());
         super.addSubCommands(new CheckBlockCommand());
@@ -29,8 +28,7 @@ public class CM2BukkitCommands extends Command {
         sendMainMessage(sender);
     }
 
-    public static void sendMainMessage(CommandSender sender)
-    {
+    public static void sendMainMessage(CommandSender sender) {
         CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " CreativeManager2 loaded in the server !");
     }
 }

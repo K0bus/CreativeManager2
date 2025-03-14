@@ -1,19 +1,18 @@
 package fr.k0bus.creativemanager2.commands.cm2;
 
+import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.SubCommands;
 import fr.k0bus.creativemanager2.utils.CM2Data;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.utils.StringUtils;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 public class CheckBlockCommand extends SubCommands {
     public CheckBlockCommand() {
@@ -25,12 +24,10 @@ public class CheckBlockCommand extends SubCommands {
         execute(sender);
     }
 
-    public void execute(CommandSender sender)
-    {
+    public void execute(CommandSender sender) {
         Player player = (Player) sender;
         Block block = player.getTargetBlockExact(5);
-        if(block == null)
-        {
+        if (block == null) {
             CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " &7No block targeted !");
             return;
         }
@@ -41,22 +38,17 @@ public class CheckBlockCommand extends SubCommands {
         String dateString;
 
         UUID uuid = CM2Data.findPlayer(block);
-        if(uuid == null)
-        {
+        if (uuid == null) {
             CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " &8No log on this block !");
             return;
         }
 
         OfflinePlayer offlinePlayer = Bukkit.getPlayer(uuid);
-        if(offlinePlayer == null)
-            playerString = "UNKNOWN";
-        else
-            playerString = offlinePlayer.getName();
+        if (offlinePlayer == null) playerString = "UNKNOWN";
+        else playerString = offlinePlayer.getName();
         long dateLong = CM2Data.findDate(block);
-        if(dateLong == -1)
-            dateString = "UNKNOWN";
-        else
-        {
+        if (dateLong == -1) dateString = "UNKNOWN";
+        else {
             Date date = new Date(dateLong);
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
             dateString = dateFormat.format(date);

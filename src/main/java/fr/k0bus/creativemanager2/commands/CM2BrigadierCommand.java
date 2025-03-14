@@ -18,13 +18,11 @@ public class CM2BrigadierCommand {
 
     private final CreativeManager2 plugin;
 
-    public CM2BrigadierCommand(CreativeManager2 instance)
-    {
+    public CM2BrigadierCommand(CreativeManager2 instance) {
         plugin = instance;
     }
 
-    public void build()
-    {
+    public void build() {
         LifecycleEventManager<Plugin> manager = plugin.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("cm2")
@@ -32,15 +30,11 @@ public class CM2BrigadierCommand {
                         CM2BukkitCommands.sendMainMessage(ctx.getSource().getSender());
                         return Command.SINGLE_SUCCESS;
                     })
-                    .then(
-                            new ReloadSubCommand().getCommandNode()
-                    ).then(
-                            new CheckBlockCommand().getCommandNode()
-                    ).then(
-                            new SettingsSubCommand().getCommandNode()
-                    ).then(
-                            new ItemInfosCommand().getCommandNode()
-                    ).build();
+                    .then(new ReloadSubCommand().getCommandNode())
+                    .then(new CheckBlockCommand().getCommandNode())
+                    .then(new SettingsSubCommand().getCommandNode())
+                    .then(new ItemInfosCommand().getCommandNode())
+                    .build();
             commands.registrar().register(buildCommand);
         });
     }

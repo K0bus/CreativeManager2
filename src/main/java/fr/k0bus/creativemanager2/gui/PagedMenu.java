@@ -1,12 +1,11 @@
 package fr.k0bus.creativemanager2.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PagedMenu extends Menu {
 
@@ -25,41 +24,31 @@ public class PagedMenu extends Menu {
     }
 
     @Override
-    public void onOpen(InventoryOpenEvent e) {
-
-    }
+    public void onOpen(InventoryOpenEvent e) {}
 
     @Override
-    public void onClose(InventoryCloseEvent e) {
-
-    }
+    public void onClose(InventoryCloseEvent e) {}
 
     @Override
-    public void onInteract(InventoryInteractEvent e) {
+    public void onInteract(InventoryInteractEvent e) {}
 
+    public boolean hasNextPage() {
+        return page < getMaxPage();
     }
 
-    public boolean hasNextPage()
-    {
-        return page< getMaxPage();
-    }
-    public boolean hasPreviousPage()
-    {
-        return page>0;
+    public boolean hasPreviousPage() {
+        return page > 0;
     }
 
-    public void next()
-    {
-        if(hasNextPage())
-        {
+    public void next() {
+        if (hasNextPage()) {
             page++;
             drawContent();
         }
     }
-    public void previous()
-    {
-        if(hasPreviousPage())
-        {
+
+    public void previous() {
+        if (hasPreviousPage()) {
             page--;
             drawContent();
         }
@@ -69,40 +58,33 @@ public class PagedMenu extends Menu {
         this.slots = slots;
     }
 
-    public void add(MenuItems menuItems)
-    {
+    public void add(MenuItems menuItems) {
         this.content.add(menuItems);
     }
 
-    public void clearInventoryContent()
-    {
-        for(int n: slots)
-        {
+    public void clearInventoryContent() {
+        for (int n : slots) {
             setItem(n, null);
         }
     }
 
-    public void clearContent()
-    {
+    public void clearContent() {
         clearInventoryContent();
         content = new ArrayList<>();
     }
 
-    public void drawContent()
-    {
+    public void drawContent() {
         clearInventoryContent();
         int i = page * slots.length;
-        for (int n:slots) {
-            if(i < content.size())
-            {
+        for (int n : slots) {
+            if (i < content.size()) {
                 setItem(n, content.get(i));
             }
             i++;
         }
     }
 
-    public int getMaxPage()
-    {
-        return Math.max(((int) Math.ceil((double)content.size() / (double)slots.length))-1, 1);
+    public int getMaxPage() {
+        return Math.max(((int) Math.ceil((double) content.size() / (double) slots.length)) - 1, 1);
     }
 }

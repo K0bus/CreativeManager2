@@ -1,7 +1,7 @@
 package fr.k0bus.creativemanager2.protections;
 
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
+import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,46 +18,37 @@ public abstract class Protection implements Listener {
 
     private final Material icon;
 
-    public Protection(CreativeManager2 plugin, Material icon, String customId)
-    {
+    public Protection(CreativeManager2 plugin, Material icon, String customId) {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase();
         this.plugin = plugin;
         this.customId = customId;
         this.icon = icon;
     }
 
-    public Protection(CreativeManager2 plugin, Material icon)
-    {
+    public Protection(CreativeManager2 plugin, Material icon) {
         this(plugin, icon, null);
     }
 
-    public void loadSettings()
-    {
-        if(!CreativeManager2.api.getSettings().getBoolean("protections." + getCustomId() + ".enabled"))
-        {
+    public void loadSettings() {
+        if (!CreativeManager2.api.getSettings().getBoolean("protections." + getCustomId() + ".enabled")) {
             setEnabled(false);
         }
-        if(CreativeManager2.api.getSettings().contains("protections." + getCustomId()))
-        {
+        if (CreativeManager2.api.getSettings().contains("protections." + getCustomId())) {
             config = CreativeManager2.api.getSettings().getConfigurationSection("protections." + getCustomId());
         }
     }
 
-    public boolean hasPermission(LivingEntity player)
-    {
+    public boolean hasPermission(LivingEntity player) {
         return player.hasPermission(getPermission());
     }
 
-    public boolean hasPermission(LivingEntity player, String permission)
-    {
+    public boolean hasPermission(LivingEntity player, String permission) {
         return player.hasPermission(getPermission() + "." + permission);
     }
 
-    public String getPermission()
-    {
+    public String getPermission() {
         return "creativemanager." + getCustomId();
     }
-
 
     public String getId() {
         return id;
@@ -79,12 +70,11 @@ public abstract class Protection implements Listener {
         return true;
     }
 
-    public void sendPermissionMessage(CommandSender toMessage)
-    {
+    public void sendPermissionMessage(CommandSender toMessage) {
         CM2Utils.sendMessage(toMessage, "permission." + getId());
     }
-    public void sendPermissionMessage(CommandSender toMessage, String custom)
-    {
+
+    public void sendPermissionMessage(CommandSender toMessage, String custom) {
         CM2Utils.sendMessage(toMessage, "permission." + getId() + "." + custom);
     }
 
@@ -97,7 +87,7 @@ public abstract class Protection implements Listener {
     }
 
     public String getCustomId() {
-        if(customId == null) return id;
+        if (customId == null) return id;
         else return customId;
     }
 }

@@ -16,36 +16,33 @@ public class InventoryProtection extends Protection {
     }
 
     @EventHandler
-    public void onGMChange(PlayerGameModeChangeEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
+    public void onGMChange(PlayerGameModeChangeEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
 
         World world = event.getPlayer().getWorld();
         GameMode gameModeFrom = event.getPlayer().getGameMode();
         GameMode gameModeTo = event.getNewGameMode();
         String inventoryFromName = CreativeManager2.api.getInventoryName(world, gameModeFrom);
         String inventoryToName = CreativeManager2.api.getInventoryName(world, gameModeTo);
-        if(inventoryFromName.equals(inventoryToName)) return;
+        if (inventoryFromName.equals(inventoryToName)) return;
         CM2Inventory.saveInventory(event.getPlayer(), inventoryFromName);
         CM2Inventory.loadInventory(event.getPlayer(), inventoryToName);
     }
 
     @EventHandler
-    public void onWorldChange(PlayerTeleportEvent event)
-    {
-        if(isDisabled()) return;
-        if(hasPermission(event.getPlayer())) return;
-        if(event.getFrom().getWorld() == null) return;
-        if(event.getTo().getWorld() == null) return;
+    public void onWorldChange(PlayerTeleportEvent event) {
+        if (isDisabled()) return;
+        if (hasPermission(event.getPlayer())) return;
+        if (event.getFrom().getWorld() == null) return;
+        if (event.getTo().getWorld() == null) return;
 
-        String inventoryFromName = CreativeManager2.api
-                .getInventoryName(event.getFrom().getWorld(), event.getPlayer().getGameMode());
-        String inventoryToName = CreativeManager2.api
-                .getInventoryName(event.getTo().getWorld(), event.getPlayer().getGameMode());
-        if(inventoryToName.equals(inventoryFromName)) return;
+        String inventoryFromName = CreativeManager2.api.getInventoryName(
+                event.getFrom().getWorld(), event.getPlayer().getGameMode());
+        String inventoryToName = CreativeManager2.api.getInventoryName(
+                event.getTo().getWorld(), event.getPlayer().getGameMode());
+        if (inventoryToName.equals(inventoryFromName)) return;
         CM2Inventory.saveInventory(event.getPlayer(), inventoryFromName);
         CM2Inventory.loadInventory(event.getPlayer(), inventoryToName);
     }
-
 }

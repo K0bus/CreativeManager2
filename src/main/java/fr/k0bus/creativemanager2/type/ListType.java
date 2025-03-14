@@ -6,17 +6,14 @@ public enum ListType {
 
     private final boolean blacklistMode;
 
-    ListType(boolean value)
-    {
+    ListType(boolean value) {
         this.blacklistMode = value;
     }
 
-    public static ListType fromString(String s)
-    {
-        if(s == null) return BLACKLIST;
-        for(ListType type:values())
-        {
-            if(type.name().equalsIgnoreCase(s)) return type;
+    public static ListType fromString(String s) {
+        if (s == null) return BLACKLIST;
+        for (ListType type : values()) {
+            if (type.name().equalsIgnoreCase(s)) return type;
         }
         return BLACKLIST;
     }

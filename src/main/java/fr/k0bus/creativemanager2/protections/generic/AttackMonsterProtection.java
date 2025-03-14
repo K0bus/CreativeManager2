@@ -18,24 +18,24 @@ public class AttackMonsterProtection extends Protection {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
-        if(isDisabled()) return;
-        if(!(event.getDamager() instanceof Player player)) return;
-        if(!(event.getEntity() instanceof LivingEntity)) return;
-        if(event.getEntity() instanceof Player) return;
-        if(hasPermission(player)) return;
-        if(!CM2Utils.isCreativePlayer(player)) return;
+        if (isDisabled()) return;
+        if (!(event.getDamager() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        if (event.getEntity() instanceof Player) return;
+        if (hasPermission(player)) return;
+        if (!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
         sendPermissionMessage(player);
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onProjectileAttack(ProjectileHitEvent event)
-    {
-        if(isDisabled()) return;
-        if(!(event.getEntity().getShooter() instanceof Player player)) return;
-        if(!(event.getHitEntity() instanceof LivingEntity)) return;
-        if(event.getHitEntity() instanceof Player) return;
-        if(hasPermission(player)) return;
-        if(!CM2Utils.isCreativePlayer(player)) return;
+    public void onProjectileAttack(ProjectileHitEvent event) {
+        if (isDisabled()) return;
+        if (!(event.getEntity().getShooter() instanceof Player player)) return;
+        if (!(event.getHitEntity() instanceof LivingEntity)) return;
+        if (event.getHitEntity() instanceof Player) return;
+        if (hasPermission(player)) return;
+        if (!CM2Utils.isCreativePlayer(player)) return;
         event.setCancelled(true);
         sendPermissionMessage(player);
     }

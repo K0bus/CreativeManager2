@@ -13,23 +13,18 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 public class MinecraftLangKey {
-    public static @NotNull String getTranslationKey(ItemStack itemStack)
-    {
+    public static @NotNull String getTranslationKey(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         Material m = itemStack.getType();
 
         /* Check for Potions / Tiped Arrow */
-        if(itemMeta instanceof PotionMeta potionMeta)
-        {
-            if(!potionMeta.hasCustomEffects()) return getTranslationKey(m);
-            if(!potionMeta.getCustomEffects().isEmpty())
-            {
+        if (itemMeta instanceof PotionMeta potionMeta) {
+            if (!potionMeta.hasCustomEffects()) return getTranslationKey(m);
+            if (!potionMeta.getCustomEffects().isEmpty()) {
                 return getTranslationKey(m, potionMeta.getCustomEffects().getFirst());
-            }
-            else
-            {
+            } else {
                 PotionType potionType = potionMeta.getBasePotionType();
-                if(potionType != null)
+                if (potionType != null)
                     return getTranslationKey(m, potionType.getPotionEffects().getFirst());
             }
         }
@@ -37,33 +32,30 @@ public class MinecraftLangKey {
         return getTranslationKey(m);
     }
 
-    public static @NotNull String getTranslationKey(Material m)
-    {
+    public static @NotNull String getTranslationKey(Material m) {
         String type = "item";
-        if(m.isBlock()) type = "block";
+        if (m.isBlock()) type = "block";
         return type + ".minecraft." + m.name().toLowerCase();
     }
-    public static @NotNull String getTranslationKey(Enchantment e)
-    {
+
+    public static @NotNull String getTranslationKey(Enchantment e) {
         return "enchantment.minecraft." + e.getKey().getKey().toLowerCase();
     }
-    public static @NotNull String getTranslationKey(EntityType e)
-    {
+
+    public static @NotNull String getTranslationKey(EntityType e) {
         return "entity.minecraft." + e.name().toLowerCase();
     }
 
-    public static @NotNull String getTranslationKey(Effect e)
-    {
+    public static @NotNull String getTranslationKey(Effect e) {
         return "effect.minecraft." + e.name().toLowerCase();
     }
-    public static @NotNull String getTranslationKey(Statistic s)
-    {
+
+    public static @NotNull String getTranslationKey(Statistic s) {
         return "stat.minecraft." + s.name().toLowerCase();
     }
 
-    private static @NotNull String getTranslationKey(Material m, PotionEffect potionEffect)
-    {
-        return "item.minecraft." + m.name().toLowerCase() + ".effect." + potionEffect.getType().translationKey().toLowerCase();
+    private static @NotNull String getTranslationKey(Material m, PotionEffect potionEffect) {
+        return "item.minecraft." + m.name().toLowerCase() + ".effect."
+                + potionEffect.getType().translationKey().toLowerCase();
     }
-
 }
