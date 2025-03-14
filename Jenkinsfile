@@ -11,7 +11,7 @@ pipeline {
         stage('Analysis') {
             steps {
                 script {
-                    sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotBugs:spotBugs"
+                    sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs"
 
                     def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
                     publishIssues issues: [checkstyle]
