@@ -38,8 +38,8 @@ public class StringUtils {
         StringBuilder finalString = new StringBuilder();
 
         for (String word : words) {
-            String capitalizedWord =
-                    word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
+            String capitalizedWord = word.substring(0, 1).toUpperCase(Locale.getDefault())
+                    + word.substring(1).toLowerCase(Locale.getDefault());
             if (!finalString.isEmpty()) {
                 finalString.append(' ');
             }

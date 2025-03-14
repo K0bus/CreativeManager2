@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.utils.language;
 
+import java.util.Locale;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
@@ -11,8 +12,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Locale;
 
 public class MinecraftLangKey {
     public static @NotNull String getTranslationKey(ItemStack itemStack) {

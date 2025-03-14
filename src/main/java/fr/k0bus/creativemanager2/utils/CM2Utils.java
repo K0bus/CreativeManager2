@@ -5,7 +5,6 @@ import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -16,9 +15,9 @@ import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
 
 public class CM2Utils {
-    
-    private final static String SEMILICON = "*";
-    
+
+    private static final String SEMILICON = "*";
+
     public static boolean isProtectedChest(Inventory inventory) {
         if (inventory.getType().equals(InventoryType.ENDER_CHEST)) return true;
         if (getProtectedType().contains(inventory.getType()) && inventory.getHolder() != null) {
@@ -140,7 +139,8 @@ public class CM2Utils {
             s = s.toLowerCase(Locale.getDefault());
             if (SEMILICON.equals(s)) return true;
             if (s.isEmpty()) continue;
-            if (s.startsWith(SEMILICON) && s.endsWith(SEMILICON) && search.contains(s.substring(1, s.length() - 1))) return true;
+            if (s.startsWith(SEMILICON) && s.endsWith(SEMILICON) && search.contains(s.substring(1, s.length() - 1)))
+                return true;
             if (s.startsWith(SEMILICON) && search.endsWith(s.substring(1))) return true;
             if (s.endsWith(SEMILICON) && search.startsWith(s.substring(0, s.length() - 1))) return true;
             if (s.equals(search)) return true;

@@ -27,7 +27,5 @@ public final class CreativeManager2 extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-
-    }
+    public void onDisable() {}
 }

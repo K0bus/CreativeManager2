@@ -2,13 +2,12 @@ package fr.k0bus.creativemanager2.protections;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
+import java.util.Locale;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
-
-import java.util.Locale;
 
 public abstract class Protection implements Listener {
 
