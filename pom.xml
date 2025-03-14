@@ -100,7 +100,6 @@
                             <include>src/test/java/**/*.java</include>
                         </includes>
                         <importOrder />
-                        <googleJavaFormat/>
                         <removeUnusedImports />
                         <toggleOffOn/>
                         <trimTrailingWhitespace/>

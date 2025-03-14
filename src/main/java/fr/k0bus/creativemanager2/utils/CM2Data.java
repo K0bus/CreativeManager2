@@ -129,18 +129,26 @@ public class CM2Data {
     public static String serializeLocation(Location location) {
         if (location == null) return null;
         if (location.getWorld() == null) return null;
-        return location.getWorld().getUID() + "_" + location.getBlockX()
-                + "_" + location.getBlockY()
-                + "_" + location.getBlockZ();
+        return location.getWorld().getUID()
+                + "_"
+                + location.getBlockX()
+                + "_"
+                + location.getBlockY()
+                + "_"
+                + location.getBlockZ();
     }
 
     @Nullable
     public static String properLocation(Location location) {
         if (location == null) return null;
         if (location.getWorld() == null) return null;
-        return StringUtils.parse(location.getWorld().getName() + " [" + location.getBlockX()
-                + " / " + location.getBlockY()
-                + " / " + location.getBlockZ()
+        return StringUtils.parse(location.getWorld().getName()
+                + " ["
+                + location.getBlockX()
+                + " / "
+                + location.getBlockY()
+                + " / "
+                + location.getBlockZ()
                 + "]");
     }
 }

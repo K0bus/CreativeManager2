@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +41,10 @@ public class MinecraftLang {
 
     private void loadLang(JavaPlugin plugin) {
         String fileUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/"
-                + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
+                + mcVersion.toLowerCase()
+                + "/assets/minecraft/lang/"
+                + lang.toLowerCase()
+                + ".json";
         Path dir = plugin.getDataFolder().toPath().resolve("locale");
 
         try {

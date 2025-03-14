@@ -55,7 +55,9 @@ public class MinecraftLangKey {
     }
 
     private static @NotNull String getTranslationKey(Material m, PotionEffect potionEffect) {
-        return "item.minecraft." + m.name().toLowerCase() + ".effect."
+        return "item.minecraft."
+                + m.name().toLowerCase()
+                + ".effect."
                 + potionEffect.getType().translationKey().toLowerCase();
     }
 }

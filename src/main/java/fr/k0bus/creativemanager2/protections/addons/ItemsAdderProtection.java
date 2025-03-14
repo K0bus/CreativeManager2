@@ -1,6 +1,11 @@
 package fr.k0bus.creativemanager2.protections.addons;
 
-import dev.lone.itemsadder.api.Events.*;
+import dev.lone.itemsadder.api.Events.CustomBlockBreakEvent;
+import dev.lone.itemsadder.api.Events.CustomBlockInteractEvent;
+import dev.lone.itemsadder.api.Events.CustomBlockPlaceEvent;
+import dev.lone.itemsadder.api.Events.CustomEntityDeathEvent;
+import dev.lone.itemsadder.api.Events.FurnitureInteractEvent;
+import dev.lone.itemsadder.api.Events.FurniturePlaceEvent;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;

@@ -13,9 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Main command class.
- */
+/** Main command class. */
 @SuppressWarnings({"rawtypes", "unused"})
 public class Command implements CommandExecutor, TabCompleter {
     private final HashMap<String, SubCommands> subCommands = new HashMap<>();

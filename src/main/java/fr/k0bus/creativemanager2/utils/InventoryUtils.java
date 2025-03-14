@@ -14,7 +14,8 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 @SuppressWarnings("unused")
 public class InventoryUtils {
     /**
-     * Converts the player inventory to a String array of Base64 strings. First string is the content and second string is the armor.
+     * Converts the player inventory to a String array of Base64 strings. First string is the content
+     * and second string is the armor.
      *
      * @param playerInventory to turn into an array of strings.
      * @return Array of strings: [ main content, armor content ]
@@ -28,11 +29,9 @@ public class InventoryUtils {
     }
 
     /**
-     *
      * A method to serialize an {@link ItemStack} array to Base64 String.
-     * <p />
      *
-     * Based off of {@link #toBase64(Inventory)}.
+     * <p>Based off of {@link #toBase64(Inventory)}.
      *
      * @param items to turn into a Base64 String.
      * @return Base64 string of the items.
@@ -60,11 +59,9 @@ public class InventoryUtils {
 
     /**
      * A method to serialize an inventory to Base64 string.
-     * <p />
      *
-     * Special thanks to Comphenix in the Bukkit forums or also known
-     * as aadnk on GitHub.
-     * <a href="https://gist.github.com/aadnk/8138186">Original Source</a>
+     * <p>Special thanks to Comphenix in the Bukkit forums or also known as aadnk on GitHub. <a
+     * href="https://gist.github.com/aadnk/8138186">Original Source</a>
      *
      * @param inventory to serialize
      * @return Base64 string of the provided inventory
@@ -91,13 +88,10 @@ public class InventoryUtils {
     }
 
     /**
-     *
      * A method to get an {@link Inventory} from an encoded, Base64, string.
-     * <p />
      *
-     * Special thanks to Comphenix in the Bukkit forums or also known
-     * as aadnk on GitHub.
-     * <a href="https://gist.github.com/aadnk/8138186">Original Source</a>
+     * <p>Special thanks to Comphenix in the Bukkit forums or also known as aadnk on GitHub. <a
+     * href="https://gist.github.com/aadnk/8138186">Original Source</a>
      *
      * @param data Base64 string of data containing an inventory.
      * @return Inventory created from the Base64 string.
@@ -122,9 +116,8 @@ public class InventoryUtils {
 
     /**
      * Gets an array of ItemStacks from Base64 string.
-     * <p />
      *
-     * Base off of {@link #fromBase64(String)}.
+     * <p>Base off of {@link #fromBase64(String)}.
      *
      * @param data Base64 string to convert to ItemStack array.
      * @return ItemStack array created from the Base64 string.
