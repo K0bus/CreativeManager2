@@ -10,28 +10,30 @@ pipeline {
     stages {
         stage('Analysis') {
             steps {
-                sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotBugs:spotBugs"
+                script {
+                    sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotBugs:spotBugs"
 
-                def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
-                publishIssues issues: [checkstyle]
+                    def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
+                    publishIssues issues: [checkstyle]
 
-                def pmd = scanForIssues tool: pmdParser(pattern: '**/target/pmd.xml')
-                publishIssues issues: [pmd]
+                    def pmd = scanForIssues tool: pmdParser(pattern: '**/target/pmd.xml')
+                    publishIssues issues: [pmd]
 
-                def cpd = scanForIssues tool: cpd(pattern: '**/target/cpd.xml')
-                publishIssues issues: [cpd]
+                    def cpd = scanForIssues tool: cpd(pattern: '**/target/cpd.xml')
+                    publishIssues issues: [cpd]
 
-                def spotbugs = scanForIssues tool: spotBugs(pattern: '**/target/spotbugsXml.xml')
-                publishIssues issues: [spotbugs]
+                    def spotbugs = scanForIssues tool: spotBugs(pattern: '**/target/spotbugsXml.xml')
+                    publishIssues issues: [spotbugs]
 
-                def maven = scanForIssues tool: mavenConsole()
-                publishIssues issues: [maven]
+                    def maven = scanForIssues tool: mavenConsole()
+                    publishIssues issues: [maven]
 
-                publishIssues id: 'analysis', name: 'All Issues',
-                    issues: [checkstyle, pmd, spotbugs],
-                    filters: [includePackage('io.jenkins.plugins.analysis.*')]
+                    publishIssues id: 'analysis', name: 'All Issues',
+                        issues: [checkstyle, pmd, spotbugs],
+                        filters: [includePackage('io.jenkins.plugins.analysis.*')]
 
-                recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
+                    recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
+                }
             }
         }
         stage('Build') {
