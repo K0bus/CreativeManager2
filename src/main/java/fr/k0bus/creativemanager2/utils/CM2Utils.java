@@ -135,8 +135,8 @@ public class CM2Utils {
     }
 
     public static boolean inList(String search, List<String> list) {
-        for (String s : list) {
-            s = s.toLowerCase(Locale.getDefault());
+        List<String> lowerList = StringUtils.listToLowerCase(list);
+        for (String s : lowerList) {
             if (SEMILICON.equals(s)) return true;
             if (s.isEmpty()) continue;
             if (s.startsWith(SEMILICON) && s.endsWith(SEMILICON) && search.contains(s.substring(1, s.length() - 1)))
