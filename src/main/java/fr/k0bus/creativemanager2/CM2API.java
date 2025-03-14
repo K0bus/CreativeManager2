@@ -9,27 +9,23 @@ import fr.k0bus.creativemanager2.utils.StringUtils;
 import fr.k0bus.creativemanager2.utils.language.MinecraftLang;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
 
-@SuppressWarnings("unused")
 public class CM2API {
     private Settings settings;
     private Lang lang;
-    private HashMap<String, Protection> protections;
+    private Map<String, Protection> protections;
     private final CreativeManager2 instance;
     private MenuListener menuListener;
     public String tag;
-    private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
-    private boolean paper = false;
+    private final Map<String, Set<Material>> tagMap = new HashMap<>();
+    private boolean paper;
     private MinecraftLang minecraftLang;
-
-    public static Level warningLevel = Level.WARNING;
 
     public CM2API(CreativeManager2 instance) {
         this.instance = instance;
@@ -62,7 +58,7 @@ public class CM2API {
         return instance;
     }
 
-    public HashMap<String, Protection> getProtections() {
+    public Map<String, Protection> getProtections() {
         return protections;
     }
 
@@ -117,7 +113,7 @@ public class CM2API {
         return paper;
     }
 
-    public HashMap<String, Set<Material>> getTagMap() {
+    public Map<String, Set<Material>> getTagMap() {
         return this.tagMap;
     }
 
@@ -127,10 +123,6 @@ public class CM2API {
 
     public MinecraftLang getMinecraftLang() {
         return minecraftLang;
-    }
-
-    private Logger getLogger() {
-        return instance.getLogger();
     }
 
     public void disableCM2() {

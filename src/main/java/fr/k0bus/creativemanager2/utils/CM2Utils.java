@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -95,8 +96,8 @@ public class CM2Utils {
         return false;
     }
 
-    public static HashMap<String, Protection> loadProtections(CreativeManager2 plugin) {
-        HashMap<String, Protection> protectionHashMap = new HashMap<>();
+    public static Map<String, Protection> loadProtections(CreativeManager2 plugin) {
+        Map<String, Protection> protectionHashMap = new HashMap<>();
         Reflections reflections = new Reflections("fr.k0bus.creativemanager2.protections");
         Set<Class<? extends Protection>> classes = reflections.getSubTypesOf(Protection.class);
         for (Class<? extends Protection> aClass : classes) {
@@ -137,7 +138,7 @@ public class CM2Utils {
     public static boolean inList(String search, List<String> list) {
         for (String s : list) {
             s = s.toLowerCase();
-            if (s.equals("*")) return true;
+            if ("*".equals(s)) return true;
             if (s.isEmpty()) continue;
             if (s.startsWith("*") && s.endsWith("*") && search.contains(s.substring(1, s.length() - 1))) return true;
             if (s.startsWith("*") && search.endsWith(s.substring(1))) return true;

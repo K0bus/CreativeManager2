@@ -21,6 +21,7 @@ public class ItemInfosCommand extends SubCommands {
         execute(sender);
     }
 
+    @Override
     public void execute(CommandSender sender) {
         Player player = (Player) sender;
         ItemStack itemStack = player.getInventory().getItemInMainHand();

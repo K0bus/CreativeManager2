@@ -78,39 +78,33 @@ public class LogBlockProtection extends Protection {
         // TODO: Check function don't work
         Block block = event.getBlock();
         UUID uuid;
-        switch (event.getNewState().getBlockData().getMaterial()) {
-            case CACTUS:
-            case SUGAR_CANE:
-                uuid = CM2Data.findPlayer(block.getRelative(BlockFace.DOWN));
-                if (uuid != null) {
-                    CM2Data.register(block, uuid);
-                }
-                break;
-            case PUMPKIN:
-            case MELON:
-                for (Block b : BlockUtils.getAdjacentBlocks(block)) {
-                    if (b.getType().equals(Material.PUMPKIN_STEM) || b.getType().equals(Material.MELON_STEM)) {
-                        uuid = CM2Data.findPlayer(b);
-                        if (uuid != null) {
-                            CM2Data.register(block, uuid);
-                            break;
-                        }
+        Material material = event.getNewState().getBlockData().getMaterial();
+        if (material.equals(Material.CACTUS) || material.equals(Material.SUGAR_CANE)) {
+            uuid = CM2Data.findPlayer(block.getRelative(BlockFace.DOWN));
+            if (uuid != null) {
+                CM2Data.register(block, uuid);
+            }
+        } else if (material.equals(Material.PUMPKIN) || material.equals(Material.MELON)) {
+            for (Block b : BlockUtils.getAdjacentBlocks(block)) {
+                if (b.getType().equals(Material.PUMPKIN_STEM) || b.getType().equals(Material.MELON_STEM)) {
+                    uuid = CM2Data.findPlayer(b);
+                    if (uuid != null) {
+                        CM2Data.register(block, uuid);
+                        break;
                     }
                 }
-                break;
-            case CHORUS_FLOWER:
-            case CHORUS_PLANT:
-                for (Block b : BlockUtils.getAdjacentBlocksComplete(block)) {
-                    if (b.getType().equals(Material.CHORUS_FLOWER)
-                            || b.getType().equals(Material.CHORUS_PLANT)) {
-                        uuid = CM2Data.findPlayer(b);
-                        if (uuid != null) {
-                            CM2Data.register(block, uuid);
-                            break;
-                        }
+            }
+        } else if (material.equals(Material.CHORUS_FLOWER) || material.equals(Material.CHORUS_PLANT)) {
+            for (Block b : BlockUtils.getAdjacentBlocksComplete(block)) {
+                if (b.getType().equals(Material.CHORUS_FLOWER)
+                        || b.getType().equals(Material.CHORUS_PLANT)) {
+                    uuid = CM2Data.findPlayer(b);
+                    if (uuid != null) {
+                        CM2Data.register(block, uuid);
+                        break;
                     }
                 }
-                break;
+            }
         }
     }
 

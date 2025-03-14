@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.gui;
 
 import fr.k0bus.creativemanager2.utils.Utils;
 import java.util.HashMap;
+import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -16,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public abstract class Menu {
 
     private final Inventory inventory;
-    private final HashMap<Integer, MenuItems> menuItemsHashMap = new HashMap<>();
+    private final Map<Integer, MenuItems> menuItemsHashMap = new HashMap<>();
 
     private final JavaPlugin plugin;
 

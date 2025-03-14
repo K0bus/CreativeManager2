@@ -15,6 +15,7 @@ public class ReloadSubCommand extends SubCommands {
         execute(sender);
     }
 
+    @Override
     public void execute(CommandSender sender) {
         CreativeManager2.api.reloadSettings();
         CM2Utils.sendRawMessage(sender, CreativeManager2.api.tag + " &2Settings & Language reloaded !");

@@ -46,6 +46,7 @@ public class Lang extends Configuration {
         }
     }
 
+    @Override
     public String getString(String path) {
         return StringUtils.translateColor(configuration.getString(path));
     }

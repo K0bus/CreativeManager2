@@ -55,7 +55,7 @@ public class PagedMenu extends Menu {
     }
 
     public void setSlots(int... slots) {
-        this.slots = slots;
+        this.slots = slots.clone();
     }
 
     public void add(MenuItems menuItems) {

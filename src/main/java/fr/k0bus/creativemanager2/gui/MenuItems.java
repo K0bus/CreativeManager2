@@ -67,6 +67,7 @@ public class MenuItems extends ItemStack {
         this.sound = sound;
     }
 
+    @Override
     public void setLore(List<String> lore) {
         ItemMeta itemMeta = getItemMeta();
         if (itemMeta != null) {

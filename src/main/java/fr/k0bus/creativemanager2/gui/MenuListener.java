@@ -1,6 +1,7 @@
 package fr.k0bus.creativemanager2.gui;
 
 import java.util.HashMap;
+import java.util.Map;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -12,7 +13,7 @@ import org.bukkit.inventory.Inventory;
 
 public class MenuListener implements Listener {
 
-    private final HashMap<Inventory, Menu> menuMap = new HashMap<>();
+    private final Map<Inventory, Menu> menuMap = new HashMap<>();
 
     public void add(Menu menu) {
         if (menuMap.containsKey(menu.getInventory())) return;

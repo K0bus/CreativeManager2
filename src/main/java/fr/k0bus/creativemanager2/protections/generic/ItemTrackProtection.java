@@ -33,6 +33,7 @@ public class ItemTrackProtection extends Protection {
 
     private void reloadInventoryLore(Player player) {
         new BukkitRunnable() {
+            @Override
             public void run() {
                 for (ItemStack is : player.getInventory().getContents()) {
                     if (is == null) continue;

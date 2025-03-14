@@ -19,6 +19,7 @@ public class SettingGui extends PagedMenu {
         super.setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));
     }
 
+    @Override
     public SettingGui init() {
         clearContent();
         for (Protection protection : CreativeManager2.api.getProtections().values()) {

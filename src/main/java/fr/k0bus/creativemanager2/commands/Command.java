@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 /** Main command class. */
 @SuppressWarnings({"rawtypes", "unused"})
 public class Command implements CommandExecutor, TabCompleter {
-    private final HashMap<String, SubCommands> subCommands = new HashMap<>();
+    private final Map<String, SubCommands> subCommands = new HashMap<>();
     private final String permission;
     private final String command;
 
@@ -25,7 +25,7 @@ public class Command implements CommandExecutor, TabCompleter {
 
     private final Class senderClass;
 
-    private final HashMap<Integer, List<String>> completer = new HashMap<>();
+    private final Map<Integer, List<String>> completer = new HashMap<>();
 
     public Command(String command, String permission, Class senderClass) {
         this.command = command;
@@ -45,7 +45,7 @@ public class Command implements CommandExecutor, TabCompleter {
         this.subCommands.put(subCommands.getCommand(), subCommands);
     }
 
-    public HashMap<String, SubCommands> getSubCommands() {
+    public Map<String, SubCommands> getSubCommands() {
         return subCommands;
     }
 
