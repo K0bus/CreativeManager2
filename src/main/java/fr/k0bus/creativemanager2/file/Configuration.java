@@ -163,7 +163,7 @@ public class Configuration {
 
         FileConfiguration defaultConf = getDefaultFileConfiguration(cfg, plugin, file);
         FileConfiguration conf = loadConfiguration(file);
-        if (defaultConf != null)
+        if (defaultConf != null) {
             for (String path : defaultConf.getKeys(true)) {
                 Object configObj = conf.get(path);
                 Object dConfigObj = defaultConf.get(path);
@@ -172,13 +172,14 @@ public class Configuration {
                     conf.set(path, defaultConf.get(path));
                 }
             }
-        for (String path : conf.getKeys(true)) {
-            Object confOption = conf.get(path);
-            Object confOptionDefault = defaultConf.get(path);
-            if (confOption != null && confOptionDefault != null) {
-                if (!confOption.getClass().equals(confOptionDefault.getClass())) {
-                    CM2Logger.warn("{0} removed to {1}", path, cfg);
-                    conf.set(path, null);
+            for (String path : conf.getKeys(true)) {
+                Object confOption = conf.get(path);
+                Object confOptionDefault = defaultConf.get(path);
+                if (confOption != null && confOptionDefault != null) {
+                    if (!confOption.getClass().equals(confOptionDefault.getClass())) {
+                        CM2Logger.warn("{0} removed to {1}", path, cfg);
+                        conf.set(path, null);
+                    }
                 }
             }
         }
