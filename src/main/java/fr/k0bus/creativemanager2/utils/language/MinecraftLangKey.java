@@ -24,13 +24,13 @@ public class MinecraftLangKey {
             if(!potionMeta.hasCustomEffects()) return getTranslationKey(m);
             if(!potionMeta.getCustomEffects().isEmpty())
             {
-                return getTranslationKey(m, potionMeta.getCustomEffects().get(0));
+                return getTranslationKey(m, potionMeta.getCustomEffects().getFirst());
             }
             else
             {
                 PotionType potionType = potionMeta.getBasePotionType();
                 if(potionType != null)
-                    return getTranslationKey(m, potionType.getPotionEffects().get(0));
+                    return getTranslationKey(m, potionType.getPotionEffects().getFirst());
             }
         }
 
