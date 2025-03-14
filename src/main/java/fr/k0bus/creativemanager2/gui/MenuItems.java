@@ -45,14 +45,13 @@ public class MenuItems extends ItemStack {
 
     public MenuItems(ItemStack itemStack, Consumer<InventoryClickEvent> consumer, Sound sound)
     {
-        this(itemStack);
-        setConsumer(consumer);
-        setSound(sound);
+        this(itemStack, consumer);
+        this.sound = sound;
     }
     public MenuItems(ItemStack itemStack, Consumer<InventoryClickEvent> consumer)
     {
         this(itemStack);
-        setConsumer(consumer);
+        this.consumer = consumer;
     }
     public MenuItems(ItemStack itemStack)
     {

@@ -5,14 +5,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 public class Utils {
-    public static String PAPIParse(String str, OfflinePlayer player)
+    public static String placeholderApiParse(String str, OfflinePlayer player)
     {
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI"))
             return PlaceholderAPI.setPlaceholders(player, str);
         return str;
     }
-    public static String PAPIParse(String str)
+    public static String placeholderApiParse(String str)
     {
-        return PAPIParse(str, null);
+        return placeholderApiParse(str, null);
     }
 }

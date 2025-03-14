@@ -54,7 +54,7 @@ public class ItemTrackProtection extends Protection {
             return;
 
         List<String> lore = getConfig().getStringList("lore");
-        List<String> lore_t = new ArrayList<>();
+        List<String> tempLore = new ArrayList<>();
         String displayname = StringUtils.parse(getConfig().getString("displayname"));
 
         if(displayname != null && !displayname.isEmpty())
@@ -68,9 +68,9 @@ public class ItemTrackProtection extends Protection {
                 line = line.replace("{PLAYER}", p.getName())
                             .replace("{UUID}", p.getUniqueId().toString())
                             .replace("{ITEM}", CreativeManager2.api.getMinecraftLang().get(item));
-                    lore_t.add(StringUtils.translateColor(line));
+                    tempLore.add(StringUtils.translateColor(line));
             }
-            meta.setLore(lore_t);
+            meta.setLore(tempLore);
         }
         item.setItemMeta(meta);
     }

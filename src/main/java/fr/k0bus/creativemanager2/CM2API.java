@@ -19,21 +19,25 @@ import java.util.logging.Logger;
 
 @SuppressWarnings("unused")
 public class CM2API {
-    private final Settings settings;
-    private final Lang lang;
+    private Settings settings;
+    private Lang lang;
     private HashMap<String, Protection> protections;
     private final CreativeManager2 instance;
-    private final MenuListener menuListener;
+    private MenuListener menuListener;
     public String tag;
     private final HashMap<String, Set<Material>> tagMap = new HashMap<>();
     private boolean paper = false;
     private MinecraftLang minecraftLang;
 
+    public static Level warningLevel = Level.WARNING;
+
 
     public CM2API(CreativeManager2 instance)
     {
         this.instance = instance;
+    }
 
+    public void initialize() {
         try {
             Class.forName("com.destroystokyo.paper.ParticleBuilder");
             this.paper = true;
@@ -41,11 +45,14 @@ public class CM2API {
 
         this.menuListener = new MenuListener();
         this.settings = new Settings(instance);
+        this.settings.loadConfig();
         this.lang = new Lang(settings.getLang(), instance);
-        this.minecraftLang = new MinecraftLang(getInstance(), getSettings().getLang());
+        this.lang.init();
+        this.minecraftLang = new MinecraftLang(instance, settings.getLang());
         this.tag = StringUtils.parse(settings.getTag());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
-        loadTags();
+        this.loadTags();
+        this.loadProtections();
     }
 
     public void loadProtections()
@@ -106,18 +113,13 @@ public class CM2API {
                 }catch (Exception ignored)
                 {}
             }
-            instance.getLogger().log(Level.INFO, "§2Tag loaded from Spigot ! &7[" + tagMap.size() + "]");
+            int size = tagMap.size();
+            CM2Logger.info("§2Tag loaded from Spigot ! &7[{0}]", size);
         }
         catch (Exception e)
         {
-            instance.getLogger().log(Level.WARNING, "§cThis minecraft version could not use the TAG system.");
+            CM2Logger.info("§cThis minecraft version could not use the TAG system.");
         }
-    }
-
-    public void debug(String string)
-    {
-        if(settings.debugMode())
-            instance.getLogger().info(StringUtils.parse(string));
     }
 
     public boolean isPaper() {
@@ -136,14 +138,9 @@ public class CM2API {
         return minecraftLang;
     }
 
-    public Logger getLogger()
+    private Logger getLogger()
     {
         return instance.getLogger();
-    }
-
-    public void logException(Exception e)
-    {
-        getLogger().log(Level.SEVERE, "An error has occurred.", e);
     }
 
     public void disableCM2()

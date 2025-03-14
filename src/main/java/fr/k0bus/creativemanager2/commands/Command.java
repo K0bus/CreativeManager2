@@ -75,7 +75,7 @@ public class Command implements CommandExecutor, TabCompleter {
         completer.put(args, list);
     }
 
-    public void run(CommandSender sender, String[] args) {}
+    public void run(CommandSender sender, String... args) {}
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String label, @NotNull String[] args) {

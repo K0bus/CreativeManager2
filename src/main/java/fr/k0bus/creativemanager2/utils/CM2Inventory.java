@@ -1,11 +1,11 @@
 package fr.k0bus.creativemanager2.utils;
 
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.file.UserData;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class CM2Inventory {
     public static void loadInventory(Player player, String inventoryName)
@@ -23,20 +23,23 @@ public class CM2Inventory {
                         InventoryUtils.itemStackArrayFromBase64(data.getString(inventoryName + ".armor"))
                 );
                 if(CreativeManager2.api.getSettings().debugMode())
-                    CreativeManager2.api.getInstance().getLogger()
-                            .log(Level.INFO, "Load inventory '" + inventoryName + "' of user '" + player.getDisplayName() + "' in file '" + data.getFile().getName() + "'");
+                {
+                    String playerDisplayname = player.getDisplayName();
+                    String fileName = data.getFile().getName();
+                    CM2Logger.info("Load inventory '{0}' of user '{1}' in file '{2}'", inventoryName, playerDisplayname, fileName);
+                }
             } catch (IOException e) {
-                CreativeManager2.api.getInstance().getLogger()
-                        .log(Level.SEVERE, e.getMessage());
+                CM2Logger.exception(e);
             }
         } else
         {
             player.getInventory().clear();
             if(CreativeManager2.api.getSettings().debugMode())
-                CreativeManager2.api.getInstance().getLogger()
-                        .log(Level.INFO, "Clear inventory of user '" + player.getDisplayName());
+            {
+                String playerName = player.getDisplayName();
+                CM2Logger.info("Clear inventory of user '{0}'", playerName);
+            }
         }
-
     }
     public static void saveInventory(Player player, String inventoryName)
     {
@@ -48,7 +51,10 @@ public class CM2Inventory {
         data.set(inventoryName + ".armor", encoded[1]);
         data.save();
         if(CreativeManager2.api.getSettings().debugMode())
-            CreativeManager2.api.getInstance().getLogger()
-                    .log(Level.INFO, "Save inventory '" + inventoryName + "' of user '" + player.getDisplayName() + "' in file '" + data.getFile().getName() + "'");
+        {
+            String playerDisplayname = player.getDisplayName();
+            String fileName = data.getFile().getName();
+            CM2Logger.info("Save inventory '{0}' of user '{1}' in file '{2}'", inventoryName, playerDisplayname, fileName);
+        }
     }
 }

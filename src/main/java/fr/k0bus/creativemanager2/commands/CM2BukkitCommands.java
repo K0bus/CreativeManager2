@@ -11,12 +11,17 @@ import org.bukkit.command.CommandSender;
 public class CM2BukkitCommands extends Command {
     public CM2BukkitCommands() {
         super("cm2", "cm2.admin");
-        addSubCommands(new SettingsSubCommand());
-        addSubCommands(new ReloadSubCommand());
-        addSubCommands(new CheckBlockCommand());
-        addSubCommands(new ItemInfosCommand());
-        setUsage("/cm2 <argument>");
-        setDescription("All command added to CreativeManager2");
+        this.init();
+    }
+
+    private void init()
+    {
+        super.addSubCommands(new SettingsSubCommand());
+        super.addSubCommands(new ReloadSubCommand());
+        super.addSubCommands(new CheckBlockCommand());
+        super.addSubCommands(new ItemInfosCommand());
+        super.setUsage("/cm2 <argument>");
+        super.setDescription("All command added to CreativeManager2");
     }
 
     @Override

@@ -8,16 +8,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Lang extends Configuration{
 
+    private final String lang;
+
     public Lang(String lang, JavaPlugin instance) {
         super(lang + ".yml", instance, "lang");
-        FileConfiguration defaultConfig = null;
+        this.lang = lang;
+    }
 
-        InputStream is = plugin.getResource("lang/" + lang + ".yml");
+    public void init()
+    {
+        loadConfig();
+        FileConfiguration defaultConfig = null;
+        InputStream is = plugin.getResource("lang/" + this.lang + ".yml");
         if(is != null)
             defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
         else
@@ -31,14 +36,14 @@ public class Lang extends Configuration{
             for(String key: defaultConfig.getKeys(false))
             {
                 if(defaultConfig.isConfigurationSection(key))
-                    checkSection(defaultConfig.getConfigurationSection(key));
+                    this.checkSection(defaultConfig.getConfigurationSection(key));
                 if(!configuration.contains(defaultConfig.getCurrentPath() + "." +key))
                     configuration.set(defaultConfig.getCurrentPath() + "." + key, defaultConfig.get(key));
             }
-        this.save();
+        super.save();
     }
 
-    public void checkSection(ConfigurationSection section)
+    protected void checkSection(ConfigurationSection section)
     {
         if(section == null) return;
         for(String key: section.getKeys(false))
@@ -53,15 +58,5 @@ public class Lang extends Configuration{
     public String getString(String path)
     {
         return StringUtils.translateColor(configuration.getString(path));
-    }
-    
-    public String getString(String path, HashMap<String, String> replaceMap)
-    {
-        String s = configuration.getString(path);
-        if(s == null) return "";
-        for (Map.Entry<String, String> entry:replaceMap.entrySet()) {
-            s = s.replace(entry.getKey(), entry.getValue());
-        }
-        return StringUtils.translateColor(s);
     }
 }

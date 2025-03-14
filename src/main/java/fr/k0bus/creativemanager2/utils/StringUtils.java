@@ -10,39 +10,42 @@ public class StringUtils {
 
     public static String parse(String s)
     {
-        return Utils.PAPIParse(translateColor(s));
+        return Utils.placeholderApiParse(translateColor(s));
     }
 
     public static String translateColor(String s) {
+        Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+        String result = s; // Utilisation d'une variable locale
 
-        Pattern pattern = Pattern.compile("#[a-fA-F\u0000-9]{6}");
-
-        for(Matcher matcher = pattern.matcher(s); matcher.find(); matcher = pattern.matcher(s)) {
-            String hexCode = s.substring(matcher.start(), matcher.end());
+        for (Matcher matcher = pattern.matcher(result); matcher.find(); matcher = pattern.matcher(result)) {
+            String hexCode = result.substring(matcher.start(), matcher.end());
             String replaceSharp = hexCode.replace('#', 'x');
             char[] ch = replaceSharp.toCharArray();
             StringBuilder builder = new StringBuilder();
 
             for (char c : ch) {
-                builder.append("&").append(c);
+                builder.append('&').append(c);
             }
 
-            s = s.replace(hexCode, builder.toString());
+            result = result.replace(hexCode, builder.toString());
         }
 
-        return ChatColor.translateAlternateColorCodes('&', s);
+        return ChatColor.translateAlternateColorCodes('&', result);
     }
 
-    public static String proper(String str)
-    {
-        str = str.replace("_", " ");
-        String[] strings = str.split(" ");
+    public static String proper(String str) {
+        String modifiedStr = str.replace("_", " ");
+        String[] words = modifiedStr.split(" ");
         StringBuilder finalString = new StringBuilder();
-        for (String s:strings) {
-            s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
-            if(!finalString.toString().isEmpty()) finalString.append(" ");
-            finalString.append(s);
+
+        for (String word : words) {
+            String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+            if (!finalString.isEmpty()) {
+                finalString.append(' ');
+            }
+            finalString.append(capitalizedWord);
         }
+
         return finalString.toString();
     }
 }

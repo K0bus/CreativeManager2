@@ -1,16 +1,15 @@
 package fr.k0bus.creativemanager2.utils;
 
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 
 public class CM2Utils {
     public static boolean isProtectedChest(Inventory inventory) {
@@ -73,8 +71,21 @@ public class CM2Utils {
             try {
                 Protection protection = (Protection) aClass.getConstructors()[0].newInstance(plugin);
                 protectionHashMap.put(protection.getId(), protection);
+                if(protection.isCompatible())
+                {
+                    String className = protection.getClass().getSimpleName();
+                    String customId = protection.getCustomId();
+                    CM2Logger.info("Protection '{0}' loaded from class ({1})", customId, className);
+                    plugin.getServer().getPluginManager().registerEvents(protection, plugin);
+                    protection.loadSettings();
+                }
+                else
+                {
+                    String customId = protection.getCustomId();
+                    CM2Logger.info("Protection '{0}' unloaded for incompatibility", customId);
+                }
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
+                CM2Logger.exception(e);
             }
         }
         return protectionHashMap;
@@ -94,18 +105,6 @@ public class CM2Utils {
     public static String parse(String string)
     {
         return string.replace("{TAG}", CreativeManager2.api.tag);
-    }
-    public static boolean inList(ItemStack itemStack, List<String> strings)
-    {
-        return inList(itemStack.getType(), strings);
-    }
-    public static boolean inList(Block block, List<String> strings)
-    {
-        return inList(block.getType(), strings);
-    }
-    public static boolean inList(Material material, List<String> strings)
-    {
-        return inList(material.name().toLowerCase(), strings);
     }
 
     public static boolean inList(String search, List<String> list) {
@@ -134,8 +133,7 @@ public class CM2Utils {
                 }
                 else
                 {
-                    CreativeManager2.api.getInstance().getLogger()
-                            .log(Level.WARNING, "Unable to find " + s + " tags");
+                    CM2Logger.warn("Unable to find {0} tags", s);
                 }
             }
         }

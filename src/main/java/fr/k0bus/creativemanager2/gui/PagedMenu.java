@@ -17,13 +17,11 @@ public class PagedMenu extends Menu {
     public PagedMenu(int size, String name, JavaPlugin plugin, MenuListener listener) {
         super(size, name, plugin, listener);
     }
-    public PagedMenu(String name, JavaPlugin plugin, MenuListener listener) {
-        super(6, name, plugin, listener);
-    }
 
     @Override
-    public void init() {
+    public PagedMenu init() {
         getInventory().clear();
+        return this;
     }
 
     @Override
@@ -67,26 +65,13 @@ public class PagedMenu extends Menu {
         }
     }
 
-    public void setSlots(int[] slots) {
+    public void setSlots(int... slots) {
         this.slots = slots;
     }
 
     public void add(MenuItems menuItems)
     {
         this.content.add(menuItems);
-    }
-
-    public void remove(MenuItems menuItems)
-    {
-        this.content.remove(menuItems);
-    }
-    public boolean contains(MenuItems menuItems)
-    {
-        return this.content.contains(menuItems);
-    }
-
-    public List<MenuItems> getContent() {
-        return content;
     }
 
     public void clearInventoryContent()
@@ -119,18 +104,5 @@ public class PagedMenu extends Menu {
     public int getMaxPage()
     {
         return Math.max(((int) Math.ceil((double)content.size() / (double)slots.length))-1, 1);
-    }
-
-    public int getSlotParPage()
-    {
-        return slots.length;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public int[] getSlots() {
-        return slots;
     }
 }

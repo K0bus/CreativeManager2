@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.file;
 
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,9 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 
 @SuppressWarnings("unused")
 public class Configuration {
@@ -29,7 +30,6 @@ public class Configuration {
         this.plugin = instance;
         this.filename = filename;
         this.file = new File(instance.getDataFolder(), filename);
-        loadConfig();
     }
 
     public Configuration(String filename, JavaPlugin instance, String dirName)
@@ -40,14 +40,13 @@ public class Configuration {
         if(!dir.exists())
             if(!dir.mkdirs())
             {
-                CreativeManager2.api.logException(new Exception("Can't create directory"));
+                CM2Logger.exception(new Exception("Can't create directory"));
                 CreativeManager2.api.disableCM2();
             }
         if(dir.isDirectory())
             this.file = new File(dir, filename);
         else
             this.file = new File(dir.getParentFile(), filename);
-        loadConfig();
     }
 
     public void loadConfig()
@@ -61,19 +60,19 @@ public class Configuration {
             else
             {
                 if(!this.file.getParentFile().mkdirs()){
-                    CreativeManager2.api.logException(new Exception("Can't create directory"));
+                    CM2Logger.exception(new Exception("Can't create directory"));
                     CreativeManager2.api.disableCM2();
                     return;
                 }
                 try {
                     if(!this.file.createNewFile())
                     {
-                        CreativeManager2.api.logException(new Exception("Can't write config file"));
+                        CM2Logger.exception(new Exception("Can't write config file"));
                         CreativeManager2.api.disableCM2();
                         return;
                     }
                 } catch (IOException e) {
-                    CreativeManager2.api.logException(e);
+                    CM2Logger.exception(e);
                 }
             }
         }
@@ -95,7 +94,7 @@ public class Configuration {
         try {
             config.load(file);
         } catch (IOException | InvalidConfigurationException e) {
-            CreativeManager2.api.logException(e);
+            CM2Logger.exception(e);
         }
 
         return config;
@@ -105,7 +104,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            CreativeManager2.api.logException(e);
+            CM2Logger.exception(e);
         }
     }
     public String getString(String path)
@@ -133,7 +132,7 @@ public class Configuration {
         if(cs != null)
             return cs.getKeys(deep);
         else
-            return null;
+            return new HashSet<>();
     }
     public List<String> getStringList(String path){return this.configuration.getStringList(path);}
     public List<?> getList(String path){return this.configuration.getList(path);}
@@ -148,7 +147,7 @@ public class Configuration {
         try {
             this.configuration.save(this.file);
         } catch (IOException e) {
-            CreativeManager2.api.logException(e);
+            CM2Logger.exception(e);
         }
     }
     public static void updateConfig(String cfg, JavaPlugin plugin)
@@ -156,7 +155,7 @@ public class Configuration {
         File file = new File(plugin.getDataFolder(), cfg);
         if(!file.getParentFile().mkdirs())
         {
-            CreativeManager2.api.logException(new Exception("Can't create directory"));
+            CM2Logger.exception(new Exception("Can't create directory"));
             CreativeManager2.api.disableCM2();
             return;
         }
@@ -165,29 +164,29 @@ public class Configuration {
         InputStream is = plugin.getResource(cfg);
         if(is == null)
         {
-            CreativeManager2.api.logException(new Exception("Can't found default config file"));
+            CM2Logger.exception(new Exception("Can't found default config file"));
             CreativeManager2.api.disableCM2();
             return;
         }
-        FileConfiguration default_conf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        FileConfiguration defaultConf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
         FileConfiguration conf = loadConfiguration(file);
-        for (String path : default_conf.getKeys(true)) {
+        for (String path : defaultConf.getKeys(true)) {
             Object configObj = conf.get(path);
-            Object dConfigObj = default_conf.get(path);
+            Object dConfigObj = defaultConf.get(path);
             if(configObj == null || (dConfigObj != null && configObj.getClass().equals(dConfigObj.getClass())))
             {
-                plugin.getLogger().log(Level.WARNING, path + " added to " + cfg);
-                conf.set(path, default_conf.get(path));
+                CM2Logger.warn("{0} added to {1}", path, cfg);
+                conf.set(path, defaultConf.get(path));
             }
         }
         for (String path : conf.getKeys(true)) {
             Object confOption = conf.get(path);
-            Object confOptionDefault = default_conf.get(path);
+            Object confOptionDefault = defaultConf.get(path);
             if(confOption != null && confOptionDefault != null)
             {
-                if(!default_conf.contains(path) || !confOption.getClass().getName().equals(confOptionDefault.getClass().getName()))
+                if(!defaultConf.contains(path) || !confOption.getClass().getName().equals(confOptionDefault.getClass().getName()))
                 {
-                    plugin.getLogger().log(Level.WARNING, path + " removed to " + cfg);
+                    CM2Logger.warn("{0} removed to {1}", path, cfg);
                     conf.set(path, null);
                 }
             }
@@ -196,7 +195,7 @@ public class Configuration {
         try {
             conf.save(file);
         } catch (IOException e) {
-            CreativeManager2.api.logException(e);
+            CM2Logger.exception(e);
         }
     }
 

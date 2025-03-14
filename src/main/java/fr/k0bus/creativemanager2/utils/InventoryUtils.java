@@ -38,7 +38,7 @@ public class InventoryUtils {
      * @param items to turn into a Base64 String.
      * @return Base64 string of the items.
      */
-    public static String itemStackArrayToBase64(ItemStack[] items) throws IllegalStateException {
+    public static String itemStackArrayToBase64(ItemStack... items) throws IllegalStateException {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);

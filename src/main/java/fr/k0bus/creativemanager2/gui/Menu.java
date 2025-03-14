@@ -22,7 +22,7 @@ public abstract class Menu {
     @SuppressWarnings("deprecation")
     public Menu(int size, String name, JavaPlugin plugin, MenuListener listener)
     {
-        inventory = Bukkit.createInventory(null,9*size, Utils.PAPIParse(name));
+        inventory = Bukkit.createInventory(null,9*size, Utils.placeholderApiParse(name));
         this.plugin = plugin;
         this.listener = listener;
         listener.add(this);
@@ -36,7 +36,7 @@ public abstract class Menu {
         return plugin;
     }
 
-    public abstract void init();
+    public abstract Menu init();
 
 
     public void setItem(int slot, MenuItems menuItems)

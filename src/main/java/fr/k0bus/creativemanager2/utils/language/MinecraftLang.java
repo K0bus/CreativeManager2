@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.utils.language;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -16,6 +17,8 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class MinecraftLang {
 
@@ -36,49 +39,55 @@ public class MinecraftLang {
         this(plugin, lang, Bukkit.getBukkitVersion().split("-")[0]);
     }
 
-    private void loadLang(JavaPlugin plugin)
-    {
-        String FILE_URL = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/" + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
-        File dir = new File(plugin.getDataFolder(), "locale");
-        if(!dir.exists())
-        {
-            if(!dir.mkdir())
-            {
-                CreativeManager2.api.logException(new Exception("Can't create MC Lang directory"));
-                CreativeManager2.api.disableCM2();
-                return;
-            }
+    private void loadLang(JavaPlugin plugin) {
+        String fileUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/" + mcVersion.toLowerCase() + "/assets/minecraft/lang/" + lang.toLowerCase() + ".json";
+        Path dir = plugin.getDataFolder().toPath().resolve("locale");
+
+        try {
+            Files.createDirectories(dir); // Crée le dossier s'il n'existe pas
+        } catch (IOException e) {
+            CM2Logger.exception(new Exception("Can't create MC Lang directory", e));
+            CreativeManager2.api.disableCM2();
+            return;
         }
-        File localeFile = new File(dir, lang.toLowerCase() + ".json");
-        if(!localeFile.exists()) {
-            plugin.getLogger().info("§Starting downloading " + lang + ".json on version" + mcVersion.toLowerCase());
-            try (BufferedInputStream in = new BufferedInputStream(new URI(FILE_URL).toURL().openStream());
-                 FileOutputStream fileOutputStream = new FileOutputStream(localeFile)) {
+
+        Path localeFile = dir.resolve(lang.toLowerCase() + ".json");
+
+        if (Files.notExists(localeFile)) {
+            CM2Logger.info("§Starting downloading {0}.json on version {1}", lang, mcVersion);
+
+            try (InputStream in = new URI(fileUrl).toURL().openStream();
+                 OutputStream out = Files.newOutputStream(localeFile)) {
                 byte[] dataBuffer = new byte[1024];
                 int bytesRead;
                 while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                    fileOutputStream.write(dataBuffer, 0, bytesRead);
+                    out.write(dataBuffer, 0, bytesRead);
                 }
             } catch (IOException | URISyntaxException e) {
-                // handle exception
-                plugin.getLogger().warning("§Can't download locale file " + lang + ".json");
-                plugin.getLogger().warning("§URL : " + FILE_URL);
-                plugin.getLogger().warning("§cDestination : " + localeFile.getPath());
+                if (CreativeManager2.api != null) {
+                    CM2Logger.warn("§Can't download locale file {0}.json", lang);
+                    CM2Logger.warn("§URL : {0}", fileUrl);
+                    String absolutePath = localeFile.toAbsolutePath().toString();
+                    CM2Logger.warn("§cDestination : {0}", absolutePath);
+                }
+                return;
             }
         }
-        if(localeFile.exists())
-        {
-            plugin.getLogger().info("§2Loading file " + this.lang + ".json");
+
+        if (Files.exists(localeFile)) {
+            CM2Logger.info("§2Loading file {0}.json", lang);
             Gson gson = new Gson();
-            try {
-                jsonObject = gson.fromJson(new FileReader(localeFile, StandardCharsets.UTF_8), JsonObject.class);
+            try (BufferedReader reader = Files.newBufferedReader(localeFile, StandardCharsets.UTF_8)) {
+                jsonObject = gson.fromJson(reader, JsonObject.class);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                CM2Logger.exception(e);
             }
-            if(jsonObject == null)
-                plugin.getLogger().warning("§cFile not loaded successfully !");
-            else
-                plugin.getLogger().info("§2File loaded successfully !");
+
+            if (jsonObject == null) {
+                CM2Logger.warn("§cFile not loaded successfully !");
+            } else {
+                CM2Logger.info("§2File loaded successfully !");
+            }
         }
     }
 

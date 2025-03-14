@@ -8,34 +8,22 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 
-import java.util.logging.Level;
-
 public abstract class Protection implements Listener {
 
     private final String id;
     private boolean enabled = true;
     protected ConfigurationSection config;
     private final CreativeManager2 plugin;
-    private String customId;
+    private final String customId;
 
-    private Material icon;
+    private final Material icon;
 
     public Protection(CreativeManager2 plugin, Material icon, String customId)
     {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase();
         this.plugin = plugin;
-        setCustomId(customId);
-        setIcon(icon);
-        if(isCompatible())
-        {
-            plugin.getServer().getPluginManager().registerEvents(this, plugin);
-            plugin.getLogger().log(Level.INFO, "Protection '" + getCustomId() + "' loaded from class (" + this.getClass().getSimpleName() + ")");
-        }
-        else
-        {
-            plugin.getLogger().log(Level.INFO, "Protection '" + getCustomId() + "' unloaded for incompatibility");
-        }
-        loadSettings();
+        this.customId = customId;
+        this.icon = icon;
     }
 
     public Protection(CreativeManager2 plugin, Material icon)
@@ -100,20 +88,12 @@ public abstract class Protection implements Listener {
         CM2Utils.sendMessage(toMessage, "permission." + getId() + "." + custom);
     }
 
-    public void setIcon(Material icon) {
-        this.icon = icon;
-    }
-
     public Material getIcon() {
         return icon;
     }
 
     public ConfigurationSection getConfig() {
         return config;
-    }
-
-    public void setCustomId(String customId) {
-        this.customId = customId;
     }
 
     public String getCustomId() {

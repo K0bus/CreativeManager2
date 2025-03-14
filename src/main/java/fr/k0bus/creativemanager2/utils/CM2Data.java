@@ -69,10 +69,10 @@ public class CM2Data {
     public static UUID findPlayer(Entity entity)
     {
         NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.api.getInstance(), UUID_ID);
-        String UUIDText = entity.getPersistentDataContainer().get(namespacedKeyUuid, PersistentDataType.STRING);
-        if(UUIDText == null)
+        String textUuid = entity.getPersistentDataContainer().get(namespacedKeyUuid, PersistentDataType.STRING);
+        if(textUuid == null)
             return null;
-        return UUID.fromString(UUIDText);
+        return UUID.fromString(textUuid);
     }
     public static long findDate(Entity entity)
     {

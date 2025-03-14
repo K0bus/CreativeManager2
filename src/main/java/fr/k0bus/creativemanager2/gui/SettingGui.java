@@ -17,10 +17,9 @@ import java.util.Collections;
 public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
         super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.api.getMenuListener());
-        setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));
-        init();
+        super.setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));
     }
-    public void init()
+    public SettingGui init()
     {
         clearContent();
         for(Protection protection:CreativeManager2.api.getProtections().values())
@@ -90,5 +89,6 @@ public class SettingGui extends PagedMenu {
         closeItem.setDisplayname(ChatColor.RED + "Close menu");
         setItem(getInventory().getSize() -1, closeItem);
         drawContent();
+        return this;
     }
 }
