@@ -180,13 +180,11 @@ public class Configuration {
         for (String path : conf.getKeys(true)) {
             Object confOption = conf.get(path);
             Object confOptionDefault = defaultConf.get(path);
-            if (confOption != null && confOptionDefault != null && !defaultConf.contains(path)
-                    || !confOption
-                            .getClass()
-                            .getName()
-                            .equals(confOptionDefault.getClass().getName())) {
-                CM2Logger.warn("{0} removed to {1}", path, cfg);
-                conf.set(path, null);
+            if (confOption != null && confOptionDefault != null) {
+                if (!confOption.getClass().equals(confOptionDefault.getClass())) {
+                    CM2Logger.warn("{0} removed to {1}", path, cfg);
+                    conf.set(path, null);
+                }
             }
         }
         try {
