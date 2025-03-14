@@ -1,5 +1,7 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
+import de.tr7zw.nbtapi.NBT;
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.CustomType;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -69,7 +72,25 @@ public class CustomProtection extends Protection {
             event.setCursor(new ItemStack(Material.AIR));
             sendPermissionMessage(event.getWhoClicked(), CustomType.STORE_ITEM.getId());
         }
-        // TODO: Implement NBT
+        if (event.getInventory().getHolder() instanceof Player player) {
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack == null) continue;
+                NBT.get(itemStack, nbt -> {
+                    nbt.getKeys().forEach(key -> {
+                        if (needCancel(player, key, CustomType.NBT)) {
+                            String playerName = player.getDisplayName();
+                            String materialName = itemStack.getType().name();
+                            CM2Logger.debug(
+                                    "Remove key '{0}' from '{1}' in player inventory '{2}'",
+                                    key, materialName, playerName);
+                            NBT.modify(itemStack, nbtModify -> {
+                                nbtModify.removeKey(key);
+                            });
+                        }
+                    });
+                });
+            }
+        }
     }
 
     @EventHandler
