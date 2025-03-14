@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PagedMenu extends Menu {
 
     int page;
-    int[] slots = null;
+    int[] slots;
     List<MenuItems> content = new ArrayList<>();
 
     public PagedMenu(int size, String name, JavaPlugin plugin, MenuListener listener) {
