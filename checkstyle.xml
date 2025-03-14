@@ -65,7 +65,6 @@
         <module name="TypeName"/>
 
         <!-- Imports -->
-        <module name="AvoidStarImport"/>
         <module name="UnusedImports"/>
         <module name="ImportOrder">
             <property name="option" value="top"/>
