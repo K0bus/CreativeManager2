@@ -20,7 +20,7 @@ public class CM2Logger {
         if (getLogger().isLoggable(Level.SEVERE)) getLogger().severe(formatMessage(string, args));
     }
 
-    public void debug(String string, Object... args) {
+    public static void debug(String string, Object... args) {
         if (CreativeManager2.api.getSettings().debugMode() && getLogger().isLoggable(Level.INFO))
             getLogger().info("Debug >> " + StringUtils.parse(formatMessage(string, args)));
     }
