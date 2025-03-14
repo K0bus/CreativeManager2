@@ -96,8 +96,7 @@ public class LogBlockProtection extends Protection {
             }
         } else if (material.equals(Material.CHORUS_FLOWER) || material.equals(Material.CHORUS_PLANT)) {
             for (Block b : BlockUtils.getAdjacentBlocksComplete(block)) {
-                if (b.getType().equals(Material.CHORUS_FLOWER)
-                        || b.getType().equals(Material.CHORUS_PLANT)) {
+                if (b.getType().equals(Material.CHORUS_FLOWER) || b.getType().equals(Material.CHORUS_PLANT)) {
                     uuid = CM2Data.findPlayer(b);
                     if (uuid != null) {
                         CM2Data.register(block, uuid);
