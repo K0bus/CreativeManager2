@@ -1,9 +1,11 @@
 package fr.k0bus.creativemanager2.utils;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import net.md_5.bungee.api.ChatColor;
 
 @SuppressWarnings("deprecation")
@@ -61,5 +63,11 @@ public class StringUtils {
         }
         matcher.appendTail(sb);
         return sb.toString();
+    }
+
+    public static List<String> listToLowerCase(List<String> list) {
+        return list.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
     }
 }
