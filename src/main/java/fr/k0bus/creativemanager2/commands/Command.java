@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class Command implements CommandExecutor, TabCompleter {
     private final Map<String, SubCommands> subCommands = new HashMap<>();
     private final String permission;
-    private final String command;
+    private final String commandString;
 
     private String description = "Default command description";
     private String usage = "/<cmd>";
@@ -27,30 +27,30 @@ public class Command implements CommandExecutor, TabCompleter {
 
     private final Map<Integer, List<String>> completer = new HashMap<>();
 
-    public Command(String command, String permission, Class senderClass) {
-        this.command = command;
+    public Command(String commandString, String permission, Class senderClass) {
+        this.commandString = commandString;
         this.permission = permission;
         this.senderClass = senderClass;
     }
 
-    public Command(String command, String permission) {
-        this(command, permission, CommandSender.class);
+    public Command(String commandString, String permission) {
+        this(commandString, permission, CommandSender.class);
     }
 
-    public Command(String command) {
-        this(command, null, CommandSender.class);
+    public Command(String commandString) {
+        this(commandString, null, CommandSender.class);
     }
 
     public void addSubCommands(SubCommands subCommands) {
-        this.subCommands.put(subCommands.getCommand(), subCommands);
+        this.subCommands.put(subCommands.getCommandString(), subCommands);
     }
 
     public Map<String, SubCommands> getSubCommands() {
         return subCommands;
     }
 
-    public String getCommand() {
-        return command;
+    public String getCommandString() {
+        return commandString;
     }
 
     public String getPermission() {
@@ -114,11 +114,11 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (e.getKey() != null
                             && e.getKey().startsWith(args[0].toLowerCase())
                             && e.getValue().isAllowed(sender))
-                        complete.add(e.getValue().getCommand());
+                        complete.add(e.getValue().getCommandString());
                 }
             } else if (args.length == 0) {
                 for (SubCommands sub : subCommands.values()) {
-                    if (sub.isAllowed(sender)) complete.add(sub.getCommand());
+                    if (sub.isAllowed(sender)) complete.add(sub.getCommandString());
                 }
             } else {
                 if (subCommands.containsKey(args[0])) {
@@ -139,7 +139,7 @@ public class Command implements CommandExecutor, TabCompleter {
     }
 
     public org.bukkit.command.Command getRawCommand() {
-        return new org.bukkit.command.Command(this.command, description, usage, new ArrayList<>()) {
+        return new org.bukkit.command.Command(this.commandString, description, usage, new ArrayList<>()) {
             @Override
             public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings) {
                 return onCommand(commandSender, this, s, strings);
@@ -150,13 +150,13 @@ public class Command implements CommandExecutor, TabCompleter {
     public void register(JavaPlugin plugin) {
 
         if (CM2Utils.isPaper()) {
-            PluginCommand cmd = plugin.getCommand(getCommand());
+            PluginCommand cmd = plugin.getCommand(getCommandString());
             if (cmd != null) {
                 cmd.setExecutor(this);
                 cmd.setTabCompleter(this);
             }
         } else {
-            PluginCommand cmd = plugin.getCommand(getCommand());
+            PluginCommand cmd = plugin.getCommand(getCommandString());
             if (cmd != null) {
                 cmd.setExecutor(this);
                 cmd.setTabCompleter(this);

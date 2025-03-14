@@ -26,7 +26,7 @@ public abstract class SubCommands extends Command {
     public abstract void execute(CommandSender sender);
 
     public LiteralArgumentBuilder<CommandSourceStack> getCommandNode() {
-        return Commands.literal(getCommand()).executes(ctx -> {
+        return Commands.literal(getCommandString()).executes(ctx -> {
             execute(ctx.getSource().getSender());
             return 1;
         });

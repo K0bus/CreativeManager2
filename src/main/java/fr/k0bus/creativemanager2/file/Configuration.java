@@ -22,7 +22,7 @@ public class Configuration {
 
     protected final JavaPlugin plugin;
     private final File file;
-    protected FileConfiguration configuration;
+    protected FileConfiguration fileConfiguration;
     private final String filename;
 
     public Configuration(String filename, JavaPlugin instance) {
@@ -65,9 +65,9 @@ public class Configuration {
             }
         }
         if (file.exists()) {
-            this.configuration = loadConfiguration(this.file);
+            this.fileConfiguration = loadConfiguration(this.file);
         } else {
-            this.configuration = new YamlConfiguration();
+            this.fileConfiguration = new YamlConfiguration();
         }
     }
 
@@ -87,56 +87,56 @@ public class Configuration {
 
     public void save() {
         try {
-            this.configuration.save(this.file);
+            this.fileConfiguration.save(this.file);
         } catch (IOException e) {
             CM2Logger.exception(e);
         }
     }
 
     public String getString(String path) {
-        return this.configuration.getString(path);
+        return this.fileConfiguration.getString(path);
     }
 
     public boolean getBoolean(String path) {
-        return this.configuration.getBoolean(path);
+        return this.fileConfiguration.getBoolean(path);
     }
 
     public int getInt(String path) {
-        return this.configuration.getInt(path);
+        return this.fileConfiguration.getInt(path);
     }
 
     public double getDouble(String path) {
-        return this.configuration.getDouble(path);
+        return this.fileConfiguration.getDouble(path);
     }
 
     public ConfigurationSection getConfigurationSection(String path) {
-        return this.configuration.getConfigurationSection(path);
+        return this.fileConfiguration.getConfigurationSection(path);
     }
 
     public boolean contains(String path) {
-        return this.configuration.contains(path);
+        return this.fileConfiguration.contains(path);
     }
 
     public boolean isString(String path) {
-        return this.configuration.isString(path);
+        return this.fileConfiguration.isString(path);
     }
 
     public Set<String> getKeys(boolean deep) {
-        return this.configuration.getKeys(deep);
+        return this.fileConfiguration.getKeys(deep);
     }
 
     public Set<String> getKeysFromPath(String path, boolean deep) {
-        ConfigurationSection cs = this.configuration.getConfigurationSection(path);
+        ConfigurationSection cs = this.fileConfiguration.getConfigurationSection(path);
         if (cs != null) return cs.getKeys(deep);
         else return new HashSet<>();
     }
 
     public List<String> getStringList(String path) {
-        return this.configuration.getStringList(path);
+        return this.fileConfiguration.getStringList(path);
     }
 
     public List<?> getList(String path) {
-        return this.configuration.getList(path);
+        return this.fileConfiguration.getList(path);
     }
 
     public File getFile() {
@@ -144,9 +144,9 @@ public class Configuration {
     }
 
     public void set(String path, Object o) {
-        this.configuration.set(path, o);
+        this.fileConfiguration.set(path, o);
         try {
-            this.configuration.save(this.file);
+            this.fileConfiguration.save(this.file);
         } catch (IOException e) {
             CM2Logger.exception(e);
         }
@@ -194,7 +194,7 @@ public class Configuration {
         }
     }
 
-    public FileConfiguration getConfiguration() {
-        return configuration;
+    public FileConfiguration getFileConfiguration() {
+        return fileConfiguration;
     }
 }
