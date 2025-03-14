@@ -16,6 +16,9 @@ import org.jetbrains.annotations.NotNull;
 /** Main command class. */
 @SuppressWarnings({"rawtypes", "unused"})
 public class Command implements CommandExecutor, TabCompleter {
+
+    private final static int FIRST_ARGS = 1;
+
     private final Map<String, SubCommands> subCommands = new HashMap<>();
     private final String permission;
     private final String commandString;
@@ -109,7 +112,7 @@ public class Command implements CommandExecutor, TabCompleter {
             @NotNull String[] args) {
         List<String> complete = new ArrayList<>();
         if (!subCommands.isEmpty()) {
-            if (args.length == 1) {
+            if (args.length == FIRST_ARGS) {
                 for (Map.Entry<String, SubCommands> e : subCommands.entrySet()) {
                     if (e.getKey() != null
                             && e.getKey().startsWith(args[0].toLowerCase())

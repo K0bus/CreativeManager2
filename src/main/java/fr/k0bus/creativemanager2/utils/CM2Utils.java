@@ -19,6 +19,9 @@ import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
 
 public class CM2Utils {
+    
+    private final static String SEMILICON = "*";
+    
     public static boolean isProtectedChest(Inventory inventory) {
         if (inventory.getType().equals(InventoryType.ENDER_CHEST)) return true;
         if (getProtectedType().contains(inventory.getType()) && inventory.getHolder() != null) {
@@ -138,11 +141,11 @@ public class CM2Utils {
     public static boolean inList(String search, List<String> list) {
         for (String s : list) {
             s = s.toLowerCase();
-            if ("*".equals(s)) return true;
+            if (SEMILICON.equals(s)) return true;
             if (s.isEmpty()) continue;
-            if (s.startsWith("*") && s.endsWith("*") && search.contains(s.substring(1, s.length() - 1))) return true;
-            if (s.startsWith("*") && search.endsWith(s.substring(1))) return true;
-            if (s.endsWith("*") && search.startsWith(s.substring(0, s.length() - 1))) return true;
+            if (s.startsWith(SEMILICON) && s.endsWith(SEMILICON) && search.contains(s.substring(1, s.length() - 1))) return true;
+            if (s.startsWith(SEMILICON) && search.endsWith(s.substring(1))) return true;
+            if (s.endsWith(SEMILICON) && search.startsWith(s.substring(0, s.length() - 1))) return true;
             if (s.equals(search)) return true;
             if (s.startsWith("#")) {
                 Set<Material> set =
