@@ -63,9 +63,10 @@ public class MinecraftLang {
             try (InputStream in = new URI(fileUrl).toURL().openStream();
                     OutputStream out = Files.newOutputStream(localeFile)) {
                 byte[] dataBuffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                int bytesRead = in.read(dataBuffer, 0, 1024);
+                while (bytesRead != -1) {
                     out.write(dataBuffer, 0, bytesRead);
+                    bytesRead = in.read(dataBuffer, 0, 1024); // Ré-assigner bytesRead à chaque itération
                 }
             } catch (IOException | URISyntaxException e) {
                 if (CreativeManager2.api != null) {
