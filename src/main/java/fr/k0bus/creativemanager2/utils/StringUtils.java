@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.utils;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.md_5.bungee.api.ChatColor;
@@ -38,7 +39,7 @@ public class StringUtils {
 
         for (String word : words) {
             String capitalizedWord =
-                    word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                    word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
             if (!finalString.isEmpty()) {
                 finalString.append(' ');
             }

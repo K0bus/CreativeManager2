@@ -1,11 +1,9 @@
 package fr.k0bus.creativemanager2.commands;
 
 import fr.k0bus.creativemanager2.utils.CM2Utils;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -115,7 +113,7 @@ public class Command implements CommandExecutor, TabCompleter {
             if (args.length == FIRST_ARGS) {
                 for (Map.Entry<String, SubCommands> e : subCommands.entrySet()) {
                     if (e.getKey() != null
-                            && e.getKey().startsWith(args[0].toLowerCase())
+                            && e.getKey().startsWith(args[0].toLowerCase(Locale.getDefault()))
                             && e.getValue().isAllowed(sender))
                         complete.add(e.getValue().getCommandString());
                 }

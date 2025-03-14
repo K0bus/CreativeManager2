@@ -9,6 +9,7 @@ import fr.k0bus.creativemanager2.utils.StringUtils;
 import fr.k0bus.creativemanager2.utils.language.MinecraftLang;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.bukkit.GameMode;
@@ -84,12 +85,12 @@ public class CM2API {
 
     public String getInventoryName(World world, GameMode gameMode) {
         if (this.settings.isString(
-                "multi-inventories." + world.getName() + "." + gameMode.name().toLowerCase())) {
+                "multi-inventories." + world.getName() + "." + gameMode.name().toLowerCase(Locale.getDefault()))) {
             return this.settings.getString("multi-inventories." + world.getName() + "."
-                    + gameMode.name().toLowerCase());
+                    + gameMode.name().toLowerCase(Locale.getDefault()));
         }
         return this.settings.getString(
-                "multi-inventories._GLOBAL." + gameMode.name().toLowerCase());
+                "multi-inventories._GLOBAL." + gameMode.name().toLowerCase(Locale.getDefault()));
     }
 
     private void loadTags() {

@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -30,8 +32,8 @@ public class MinecraftLang {
     JsonObject jsonObject;
 
     public MinecraftLang(JavaPlugin plugin, String lang, String mcVersion) {
-        this.mcVersion = mcVersion.toLowerCase();
-        this.lang = lang.toLowerCase();
+        this.mcVersion = mcVersion.toLowerCase(Locale.getDefault());
+        this.lang = lang.toLowerCase(Locale.getDefault());
         loadLang(plugin);
     }
 
@@ -41,9 +43,9 @@ public class MinecraftLang {
 
     private void loadLang(JavaPlugin plugin) {
         String fileUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/"
-                + mcVersion.toLowerCase()
+                + mcVersion.toLowerCase(Locale.getDefault())
                 + "/assets/minecraft/lang/"
-                + lang.toLowerCase()
+                + lang.toLowerCase(Locale.getDefault())
                 + ".json";
         Path dir = plugin.getDataFolder().toPath().resolve("locale");
 
@@ -55,7 +57,7 @@ public class MinecraftLang {
             return;
         }
 
-        Path localeFile = dir.resolve(lang.toLowerCase() + ".json");
+        Path localeFile = dir.resolve(lang.toLowerCase(Locale.getDefault()) + ".json");
 
         if (Files.notExists(localeFile)) {
             CM2Logger.info("§Starting downloading {0}.json on version {1}", lang, mcVersion);

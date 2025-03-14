@@ -8,6 +8,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 
+import java.util.Locale;
+
 public abstract class Protection implements Listener {
 
     private final String id;
@@ -19,7 +21,7 @@ public abstract class Protection implements Listener {
     private final Material icon;
 
     public Protection(CreativeManager2 plugin, Material icon, String customId) {
-        id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase();
+        id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase(Locale.getDefault());
         this.plugin = plugin;
         this.customId = customId;
         this.icon = icon;

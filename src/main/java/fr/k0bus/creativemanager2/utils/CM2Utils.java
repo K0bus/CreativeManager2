@@ -4,11 +4,8 @@ import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -140,7 +137,7 @@ public class CM2Utils {
 
     public static boolean inList(String search, List<String> list) {
         for (String s : list) {
-            s = s.toLowerCase();
+            s = s.toLowerCase(Locale.getDefault());
             if (SEMILICON.equals(s)) return true;
             if (s.isEmpty()) continue;
             if (s.startsWith(SEMILICON) && s.endsWith(SEMILICON) && search.contains(s.substring(1, s.length() - 1))) return true;
@@ -149,9 +146,9 @@ public class CM2Utils {
             if (s.equals(search)) return true;
             if (s.startsWith("#")) {
                 Set<Material> set =
-                        CreativeManager2.api.getTagMap().get(s.substring(1).toUpperCase());
+                        CreativeManager2.api.getTagMap().get(s.substring(1).toUpperCase(Locale.getDefault()));
                 if (set != null) {
-                    if (set.contains(Material.valueOf(search.toUpperCase()))) return true;
+                    if (set.contains(Material.valueOf(search.toUpperCase(Locale.getDefault())))) return true;
                 } else {
                     CM2Logger.warn("Unable to find {0} tags", s);
                 }

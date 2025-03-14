@@ -6,6 +6,8 @@ import fr.k0bus.creativemanager2.type.CustomType;
 import fr.k0bus.creativemanager2.type.ListType;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import java.util.List;
+import java.util.Locale;
+
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -85,6 +87,6 @@ public class CustomProtection extends Protection {
         if (hasPermission(player, type.getId())) return false;
         if (s == null) return false;
         if (hasPermission(player, type.getId() + "." + s)) return false;
-        return CM2Utils.inList(s.toLowerCase(), getList(type)) == getType(type).isBlacklistMode();
+        return CM2Utils.inList(s.toLowerCase(Locale.getDefault()), getList(type)) == getType(type).isBlacklistMode();
     }
 }
