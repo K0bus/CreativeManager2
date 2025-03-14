@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -165,7 +166,8 @@ public class Configuration {
             CreativeManager2.api.disableCM2();
             return;
         }
-        FileConfiguration defaultConf = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        FileConfiguration defaultConf =
+                YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));
         FileConfiguration conf = loadConfiguration(file);
         for (String path : defaultConf.getKeys(true)) {
             Object configObj = conf.get(path);
