@@ -8,16 +8,30 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
-        stage('CheckStyle') {
+        stage('Analysis') {
             steps {
-                sh 'mvn checkstyle:check'
+                sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotBugs:spotBugs"
+
+                def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
+                publishIssues issues: [checkstyle]
+
+                def pmd = scanForIssues tool: pmdParser(pattern: '**/target/pmd.xml')
+                publishIssues issues: [pmd]
+
+                def cpd = scanForIssues tool: cpd(pattern: '**/target/cpd.xml')
+                publishIssues issues: [cpd]
+
+                def spotbugs = scanForIssues tool: spotBugs(pattern: '**/target/spotbugsXml.xml')
+                publishIssues issues: [spotbugs]
+
+                def maven = scanForIssues tool: mavenConsole()
+                publishIssues issues: [maven]
+
+                publishIssues id: 'analysis', name: 'All Issues',
+                    issues: [checkstyle, pmd, spotbugs],
+                    filters: [includePackage('io.jenkins.plugins.analysis.*')]
+
                 recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
-            }
-        }
-        stage('PMD') {
-            steps {
-                sh 'mvn pmd:check'
-                recordIssues(tools: [pmdParser(reportEncoding: 'UTF-8')])
             }
         }
         stage('Build') {
