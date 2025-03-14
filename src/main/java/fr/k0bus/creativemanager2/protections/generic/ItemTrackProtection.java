@@ -6,6 +6,7 @@ import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -53,20 +54,22 @@ public class ItemTrackProtection extends Protection {
         String displayname = StringUtils.parse(getConfig().getString("displayname"));
 
         if (displayname != null && !displayname.isEmpty()) {
-            meta.setDisplayName(displayname.replace(
-                    "{ITEM}", CreativeManager2.api.getMinecraftLang().get(item)));
+            meta.setDisplayName(getFinalString(displayname, (Player) p, item));
         }
         if (!lore.isEmpty()) {
             for (String line : lore) {
-                line = line.replace("{PLAYER}", p.getName())
-                        .replace("{UUID}", p.getUniqueId().toString())
-                        .replace(
-                                "{ITEM}",
-                                CreativeManager2.api.getMinecraftLang().get(item));
-                tempLore.add(StringUtils.translateColor(line));
+                tempLore.add(getFinalString(line, (Player) p, item));
             }
             meta.setLore(tempLore);
         }
         item.setItemMeta(meta);
+    }
+
+    private String getFinalString(String string, Player player, ItemStack itemStack) {
+        return StringUtils.parse(StringUtils.replacePlaceholders(string, Map.of(
+                "PLAYER", player.getName(),
+                "UUID", player.getUniqueId().toString(),
+                "ITEM", CreativeManager2.api.getMinecraftLang().get(itemStack)))
+        );
     }
 }
