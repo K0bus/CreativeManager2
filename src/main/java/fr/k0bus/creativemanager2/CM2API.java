@@ -1,6 +1,7 @@
 package fr.k0bus.creativemanager2;
 
-import fr.k0bus.creativemanager2.file.*;
+import fr.k0bus.creativemanager2.file.Lang;
+import fr.k0bus.creativemanager2.file.Settings;
 import fr.k0bus.creativemanager2.gui.MenuListener;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
