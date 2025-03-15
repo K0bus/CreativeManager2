@@ -44,12 +44,19 @@ public class ItemInfosCommand extends SubCommands {
                 nbtKey.append("§r").append(k).append("§6");
             }
         });
+        StringBuilder nmsKey = new StringBuilder();
+        itemStack.getItemMeta().getPersistentDataContainer().getKeys().forEach(nms -> {
+            if (!nmsKey.toString().isEmpty()) nmsKey.append(", ");
+            nmsKey.append("§r").append(nms.getKey()).append("§6");
+        });
+
         MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         MessageUtils.sendRawMessage(sender, " &6You've requested items informations below");
         MessageUtils.sendRawMessage(
                 sender, " &8- &3Name : &7" + itemStack.getType().name());
         MessageUtils.sendRawMessage(sender, " &8- &3Tags : &6[&7" + tags + "&r&6]");
         MessageUtils.sendRawMessage(sender, " &8- &3NBT Keys : &6[&7" + nbtKey + "&r&6]");
+        MessageUtils.sendRawMessage(sender, " &8- &3NMS Keys : &6[&7" + nmsKey + "&r&6]");
         MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
     }
 }
