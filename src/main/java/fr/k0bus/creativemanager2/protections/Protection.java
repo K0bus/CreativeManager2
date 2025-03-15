@@ -120,6 +120,7 @@ public abstract class Protection implements Listener {
                 new LogEntityProtection().getMapEntry(),
                 new PickupProtection().getMapEntry(),
                 new ThrowProtection().getMapEntry(),
+                new DataRemoverProtection().getMapEntry(),
                 new ChestShopProtection().getMapEntry(),
                 new ItemsAdderProtection().getMapEntry(),
                 new SlimefunProtection().getMapEntry());

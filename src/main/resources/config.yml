@@ -61,6 +61,29 @@ protections:
     custom-max:
       MENDING: 10
     blacklist: []
+  data-remover:
+    enabled: false
+    type:
+      ENCHANT:
+        enabled: true
+        list-type: WHITELIST
+        list: []
+      NBT:
+        enabled: true
+        list-type: WHITELIST
+        list: []
+      POTION_EFFECT:
+        enabled: true
+        list-type: WHITELIST
+        list: []
+      NAME_SPACED_KEY:
+        enabled: true
+        list-type: WHITELIST
+        list: []
+      ITEM_FLAG:
+        enabled: true
+        list-type: WHITELIST
+        list: []
   creative_armor:
     enabled: false
     armors:
