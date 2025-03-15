@@ -7,6 +7,7 @@ import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import fr.k0bus.creativemanager2.utils.language.MinecraftLang;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,10 +33,13 @@ public class CM2API {
 
     public void initialize() {
         this.menuListener = new MenuListener();
-        this.settings = new Settings(instance);
-        this.settings.loadConfig();
-        this.lang = new Lang(settings.getLang(), instance);
-        this.lang.init();
+        try {
+            this.settings = new Settings();
+            this.lang = new Lang(settings.getLang());
+        } catch (IOException e) {
+            CM2Logger.exception(e);
+            disableCM2();
+        }
         this.minecraftLang = new MinecraftLang(instance, settings.getLang());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         this.loadTags();
@@ -63,8 +67,8 @@ public class CM2API {
     }
 
     public void reloadSettings() {
-        this.settings.loadConfig();
-        this.lang.loadConfig();
+        this.settings.reload();
+        this.lang.reload();
         this.minecraftLang = new MinecraftLang(getInstance(), getSettings().getLang());
         if (!protections.isEmpty()) {
             for (Protection protection : protections.values()) {

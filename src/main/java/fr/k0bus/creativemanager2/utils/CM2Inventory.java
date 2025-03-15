@@ -10,7 +10,13 @@ public class CM2Inventory {
     public static void loadInventory(Player player, String inventoryName) {
         if (CreativeManager2.getAPI().getSettings().getBoolean("stop-inventory-save")) return;
         if (player.hasPermission("creativemanager.inventory.bypass")) return;
-        UserData data = new UserData(player, CreativeManager2.getAPI().getInstance());
+        UserData data = null;
+        try {
+            data = new UserData(player);
+        } catch (IOException e) {
+            CM2Logger.exception(e);
+            return;
+        }
         if (data.contains(inventoryName + ".content") && data.contains(inventoryName + ".armor")) {
             try {
                 player.getInventory()
@@ -41,7 +47,13 @@ public class CM2Inventory {
     public static void saveInventory(Player player, String inventoryName) {
         if (CreativeManager2.getAPI().getSettings().getBoolean("stop-inventory-save")) return;
         if (player.hasPermission("creativemanager.inventory.bypass")) return;
-        UserData data = new UserData(player, CreativeManager2.getAPI().getInstance());
+        UserData data = null;
+        try {
+            data = new UserData(player);
+        } catch (IOException e) {
+            CM2Logger.exception(e);
+            return;
+        }
         String[] encoded = InventoryUtils.playerInventoryToBase64(player.getInventory());
         data.set(inventoryName + ".content", encoded[0]);
         data.set(inventoryName + ".armor", encoded[1]);
