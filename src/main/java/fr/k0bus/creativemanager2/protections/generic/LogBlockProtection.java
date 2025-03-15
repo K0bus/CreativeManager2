@@ -1,7 +1,6 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CM2Data;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 
 public class LogBlockProtection extends Protection {
-    public LogBlockProtection(CreativeManager2 plugin) {
-        super(plugin, Material.MAP);
+    public LogBlockProtection() {
+        super(Material.MAP);
     }
 
     @EventHandler

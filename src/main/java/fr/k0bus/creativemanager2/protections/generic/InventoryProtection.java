@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class InventoryProtection extends Protection {
-    public InventoryProtection(CreativeManager2 plugin) {
-        super(plugin, Material.PLAYER_HEAD);
+    public InventoryProtection() {
+        super(Material.PLAYER_HEAD);
     }
 
     @EventHandler

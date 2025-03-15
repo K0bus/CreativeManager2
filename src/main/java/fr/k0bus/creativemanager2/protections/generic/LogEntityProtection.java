@@ -1,7 +1,6 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CM2Data;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -9,8 +8,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPlaceEvent;
 
 public class LogEntityProtection extends Protection {
-    public LogEntityProtection(CreativeManager2 plugin) {
-        super(plugin, Material.ZOMBIE_HEAD);
+    public LogEntityProtection() {
+        super(Material.ZOMBIE_HEAD);
     }
 
     @EventHandler

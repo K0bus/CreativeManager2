@@ -11,8 +11,8 @@ public final class CreativeManager2 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         setApi(this);
+        CM2Logger.info("&bStart initialization...");
         registerCommands();
         api.initialize();
     }

@@ -17,8 +17,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ItemTrackProtection extends Protection {
-    public ItemTrackProtection(CreativeManager2 plugin) {
-        super(plugin, Material.NAME_TAG);
+    public ItemTrackProtection() {
+        super(Material.NAME_TAG);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

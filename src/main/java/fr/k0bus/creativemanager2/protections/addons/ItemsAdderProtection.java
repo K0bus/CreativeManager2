@@ -6,7 +6,6 @@ import dev.lone.itemsadder.api.Events.CustomBlockPlaceEvent;
 import dev.lone.itemsadder.api.Events.CustomEntityDeathEvent;
 import dev.lone.itemsadder.api.Events.FurnitureInteractEvent;
 import dev.lone.itemsadder.api.Events.FurniturePlaceEvent;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,8 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
 public class ItemsAdderProtection extends Protection {
-    public ItemsAdderProtection(CreativeManager2 plugin) {
-        super(plugin, Material.WRITABLE_BOOK);
+    public ItemsAdderProtection() {
+        super(Material.WRITABLE_BOOK);
     }
 
     @Override

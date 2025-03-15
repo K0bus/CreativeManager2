@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import java.util.Map;
 import org.bukkit.Material;
@@ -13,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EnchantProtection extends Protection {
-    public EnchantProtection(CreativeManager2 plugin) {
-        super(plugin, Material.ENCHANTED_BOOK);
+    public EnchantProtection() {
+        super(Material.ENCHANTED_BOOK);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -59,7 +59,7 @@ public class MinecraftLang {
         Path localeFile = dir.resolve(lang.toLowerCase(Locale.getDefault()) + ".json");
 
         if (Files.notExists(localeFile)) {
-            CM2Logger.info("§Starting downloading {0}.json on version {1}", lang, mcVersion);
+            CM2Logger.info("&7> &6&lStarting downloading {0}.json on version {1}", lang, mcVersion);
 
             try (InputStream in = new URI(fileUrl).toURL().openStream();
                     OutputStream out = Files.newOutputStream(localeFile)) {
@@ -71,17 +71,17 @@ public class MinecraftLang {
                 }
             } catch (IOException | URISyntaxException e) {
                 if (CreativeManager2.getAPI() != null) {
-                    CM2Logger.warn("§Can't download locale file {0}.json", lang);
-                    CM2Logger.warn("§URL : {0}", fileUrl);
+                    CM2Logger.warn("&7> &c&lCan't download locale file {0}.json", lang);
+                    CM2Logger.warn("&7> &c&l - URL : {0}", fileUrl);
                     String absolutePath = localeFile.toAbsolutePath().toString();
-                    CM2Logger.warn("§cDestination : {0}", absolutePath);
+                    CM2Logger.warn("&7> &c&l - Destination : {0}", absolutePath);
                 }
                 return;
             }
         }
 
         if (Files.exists(localeFile)) {
-            CM2Logger.info("§2Loading file {0}.json", lang);
+            CM2Logger.info("&7> &6&lLoading file {0}.json", lang);
             Gson gson = new Gson();
             try (BufferedReader reader = Files.newBufferedReader(localeFile, StandardCharsets.UTF_8)) {
                 jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -90,9 +90,9 @@ public class MinecraftLang {
             }
 
             if (jsonObject == null) {
-                CM2Logger.warn("§cFile not loaded successfully !");
+                CM2Logger.warn("&7> &c&lFile not loaded successfully !");
             } else {
-                CM2Logger.info("§2File loaded successfully !");
+                CM2Logger.info("&7> &a&lFile loaded successfully !");
             }
         }
     }

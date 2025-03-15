@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import de.tr7zw.nbtapi.NBT;
 import fr.k0bus.creativemanager2.CM2Logger;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.CustomType;
 import fr.k0bus.creativemanager2.type.ListType;
@@ -21,8 +20,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CustomProtection extends Protection {
-    public CustomProtection(CreativeManager2 plugin) {
-        super(plugin, Material.WRITTEN_BOOK);
+    public CustomProtection() {
+        super(Material.WRITTEN_BOOK);
     }
 
     public ListType getType(CustomType type) {

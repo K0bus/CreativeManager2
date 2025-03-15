@@ -34,7 +34,9 @@ public class CM2API {
         this.menuListener = new MenuListener();
         try {
             this.settings = new Settings();
+            CM2Logger.info("&7> &6&lConfiguration loaded");
             this.lang = new Lang(settings.getLang());
+            CM2Logger.info("&7> &6&lLanguage loaded");
         } catch (IOException e) {
             CM2Logger.exception(e);
             disableCM2();
@@ -46,7 +48,7 @@ public class CM2API {
     }
 
     public void loadProtections() {
-        this.protections = Protection.loadProtections(instance);
+        this.protections = Protection.loadProtections();
     }
 
     public CreativeManager2 getInstance() {
@@ -98,9 +100,9 @@ public class CM2API {
                 }
             }
             int size = tagMap.size();
-            CM2Logger.info("§2Tag loaded from Spigot ! &7[{0}]", size);
+            CM2Logger.info("&7> &6&lTag loaded from Spigot ! &r&7[{0}]", size);
         } catch (Exception e) {
-            CM2Logger.info("§cThis minecraft version could not use the TAG system.");
+            CM2Logger.info("&7> &c&lThis minecraft version could not use the TAG system.");
         }
     }
 

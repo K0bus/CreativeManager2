@@ -1,41 +1,38 @@
 package fr.k0bus.creativemanager2.protections;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
-import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
+import fr.k0bus.creativemanager2.protections.addons.ChestShopProtection;
+import fr.k0bus.creativemanager2.protections.addons.ItemsAdderProtection;
+import fr.k0bus.creativemanager2.protections.addons.SlimefunProtection;
+import fr.k0bus.creativemanager2.protections.generic.*;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.reflections.Reflections;
 
 public abstract class Protection implements Listener {
 
     private final String id;
     private boolean enabled = true;
     protected Section config;
-    private final CreativeManager2 plugin;
+    private final CreativeManager2 plugin = CreativeManager2.getAPI().getInstance();
     private final String customId;
 
     private final Material icon;
 
-    public Protection(CreativeManager2 plugin, Material icon, String customId) {
+    public Protection(Material icon, String customId) {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase(Locale.getDefault());
-        this.plugin = plugin;
         this.customId = customId;
         this.icon = icon;
     }
 
-    public Protection(CreativeManager2 plugin, Material icon) {
-        this(plugin, icon, null);
+    public Protection(Material icon) {
+        this(icon, null);
     }
 
     public void loadSettings() {
@@ -100,29 +97,32 @@ public abstract class Protection implements Listener {
         else return customId;
     }
 
-    public static Map<String, Protection> loadProtections(CreativeManager2 plugin) {
-        Map<String, Protection> protectionHashMap = new HashMap<>();
-        Reflections reflections = new Reflections("fr.k0bus.creativemanager2.protections");
-        Set<Class<? extends Protection>> classes = reflections.getSubTypesOf(Protection.class);
-        for (Class<? extends Protection> aClass : classes) {
-            try {
-                Protection protection = (Protection) aClass.getConstructors()[0].newInstance(plugin);
-                protectionHashMap.put(protection.getId(), protection);
-                if (protection.isCompatible()) {
-                    String className = protection.getClass().getSimpleName();
-                    String customId = protection.getCustomId();
-                    CM2Logger.info("Protection {0} loaded from class ({1})", customId, className);
-                    plugin.getServer().getPluginManager().registerEvents(protection, plugin);
-                    protection.loadSettings();
-                } else {
-                    String customId = protection.getCustomId();
-                    CM2Logger.info("Protection {0} unloaded for incompatibility", customId);
-                }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                CM2Logger.exception(e);
-            }
-        }
-        return protectionHashMap;
+    protected Map.Entry<String, Protection> getMapEntry() {
+        return new AbstractMap.SimpleEntry<>(getCustomId(), this);
+    }
+
+    public static Map<String, Protection> loadProtections() {
+        return Map.ofEntries(
+                new AttackMonsterProtection().getMapEntry(),
+                new AttackPlayerProtection().getMapEntry(),
+                new BuildProtection().getMapEntry(),
+                new ClaimProtection().getMapEntry(),
+                new ContainerProtection().getMapEntry(),
+                new CustomProtection().getMapEntry(),
+                new DeathProtection().getMapEntry(),
+                new DropProtection().getMapEntry(),
+                new EffectProtection().getMapEntry(),
+                new EnchantProtection().getMapEntry(),
+                new GuiProtection().getMapEntry(),
+                new InventoryProtection().getMapEntry(),
+                new ItemTrackProtection().getMapEntry(),
+                new LogBlockProtection().getMapEntry(),
+                new LogEntityProtection().getMapEntry(),
+                new PickupProtection().getMapEntry(),
+                new ThrowProtection().getMapEntry(),
+                new ChestShopProtection().getMapEntry(),
+                new ItemsAdderProtection().getMapEntry(),
+                new SlimefunProtection().getMapEntry());
     }
 
     public static boolean isCreativePlayer(LivingEntity entity) {

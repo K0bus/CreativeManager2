@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections.addons;
 
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import io.github.thebusybiscuit.slimefun4.api.events.MultiBlockInteractEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
@@ -13,8 +12,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class SlimefunProtection extends Protection {
-    public SlimefunProtection(CreativeManager2 plugin) {
-        super(plugin, Material.SLIME_BLOCK);
+    public SlimefunProtection() {
+        super(Material.SLIME_BLOCK);
     }
 
     @Override

@@ -38,10 +38,6 @@
                             <!-- Replace this -->
                             <shadedPattern>fr.k0bus.creativemanager2.libs.boostedyaml</shadedPattern>
                         </relocation>
-                        <relocation>
-                            <pattern>org.reflections</pattern>
-                            <shadedPattern>fr.k0bus.creativemanager2.libs.reflections</shadedPattern>
-                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -245,11 +241,6 @@
             <artifactId>spigot-api</artifactId>
             <version>1.21-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.10.2</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

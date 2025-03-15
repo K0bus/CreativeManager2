@@ -8,7 +8,6 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import java.util.Set;
 import me.angeschossen.lands.api.LandsIntegration;
@@ -24,8 +23,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class ClaimProtection extends Protection {
-    public ClaimProtection(CreativeManager2 plugin) {
-        super(plugin, Material.OAK_SIGN);
+    public ClaimProtection() {
+        super(Material.OAK_SIGN);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

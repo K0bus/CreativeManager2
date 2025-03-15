@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.ContainerUtils;
 import org.bukkit.Material;
@@ -9,8 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
 public class GuiProtection extends Protection {
-    public GuiProtection(CreativeManager2 plugin) {
-        super(plugin, Material.BOOK);
+    public GuiProtection() {
+        super(Material.BOOK);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

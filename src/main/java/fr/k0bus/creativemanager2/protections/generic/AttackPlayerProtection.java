@@ -1,6 +1,5 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,8 +9,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class AttackPlayerProtection extends Protection {
-    public AttackPlayerProtection(CreativeManager2 plugin) {
-        super(plugin, Material.GOLDEN_SWORD, "combat.pvp");
+    public AttackPlayerProtection() {
+        super(Material.GOLDEN_SWORD, "combat.pvp");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
