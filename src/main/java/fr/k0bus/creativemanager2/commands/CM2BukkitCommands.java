@@ -5,7 +5,7 @@ import fr.k0bus.creativemanager2.commands.cm2.CheckBlockCommand;
 import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
 import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
 import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
 
 public class CM2BukkitCommands extends Command {
@@ -29,7 +29,7 @@ public class CM2BukkitCommands extends Command {
     }
 
     private static void sendMainMessage(CommandSender sender) {
-        CM2Utils.sendRawMessage(
+        MessageUtils.sendRawMessage(
                 sender, CreativeManager2.getAPI().getTag() + " CreativeManager2 loaded in the server !");
     }
 }

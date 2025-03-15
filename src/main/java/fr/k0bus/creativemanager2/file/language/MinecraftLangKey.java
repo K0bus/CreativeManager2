@@ -1,4 +1,4 @@
-package fr.k0bus.creativemanager2.utils.language;
+package fr.k0bus.creativemanager2.file.language;
 
 import java.util.Locale;
 import org.bukkit.Effect;

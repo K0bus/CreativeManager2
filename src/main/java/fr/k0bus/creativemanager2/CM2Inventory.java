@@ -1,8 +1,7 @@
-package fr.k0bus.creativemanager2.utils;
+package fr.k0bus.creativemanager2;
 
-import fr.k0bus.creativemanager2.CM2Logger;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.file.UserData;
+import fr.k0bus.creativemanager2.utils.InventoryUtils;
 import java.io.IOException;
 import org.bukkit.entity.Player;
 

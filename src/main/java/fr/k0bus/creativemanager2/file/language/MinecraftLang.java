@@ -1,4 +1,4 @@
-package fr.k0bus.creativemanager2.utils.language;
+package fr.k0bus.creativemanager2.file.language;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

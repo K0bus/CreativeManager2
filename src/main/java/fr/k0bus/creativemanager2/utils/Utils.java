@@ -14,4 +14,13 @@ public class Utils {
     public static String placeholderApiParse(String str) {
         return placeholderApiParse(str, null);
     }
+
+    public static boolean isPaper() {
+        try {
+            Class.forName("com.destroystokyo.paper.ParticleBuilder");
+            return true;
+        } catch (ClassNotFoundException ignored) {
+        }
+        return false;
+    }
 }

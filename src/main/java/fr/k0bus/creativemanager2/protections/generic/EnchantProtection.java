@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -23,7 +22,7 @@ public class EnchantProtection extends Protection {
         if (isDisabled()) return;
         if (event.getWhoClicked() instanceof Player player) {
             if (hasPermission(player)) return;
-            if (!CM2Utils.isCreativePlayer(player)) return;
+            if (!Protection.isCreativePlayer(player)) return;
             checkInventoryEnchantments(player);
         }
     }

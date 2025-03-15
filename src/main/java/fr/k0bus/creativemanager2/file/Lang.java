@@ -12,7 +12,7 @@ public class Lang extends CM2YamlDocument {
     public Lang(@NotNull String langString) throws IOException {
         super(
                 new File(CreativeManager2.getAPI().getInstance().getDataFolder() + "/lang", langString + ".yml"),
-                CreativeManager2.getAPI().getInstance().getResource(langString + ".yml"),
+                CreativeManager2.getAPI().getInstance().getResource("lang/" + langString + ".yml"),
                 GeneralSettings.builder()
                         .setSerializer(SpigotSerializer.getInstance())
                         .build());

@@ -3,7 +3,7 @@ package fr.k0bus.creativemanager2.commands.cm2;
 import de.tr7zw.nbtapi.NBT;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.SubCommands;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.MessageUtils;
 import java.util.Map;
 import java.util.Set;
 import org.bukkit.Material;
@@ -26,7 +26,7 @@ public class ItemInfosCommand extends SubCommands {
         Player player = (Player) sender;
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (itemStack.getType().equals(Material.AIR)) {
-            CM2Utils.sendMessage(player, "commands.iteminfos.no-items");
+            MessageUtils.sendMessage(player, "commands.iteminfos.no-items");
             return;
         }
         StringBuilder tags = new StringBuilder();
@@ -44,11 +44,12 @@ public class ItemInfosCommand extends SubCommands {
                 nbtKey.append("§r").append(k).append("§6");
             }
         });
-        CM2Utils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
-        CM2Utils.sendRawMessage(sender, " &6You've requested items informations below");
-        CM2Utils.sendRawMessage(sender, " &8- &3Name : &7" + itemStack.getType().name());
-        CM2Utils.sendRawMessage(sender, " &8- &3Tags : &6[&7" + tags + "&r&6]");
-        CM2Utils.sendRawMessage(sender, " &8- &3NBT Keys : &6[&7" + nbtKey + "&r&6]");
-        CM2Utils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        MessageUtils.sendRawMessage(sender, " &6You've requested items informations below");
+        MessageUtils.sendRawMessage(
+                sender, " &8- &3Name : &7" + itemStack.getType().name());
+        MessageUtils.sendRawMessage(sender, " &8- &3Tags : &6[&7" + tags + "&r&6]");
+        MessageUtils.sendRawMessage(sender, " &8- &3NBT Keys : &6[&7" + nbtKey + "&r&6]");
+        MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
     }
 }

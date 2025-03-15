@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,7 +16,7 @@ public class DeathProtection extends Protection {
     public void onDeath(PlayerDeathEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setDroppedExp(0);
         event.getDrops().clear();
     }

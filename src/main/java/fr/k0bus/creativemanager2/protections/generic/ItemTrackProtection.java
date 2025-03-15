@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class ItemTrackProtection extends Protection {
         if (isDisabled()) return;
         if (event.getWhoClicked() instanceof Player player) {
             if (hasPermission(player)) return;
-            if (!CM2Utils.isCreativePlayer(player)) return;
+            if (!Protection.isCreativePlayer(player)) return;
             reloadInventoryLore(player);
         }
     }

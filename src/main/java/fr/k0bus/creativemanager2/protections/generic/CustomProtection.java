@@ -6,7 +6,7 @@ import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.CustomType;
 import fr.k0bus.creativemanager2.type.ListType;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.ListUtils;
 import java.util.List;
 import java.util.Locale;
 import org.bukkit.Material;
@@ -103,11 +103,11 @@ public class CustomProtection extends Protection {
 
     private boolean needCancel(LivingEntity player, String s, CustomType type) {
         if (isDisabled()) return false;
-        if (!CM2Utils.isCreativePlayer(player)) return false;
+        if (!Protection.isCreativePlayer(player)) return false;
         if (hasPermission(player, type.getId())) return false;
         if (s == null) return false;
         if (hasPermission(player, type.getId() + "." + s)) return false;
-        return CM2Utils.inList(s.toLowerCase(Locale.getDefault()), getList(type))
+        return ListUtils.inList(s.toLowerCase(Locale.getDefault()), getList(type))
                 == getType(type).isBlacklistMode();
     }
 }

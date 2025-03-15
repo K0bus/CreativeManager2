@@ -2,11 +2,10 @@ package fr.k0bus.creativemanager2;
 
 import fr.k0bus.creativemanager2.file.Lang;
 import fr.k0bus.creativemanager2.file.Settings;
+import fr.k0bus.creativemanager2.file.language.MinecraftLang;
 import fr.k0bus.creativemanager2.gui.MenuListener;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
-import fr.k0bus.creativemanager2.utils.language.MinecraftLang;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -47,7 +46,7 @@ public class CM2API {
     }
 
     public void loadProtections() {
-        this.protections = CM2Utils.loadProtections(instance);
+        this.protections = Protection.loadProtections(instance);
     }
 
     public CreativeManager2 getInstance() {

@@ -1,10 +1,9 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
+import fr.k0bus.creativemanager2.CM2Data;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
-import fr.k0bus.creativemanager2.utils.CM2Data;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +36,7 @@ public class LogBlockProtection extends Protection {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         if (isDisabled()) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
         for (Block block : blocks) {
             CM2Data.register(block, event.getPlayer());
@@ -47,7 +46,7 @@ public class LogBlockProtection extends Protection {
     @EventHandler
     public void onMultiPlace(BlockMultiPlaceEvent event) {
         if (isDisabled()) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         for (BlockState state : event.getReplacedBlockStates()) {
             CM2Data.register(state.getBlock(), event.getPlayer());
         }
@@ -55,7 +54,7 @@ public class LogBlockProtection extends Protection {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        if (CM2Utils.isCreativePlayer(event.getPlayer()) || hasPermission(event.getPlayer())) {
+        if (Protection.isCreativePlayer(event.getPlayer()) || hasPermission(event.getPlayer())) {
             List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
             for (Block block : blocks) {
                 CM2Data.unregister(block);

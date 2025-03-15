@@ -10,7 +10,6 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import java.util.Set;
 import me.angeschossen.lands.api.LandsIntegration;
 import me.angeschossen.lands.api.land.Area;
@@ -33,7 +32,7 @@ public class ClaimProtection extends Protection {
     public void onPlace(BlockPlaceEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         if (notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
@@ -43,7 +42,7 @@ public class ClaimProtection extends Protection {
     public void onBreak(BlockBreakEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         if (notMember(event.getPlayer(), event.getBlock().getLocation())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());

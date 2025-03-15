@@ -8,7 +8,6 @@ import dev.lone.itemsadder.api.Events.FurnitureInteractEvent;
 import dev.lone.itemsadder.api.Events.FurniturePlaceEvent;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,7 +27,7 @@ public class ItemsAdderProtection extends Protection {
     public void onPlaceFurniture(FurniturePlaceEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
@@ -37,7 +36,7 @@ public class ItemsAdderProtection extends Protection {
     public void onBlockPlace(CustomBlockPlaceEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
@@ -46,7 +45,7 @@ public class ItemsAdderProtection extends Protection {
     public void onBlockBreak(CustomBlockBreakEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
@@ -55,7 +54,7 @@ public class ItemsAdderProtection extends Protection {
     public void onBlockInteract(CustomBlockInteractEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
@@ -64,7 +63,7 @@ public class ItemsAdderProtection extends Protection {
     public void onFurnitureInteract(FurnitureInteractEvent event) {
         if (isDisabled()) return;
         if (hasPermission(event.getPlayer())) return;
-        if (!CM2Utils.isCreativePlayer(event.getPlayer())) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
         event.setCancelled(true);
         sendPermissionMessage(event.getPlayer());
     }
@@ -74,7 +73,7 @@ public class ItemsAdderProtection extends Protection {
         if (isDisabled()) return;
         if (!(event.getKiller() instanceof Player player)) return;
         if (hasPermission(player)) return;
-        if (!CM2Utils.isCreativePlayer(player)) return;
+        if (!Protection.isCreativePlayer(player)) return;
         player.setLastDamage(0);
         sendPermissionMessage(player);
     }

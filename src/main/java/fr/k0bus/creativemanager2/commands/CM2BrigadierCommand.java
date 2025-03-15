@@ -7,7 +7,7 @@ import fr.k0bus.creativemanager2.commands.cm2.CheckBlockCommand;
 import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
 import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
 import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.MessageUtils;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
@@ -39,7 +39,7 @@ public class CM2BrigadierCommand {
     }
 
     private static void sendMainMessage(CommandSender sender) {
-        CM2Utils.sendRawMessage(
+        MessageUtils.sendRawMessage(
                 sender, CreativeManager2.getAPI().getTag() + " CreativeManager2 loaded in the server !");
     }
 }

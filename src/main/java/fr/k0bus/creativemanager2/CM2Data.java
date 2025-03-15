@@ -1,6 +1,6 @@
-package fr.k0bus.creativemanager2.utils;
+package fr.k0bus.creativemanager2;
 
-import fr.k0bus.creativemanager2.CreativeManager2;
+import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import org.bukkit.Location;

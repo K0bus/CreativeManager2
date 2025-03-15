@@ -1,9 +1,9 @@
 package fr.k0bus.creativemanager2.commands.cm2;
 
+import fr.k0bus.creativemanager2.CM2Data;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.SubCommands;
-import fr.k0bus.creativemanager2.utils.CM2Data;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.MessageUtils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.text.DateFormat;
 import java.util.Date;
@@ -29,7 +29,7 @@ public class CheckBlockCommand extends SubCommands {
         Player player = (Player) sender;
         Block block = player.getTargetBlockExact(5);
         if (block == null) {
-            CM2Utils.sendRawMessage(sender, CreativeManager2.getAPI().getTag() + " &7No block targeted !");
+            MessageUtils.sendRawMessage(sender, CreativeManager2.getAPI().getTag() + " &7No block targeted !");
             return;
         }
 
@@ -40,7 +40,7 @@ public class CheckBlockCommand extends SubCommands {
 
         UUID uuid = CM2Data.findPlayer(block);
         if (uuid == null) {
-            CM2Utils.sendRawMessage(sender, CreativeManager2.getAPI().getTag() + " &8No log on this block !");
+            MessageUtils.sendRawMessage(sender, CreativeManager2.getAPI().getTag() + " &8No log on this block !");
             return;
         }
 
@@ -54,11 +54,11 @@ public class CheckBlockCommand extends SubCommands {
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
             dateString = dateFormat.format(date);
         }
-        CM2Utils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
-        CM2Utils.sendRawMessage(sender, " &8- &3Location : &7" + locationString);
-        CM2Utils.sendRawMessage(sender, " &8- &3Block : &7" + blockString);
-        CM2Utils.sendRawMessage(sender, " &8- &3Player : &6" + playerString);
-        CM2Utils.sendRawMessage(sender, " &8- &3Date : &6" + dateString);
-        CM2Utils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        MessageUtils.sendRawMessage(sender, " &8- &3Location : &7" + locationString);
+        MessageUtils.sendRawMessage(sender, " &8- &3Block : &7" + blockString);
+        MessageUtils.sendRawMessage(sender, " &8- &3Player : &6" + playerString);
+        MessageUtils.sendRawMessage(sender, " &8- &3Date : &6" + dateString);
+        MessageUtils.sendRawMessage(sender, "&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
     }
 }

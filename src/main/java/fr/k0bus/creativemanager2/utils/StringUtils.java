@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.utils;
 
+import fr.k0bus.creativemanager2.CreativeManager2;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -68,5 +69,9 @@ public class StringUtils {
 
     public static List<String> listToLowerCase(List<String> list) {
         return list.stream().map(String::toLowerCase).collect(Collectors.toList());
+    }
+
+    public static String parseTag(String string) {
+        return string.replace("{TAG}", CreativeManager2.getAPI().getTag());
     }
 }

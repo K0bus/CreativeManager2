@@ -2,7 +2,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.CM2Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -23,7 +22,7 @@ public class AttackMonsterProtection extends Protection {
         if (!(event.getEntity() instanceof LivingEntity)) return;
         if (event.getEntity() instanceof Player) return;
         if (hasPermission(player)) return;
-        if (!CM2Utils.isCreativePlayer(player)) return;
+        if (!Protection.isCreativePlayer(player)) return;
         event.setCancelled(true);
         sendPermissionMessage(player);
     }
@@ -35,7 +34,7 @@ public class AttackMonsterProtection extends Protection {
         if (!(event.getHitEntity() instanceof LivingEntity)) return;
         if (event.getHitEntity() instanceof Player) return;
         if (hasPermission(player)) return;
-        if (!CM2Utils.isCreativePlayer(player)) return;
+        if (!Protection.isCreativePlayer(player)) return;
         event.setCancelled(true);
         sendPermissionMessage(player);
     }

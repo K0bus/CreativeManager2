@@ -1,6 +1,6 @@
 package fr.k0bus.creativemanager2.commands;
 
-import fr.k0bus.creativemanager2.utils.CM2Utils;
+import fr.k0bus.creativemanager2.utils.Utils;
 import java.util.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -148,7 +148,7 @@ public class Command implements CommandExecutor, TabCompleter {
 
     public void register(JavaPlugin plugin) {
 
-        if (CM2Utils.isPaper()) {
+        if (Utils.isPaper()) {
             PluginCommand cmd = plugin.getCommand(getCommandString());
             if (cmd != null) {
                 cmd.setExecutor(this);
