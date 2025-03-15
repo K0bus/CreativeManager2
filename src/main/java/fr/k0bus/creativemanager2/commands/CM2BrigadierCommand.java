@@ -3,10 +3,7 @@ package fr.k0bus.creativemanager2.commands;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import fr.k0bus.creativemanager2.CreativeManager2;
-import fr.k0bus.creativemanager2.commands.cm2.CheckBlockCommand;
-import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
-import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
-import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
+import fr.k0bus.creativemanager2.commands.cm2.*;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -29,6 +26,7 @@ public class CM2BrigadierCommand {
                     .then(new CheckBlockCommand().getCommandNode())
                     .then(new SettingsSubCommand().getCommandNode())
                     .then(new ItemInfosCommand().getCommandNode())
+                    .then(new ItemDebugCommand().getCommandNode())
                     .build();
             commands.registrar().register(buildCommand);
         });

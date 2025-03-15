@@ -1,10 +1,7 @@
 package fr.k0bus.creativemanager2.commands;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
-import fr.k0bus.creativemanager2.commands.cm2.CheckBlockCommand;
-import fr.k0bus.creativemanager2.commands.cm2.ItemInfosCommand;
-import fr.k0bus.creativemanager2.commands.cm2.ReloadSubCommand;
-import fr.k0bus.creativemanager2.commands.cm2.SettingsSubCommand;
+import fr.k0bus.creativemanager2.commands.cm2.*;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
 
@@ -19,6 +16,7 @@ public class CM2BukkitCommands extends Command {
         super.addSubCommands(new ReloadSubCommand());
         super.addSubCommands(new CheckBlockCommand());
         super.addSubCommands(new ItemInfosCommand());
+        super.addSubCommands(new ItemDebugCommand());
         super.setUsage("/cm2 <argument>");
         super.setDescription("All command added to CreativeManager2");
     }
