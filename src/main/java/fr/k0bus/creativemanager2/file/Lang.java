@@ -3,6 +3,8 @@ package fr.k0bus.creativemanager2.file;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -33,10 +35,10 @@ public class Lang extends Configuration {
 
     protected FileConfiguration openDefaultConfigurationFile() {
         InputStream is = plugin.getResource("lang/" + this.langString + ".yml");
-        if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+        if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));
         else {
             is = plugin.getResource("lang/en_US.yml");
-            if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is));
+            if (is != null) return YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));
         }
         return null;
     }
