@@ -43,33 +43,40 @@ public class CM2Data {
     }
 
     public static void register(Entity entity, Player player) {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
         entity.getPersistentDataContainer()
                 .set(
                         namespacedKeyUuid,
                         PersistentDataType.STRING,
                         player.getUniqueId().toString());
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
         entity.getPersistentDataContainer().set(namespacedKeyDate, PersistentDataType.LONG, System.currentTimeMillis());
     }
 
     public static void register(Entity entity, UUID uuid) {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
         entity.getPersistentDataContainer().set(namespacedKeyUuid, PersistentDataType.STRING, uuid.toString());
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
         entity.getPersistentDataContainer().set(namespacedKeyDate, PersistentDataType.LONG, System.currentTimeMillis());
     }
 
     public static void unregister(Entity entity) {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
         entity.getPersistentDataContainer().remove(namespacedKeyUuid);
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
         entity.getPersistentDataContainer().remove(namespacedKeyDate);
     }
 
     @Nullable
     public static UUID findPlayer(Entity entity) {
-        NamespacedKey namespacedKeyUuid = new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
+        NamespacedKey namespacedKeyUuid =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), UUID_ID);
         String textUuid = entity.getPersistentDataContainer().get(namespacedKeyUuid, PersistentDataType.STRING);
         if (textUuid == null) return null;
         return UUID.fromString(textUuid);
@@ -77,7 +84,8 @@ public class CM2Data {
 
     public static long findDate(Entity entity) {
         if (entity == null) return 0;
-        NamespacedKey namespacedKeyDate = new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
+        NamespacedKey namespacedKeyDate =
+                new NamespacedKey(CreativeManager2.getAPI().getInstance(), DATE_ID);
         Object o = entity.getPersistentDataContainer().get(namespacedKeyDate, PersistentDataType.LONG);
         if (o == null) return -1;
         return (long) o;

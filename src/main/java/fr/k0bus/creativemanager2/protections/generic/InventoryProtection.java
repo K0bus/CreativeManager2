@@ -37,10 +37,10 @@ public class InventoryProtection extends Protection {
         if (event.getFrom().getWorld() == null) return;
         if (event.getTo().getWorld() == null) return;
 
-        String inventoryFromName = CreativeManager2.getAPI().getInventoryName(
-                event.getFrom().getWorld(), event.getPlayer().getGameMode());
-        String inventoryToName = CreativeManager2.getAPI().getInventoryName(
-                event.getTo().getWorld(), event.getPlayer().getGameMode());
+        String inventoryFromName = CreativeManager2.getAPI()
+                .getInventoryName(event.getFrom().getWorld(), event.getPlayer().getGameMode());
+        String inventoryToName = CreativeManager2.getAPI()
+                .getInventoryName(event.getTo().getWorld(), event.getPlayer().getGameMode());
         if (inventoryToName.equals(inventoryFromName)) return;
         CM2Inventory.saveInventory(event.getPlayer(), inventoryFromName);
         CM2Inventory.loadInventory(event.getPlayer(), inventoryToName);

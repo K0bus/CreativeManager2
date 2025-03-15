@@ -13,6 +13,8 @@ public class UserData extends CM2YamlDocument {
         super(
                 new File(CreativeManager2.getAPI().getInstance().getDataFolder() + "/data", p.getUniqueId() + ".yml"),
                 CreativeManager2.getAPI().getInstance().getResource(p.getUniqueId() + ".yml"),
-                GeneralSettings.builder().setSerializer(SpigotSerializer.getInstance()).build());
+                GeneralSettings.builder()
+                        .setSerializer(SpigotSerializer.getInstance())
+                        .build());
     }
 }

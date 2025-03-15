@@ -12,7 +12,9 @@ public class Settings extends CM2YamlDocument {
         super(
                 new File(CreativeManager2.getAPI().getInstance().getDataFolder(), "config.yml"),
                 CreativeManager2.getAPI().getInstance().getResource("config.yml"),
-                GeneralSettings.builder().setSerializer(SpigotSerializer.getInstance()).build());
+                GeneralSettings.builder()
+                        .setSerializer(SpigotSerializer.getInstance())
+                        .build());
     }
 
     public String getLang() {

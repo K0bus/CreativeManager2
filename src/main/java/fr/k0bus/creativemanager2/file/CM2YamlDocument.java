@@ -10,9 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CM2YamlDocument extends YamlDocument {
-    protected CM2YamlDocument(@NotNull File document, @Nullable InputStream defaults, @NotNull Settings... settings) throws IOException {
+    protected CM2YamlDocument(@NotNull File document, @Nullable InputStream defaults, @NotNull Settings... settings)
+            throws IOException {
         super(document, defaults, settings);
     }
+
     @Override
     public boolean save() {
         try {
@@ -23,6 +25,7 @@ public class CM2YamlDocument extends YamlDocument {
         }
         return false;
     }
+
     @Override
     public boolean reload() {
         try {

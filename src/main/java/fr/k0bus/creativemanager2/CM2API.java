@@ -95,7 +95,7 @@ public class CM2API {
                 try {
                     Set<Material> set = ((Tag<Material>) fld.get(null)).getValues();
                     tagMap.put(fld.getName(), set);
-                } catch (Exception e) { //NOPMD - suppressed EmptyCatchBlock - Try needed to catch Spigot data
+                } catch (Exception e) { // NOPMD - suppressed EmptyCatchBlock - Try needed to catch Spigot data
                 }
             }
             int size = tagMap.size();
