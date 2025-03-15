@@ -37,7 +37,7 @@ public class Configuration {
         File dir = new File(plugin.getDataFolder(), dirName);
         if (!dir.exists() && !dir.mkdirs()) {
             CM2Logger.exception(new Exception("Can't create directory"));
-            CreativeManager2.api.disableCM2();
+            CreativeManager2.getAPI().disableCM2();
         }
         if (dir.isDirectory()) this.file = new File(dir, filename);
         else this.file = new File(dir.getParentFile(), filename);
@@ -51,13 +51,13 @@ public class Configuration {
                 if (!this.file.getParentFile().exists()
                         && !this.file.getParentFile().mkdirs()) {
                     CM2Logger.exception(new Exception("Can't create directory"));
-                    CreativeManager2.api.disableCM2();
+                    CreativeManager2.getAPI().disableCM2();
                     return;
                 }
                 try {
                     if (!this.file.createNewFile()) {
                         CM2Logger.exception(new Exception("Can't write config file"));
-                        CreativeManager2.api.disableCM2();
+                        CreativeManager2.getAPI().disableCM2();
                         return;
                     }
                 } catch (IOException e) {
@@ -157,7 +157,7 @@ public class Configuration {
         File file = new File(plugin.getDataFolder(), cfg);
         if (!file.getParentFile().mkdirs()) {
             CM2Logger.exception(new Exception("Can't create directory"));
-            CreativeManager2.api.disableCM2();
+            CreativeManager2.getAPI().disableCM2();
             return;
         }
 
@@ -196,7 +196,7 @@ public class Configuration {
         InputStream is = plugin.getResource(cfg);
         if (is == null) {
             CM2Logger.exception(new Exception("Can't found default config file"));
-            CreativeManager2.api.disableCM2();
+            CreativeManager2.getAPI().disableCM2();
             return null;
         }
         return YamlConfiguration.loadConfiguration(new InputStreamReader(is, StandardCharsets.UTF_8));

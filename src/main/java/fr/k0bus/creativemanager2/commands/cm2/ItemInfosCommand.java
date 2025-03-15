@@ -31,7 +31,7 @@ public class ItemInfosCommand extends SubCommands {
         }
         StringBuilder tags = new StringBuilder();
         for (Map.Entry<String, Set<Material>> entry :
-                CreativeManager2.api.getTagMap().entrySet()) {
+                CreativeManager2.getAPI().getTagMap().entrySet()) {
             if (entry.getValue().contains(itemStack.getType())) {
                 if (!tags.toString().isEmpty()) tags.append(", ");
                 tags.append("§r#").append(entry.getKey()).append("§6");

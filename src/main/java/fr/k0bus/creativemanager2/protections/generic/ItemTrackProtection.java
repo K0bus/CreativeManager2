@@ -71,6 +71,6 @@ public class ItemTrackProtection extends Protection {
                 Map.of(
                         "PLAYER", player.getName(),
                         "UUID", player.getUniqueId().toString(),
-                        "ITEM", CreativeManager2.api.getMinecraftLang().get(itemStack))));
+                        "ITEM", CreativeManager2.getAPI().getMinecraftLang().get(itemStack))));
     }
 }

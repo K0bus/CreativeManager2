@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CreativeManager2 extends JavaPlugin {
 
-    public static CM2API api;
+    private static CM2API api;
 
     @Override
     public void onEnable() {
@@ -17,13 +17,17 @@ public final class CreativeManager2 extends JavaPlugin {
         api.initialize();
     }
 
-    public static void setApi(CreativeManager2 instance) {
-        CreativeManager2.api = new CM2API(instance);
+    private static void setApi(CreativeManager2 instance) {
+        api = new CM2API(instance);
     }
 
-    public void registerCommands() {
-        if (CM2Utils.isPaper()) new CM2BrigadierCommand(this).build();
+    private void registerCommands() {
+        if (CM2Utils.isPaper()) new CM2BrigadierCommand().build();
         else new CM2BukkitCommands().register(this);
+    }
+
+    public static CM2API getAPI() {
+        return api;
     }
 
     @Override

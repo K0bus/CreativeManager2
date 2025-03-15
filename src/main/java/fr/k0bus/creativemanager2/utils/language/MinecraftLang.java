@@ -52,7 +52,7 @@ public class MinecraftLang {
             Files.createDirectories(dir); // Crée le dossier s'il n'existe pas
         } catch (IOException e) {
             CM2Logger.exception(new Exception("Can't create MC Lang directory", e));
-            CreativeManager2.api.disableCM2();
+            CreativeManager2.getAPI().disableCM2();
             return;
         }
 
@@ -70,7 +70,7 @@ public class MinecraftLang {
                     bytesRead = in.read(dataBuffer, 0, 1024); // Ré-assigner bytesRead à chaque itération
                 }
             } catch (IOException | URISyntaxException e) {
-                if (CreativeManager2.api != null) {
+                if (CreativeManager2.getAPI() != null) {
                     CM2Logger.warn("§Can't download locale file {0}.json", lang);
                     CM2Logger.warn("§URL : {0}", fileUrl);
                     String absolutePath = localeFile.toAbsolutePath().toString();

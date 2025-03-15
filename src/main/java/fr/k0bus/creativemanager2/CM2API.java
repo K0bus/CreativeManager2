@@ -23,7 +23,6 @@ public class CM2API {
     private Map<String, Protection> protections;
     private final CreativeManager2 instance;
     private MenuListener menuListener;
-    public String tag;
     private final Map<String, Set<Material>> tagMap = new HashMap<>();
     private MinecraftLang minecraftLang;
 
@@ -38,7 +37,6 @@ public class CM2API {
         this.lang = new Lang(settings.getLang(), instance);
         this.lang.init();
         this.minecraftLang = new MinecraftLang(instance, settings.getLang());
-        this.tag = StringUtils.parse(settings.getTag());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         this.loadTags();
         this.loadProtections();
@@ -68,7 +66,6 @@ public class CM2API {
         this.settings.loadConfig();
         this.lang.loadConfig();
         this.minecraftLang = new MinecraftLang(getInstance(), getSettings().getLang());
-        this.tag = StringUtils.parse(settings.getTag());
         if (!protections.isEmpty()) {
             for (Protection protection : protections.values()) {
                 protection.loadSettings();
@@ -118,5 +115,9 @@ public class CM2API {
 
     public void disableCM2() {
         instance.getServer().getPluginManager().disablePlugin(instance);
+    }
+
+    public String getTag() {
+        return StringUtils.parse(settings.getTag());
     }
 }

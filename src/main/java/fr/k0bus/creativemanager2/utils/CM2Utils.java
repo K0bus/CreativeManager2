@@ -121,9 +121,9 @@ public class CM2Utils {
     }
 
     public static void sendMessage(CommandSender messageTo, String text) {
-        if (!CreativeManager2.api.getLang().getString(text).isEmpty())
+        if (!CreativeManager2.getAPI().getLang().getString(text).isEmpty())
             messageTo.sendMessage(
-                    parse(StringUtils.parse(CreativeManager2.api.getLang().getString(text))));
+                    parse(StringUtils.parse(CreativeManager2.getAPI().getLang().getString(text))));
     }
 
     public static void sendRawMessage(CommandSender messageTo, String text) {
@@ -131,7 +131,7 @@ public class CM2Utils {
     }
 
     public static String parse(String string) {
-        return string.replace("{TAG}", CreativeManager2.api.tag);
+        return string.replace("{TAG}", CreativeManager2.getAPI().getTag());
     }
 
     public static boolean inList(String search, List<String> list) {
@@ -146,7 +146,7 @@ public class CM2Utils {
             if (s.equals(search)) return true;
             if (s.startsWith("#")) {
                 Set<Material> set =
-                        CreativeManager2.api.getTagMap().get(s.substring(1).toUpperCase(Locale.getDefault()));
+                        CreativeManager2.getAPI().getTagMap().get(s.substring(1).toUpperCase(Locale.getDefault()));
                 if (set != null) {
                     if (set.contains(Material.valueOf(search.toUpperCase(Locale.getDefault())))) return true;
                 } else {

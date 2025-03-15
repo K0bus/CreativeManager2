@@ -31,11 +31,11 @@ public abstract class Protection implements Listener {
     }
 
     public void loadSettings() {
-        if (!CreativeManager2.api.getSettings().getBoolean("protections." + getCustomId() + ".enabled")) {
+        if (!CreativeManager2.getAPI().getSettings().getBoolean("protections." + getCustomId() + ".enabled")) {
             setEnabled(false);
         }
-        if (CreativeManager2.api.getSettings().contains("protections." + getCustomId())) {
-            config = CreativeManager2.api.getSettings().getConfigurationSection("protections." + getCustomId());
+        if (CreativeManager2.getAPI().getSettings().contains("protections." + getCustomId())) {
+            config = CreativeManager2.getAPI().getSettings().getConfigurationSection("protections." + getCustomId());
         }
     }
 

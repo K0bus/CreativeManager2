@@ -16,18 +16,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 @SuppressWarnings("deprecation")
 public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
-        super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.api.getMenuListener());
+        super(3, "§9§lCreativeManager §7>> §r§4Settings", plugin, CreativeManager2.getAPI().getMenuListener());
         super.setSlots(Serializer.readIntArray(Collections.singletonList("0-17")));
     }
 
     @Override
     public SettingGui init() {
         clearContent();
-        for (Protection protection : CreativeManager2.api.getProtections().values()) {
+        for (Protection protection : CreativeManager2.getAPI().getProtections().values()) {
             MenuItems menuItems = new MenuItems(protection.getIcon(), 1, inventoryClickEvent -> {
                 protection.setEnabled(protection.isDisabled());
-                CreativeManager2.api.getSettings().set("protections." + protection.getCustomId() + ".enabled", true);
-                CreativeManager2.api.getSettings().save();
+                CreativeManager2.getAPI().getSettings().set("protections." + protection.getCustomId() + ".enabled", true);
+                CreativeManager2.getAPI().getSettings().save();
                 init();
             });
             if (protection.isDisabled()) {
