@@ -41,6 +41,7 @@ public class CM2API {
             CM2Logger.exception(e);
             disableCM2();
         }
+        CM2Logger.info("&7> &b&lLoading Minecraft language file");
         this.minecraftLang = new MinecraftLang(instance, settings.getLang());
         instance.getServer().getPluginManager().registerEvents(menuListener, instance);
         this.loadTags();

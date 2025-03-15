@@ -12,9 +12,15 @@ public final class CreativeManager2 extends JavaPlugin {
     @Override
     public void onEnable() {
         setApi(this);
+        long timestamp = System.currentTimeMillis();
+        String separator = "▬".repeat(40);
+        CM2Logger.info("&8{0}", separator);
         CM2Logger.info("&bStart initialization...");
         registerCommands();
         api.initialize();
+        int elapsedTime = (int) (System.currentTimeMillis() - timestamp);
+        CM2Logger.info("&bInitialization ended in {0}ms", elapsedTime);
+        CM2Logger.info("&8{0}", separator);
     }
 
     private static void setApi(CreativeManager2 instance) {
