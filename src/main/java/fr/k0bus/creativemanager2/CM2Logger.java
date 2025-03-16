@@ -10,7 +10,7 @@ import org.bukkit.Bukkit;
 public class CM2Logger {
     public static void info(String string, Object... args) {
         if (getLogger().isLoggable(Level.INFO))
-            Bukkit.getConsoleSender().sendMessage(StringUtils.parseComponent(getTag() + formatMessage(string, args)));
+            Bukkit.getConsoleSender().sendMessage(StringUtils.parseString(getTag() + formatMessage(string, args)));
     }
 
     public static void warn(String string, Object... args) {

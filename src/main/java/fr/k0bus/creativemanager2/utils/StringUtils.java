@@ -20,9 +20,6 @@ public class StringUtils {
         TextComponent builder = LegacyComponentSerializer.legacyAmpersand().deserialize(s);
         return LegacyComponentSerializer.legacySection().serialize(builder);
     }
-    public static TextComponent parseComponent(String s) {
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
-    }
 
     public static String proper(String str) {
         String modifiedStr = str.replace("_", " ");
