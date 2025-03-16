@@ -3,6 +3,9 @@ package fr.k0bus.creativemanager2.protections.generic;
 import de.tr7zw.nbtapi.NBT;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.ItemDataType;
+import fr.k0bus.creativemanager2.type.ListType;
+import fr.k0bus.creativemanager2.utils.ListUtils;
+import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -18,7 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class DataRemoverProtection extends Protection {
     public DataRemoverProtection() {
-        super(Material.NAME_TAG);
+        super(Material.NAME_TAG, "data-remover");
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -27,11 +30,11 @@ public class DataRemoverProtection extends Protection {
         if (event.getWhoClicked() instanceof Player player) {
             if (hasPermission(player)) return;
             if (!Protection.isCreativePlayer(player)) return;
-            startCheck(player);
+            asyncCheck(player);
         }
     }
 
-    private void startCheck(Player player) {
+    private void asyncCheck(Player player) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -44,31 +47,65 @@ public class DataRemoverProtection extends Protection {
                     if (ItemDataType.NAME_SPACED_KEY.isEnabled(DataRemoverProtection.this)) checkNMS(is);
                 }
             }
-        }.runTaskTimer(getPlugin(), 0L, 0L);
+        }.runTaskLaterAsynchronously(getPlugin(), 1L);
     }
 
     private void checkEnchant(ItemStack itemStack) {
-        for (Enchantment enchantment : itemStack.getEnchantments().keySet()) {
-            itemStack.removeEnchantment(enchantment);
+        for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry :
+                itemStack.getEnchantments().entrySet()) {
+            if (ListUtils.inList(
+                    enchantmentIntegerEntry.getKey().getName(),
+                    getConfig().getStringList("type.ENCHANT.remover.list"),
+                    ListType.fromString(getConfig().getString("type.ENCHANT.remover.list-type")))) {
+                itemStack.removeEnchantment(enchantmentIntegerEntry.getKey());
+                continue;
+            }
+            int maxLevel = 0;
+            if (!getConfig().getBoolean("type.ENCHANT.allow-unsafe"))
+                maxLevel = enchantmentIntegerEntry.getKey().getMaxLevel();
+            else if (getConfig()
+                    .contains("type.ENCHANT.custom-max." + enchantmentIntegerEntry.getKey().getName()))
+                maxLevel = getConfig()
+                        .getInt("type.ENCHANT.custom-max." + enchantmentIntegerEntry.getKey().getName());
+
+            if (enchantmentIntegerEntry.getValue() > maxLevel)
+                itemStack.addUnsafeEnchantment(enchantmentIntegerEntry.getKey(), maxLevel);
         }
     }
 
     private void checkItemFlag(ItemStack itemStack) {
         for (ItemFlag itemFlag : itemStack.getItemFlags()) {
-            itemStack.removeItemFlags(itemFlag);
+            if (ListUtils.inList(
+                    itemFlag.name(),
+                    getConfig().getStringList("type.ITEM_FLAG.remover.list"),
+                    ListType.fromString(getConfig().getString("type.ITEM_FLAG.remover.list-type")))) {
+                itemStack.removeItemFlags(itemFlag);
+            }
         }
     }
 
     private void checkNBT(ItemStack itemStack) {
         NBT.modify(itemStack, nbt -> {
-            nbt.getKeys().forEach(nbt::removeKey);
+            nbt.getKeys().forEach(nbtKey -> {
+                if (ListUtils.inList(
+                        nbtKey,
+                        getConfig().getStringList("type.NBT.remover.list"),
+                        ListType.fromString(getConfig().getString("type.NBT.remover.list-type")))) {
+                    nbt.removeKey(nbtKey);
+                }
+            });
         });
     }
 
     private void checkPotionEffect(ItemStack itemStack) {
         if (itemStack.getItemMeta() instanceof PotionMeta potionMeta) {
             for (PotionEffect potionEffect : potionMeta.getCustomEffects()) {
-                potionMeta.removeCustomEffect(potionEffect.getType());
+                if (ListUtils.inList(
+                        potionEffect.getType().getName(),
+                        getConfig().getStringList("type.POTION_EFFECT.remover.list"),
+                        ListType.fromString(getConfig().getString("type.POTION_EFFECT.remover.list-type")))) {
+                    potionMeta.removeCustomEffect(potionEffect.getType());
+                }
             }
             itemStack.setItemMeta(potionMeta);
         }
@@ -77,7 +114,12 @@ public class DataRemoverProtection extends Protection {
     private void checkNMS(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.getPersistentDataContainer().getKeys().forEach(nms -> {
-            itemMeta.getPersistentDataContainer().remove(nms);
+            if (ListUtils.inList(
+                    nms.getKey(),
+                    getConfig().getStringList("type.NAME_SPACED_KEY.remover.list"),
+                    ListType.fromString(getConfig().getString("type.NAME_SPACED_KEY.remover.list-type")))) {
+                itemMeta.getPersistentDataContainer().remove(nms);
+            }
         });
         itemStack.setItemMeta(itemMeta);
     }
