@@ -27,41 +27,39 @@ public class ItemTrackProtection extends Protection {
         if (event.getWhoClicked() instanceof Player player) {
             if (hasPermission(player)) return;
             if (!Protection.isCreativePlayer(player)) return;
-            reloadInventoryLore(player);
+            asyncCheck(player, event);
         }
     }
 
-    private void reloadInventoryLore(Player player) {
+    private void asyncCheck(Player player, InventoryCreativeEvent event) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (ItemStack is : player.getInventory().getContents()) {
-                    if (is == null) continue;
-                    addLore(is, player);
-                }
+                addLore(player.getInventory().getItem(event.getSlot()), player);
             }
-        }.runTaskTimer(getPlugin(), 0L, 0L);
+        }.runTaskLaterAsynchronously(CreativeManager2.getAPI().getInstance(), 2L);
     }
 
-    private void addLore(ItemStack item, HumanEntity p) {
-        if (item == null || p == null) return;
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) return;
+    private ItemStack addLore(ItemStack itemStack, HumanEntity p) {
+        if (itemStack == null || p == null) return itemStack;
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) return itemStack;
 
         List<String> lore = getConfig().getStringList("lore");
         List<String> tempLore = new ArrayList<>();
         String displayname = StringUtils.parse(getConfig().getString("displayname"));
 
         if (displayname != null && !displayname.isEmpty()) {
-            meta.setDisplayName(getFinalString(displayname, (Player) p, item));
+            meta.setDisplayName(getFinalString(displayname, (Player) p, itemStack));
         }
         if (!lore.isEmpty()) {
             for (String line : lore) {
-                tempLore.add(getFinalString(line, (Player) p, item));
+                tempLore.add(getFinalString(line, (Player) p, itemStack));
             }
             meta.setLore(tempLore);
         }
-        item.setItemMeta(meta);
+        itemStack.setItemMeta(meta);
+        return itemStack;
     }
 
     private String getFinalString(String string, Player player, ItemStack itemStack) {
