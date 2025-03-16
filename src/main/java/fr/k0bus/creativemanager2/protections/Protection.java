@@ -22,6 +22,7 @@ public abstract class Protection implements Listener {
     protected Section config;
     private final CreativeManager2 plugin = CreativeManager2.getAPI().getInstance();
     private final String customId;
+    private final List<String> dependencies = new ArrayList<>();
 
     private final Material icon;
 
@@ -73,7 +74,16 @@ public abstract class Protection implements Listener {
     }
 
     public boolean isCompatible() {
+        for (String str : dependencies)
+            if (!getPlugin().getServer().getPluginManager().isPluginEnabled(str)) return false;
         return true;
+    }
+
+    public List<String> missingDependencies() {
+        List<String> missingDependencies = new ArrayList<>();
+        for (String str : dependencies)
+            if (!getPlugin().getServer().getPluginManager().isPluginEnabled(str)) missingDependencies.add(str);
+        return missingDependencies;
     }
 
     public void sendPermissionMessage(CommandSender toMessage) {
@@ -95,6 +105,14 @@ public abstract class Protection implements Listener {
     public String getCustomId() {
         if (customId == null) return id;
         else return customId;
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
+    }
+
+    protected void addDependencies(String... args) {
+        dependencies.addAll(Arrays.asList(args));
     }
 
     protected Map.Entry<String, Protection> getMapEntry() {

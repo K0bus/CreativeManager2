@@ -10,11 +10,7 @@ import org.bukkit.event.EventPriority;
 public class ChestShopProtection extends Protection {
     public ChestShopProtection() {
         super(Material.GOLD_NUGGET);
-    }
-
-    @Override
-    public boolean isCompatible() {
-        return getPlugin().getServer().getPluginManager().isPluginEnabled("ChestShop");
+        addDependencies("ChestShop");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

@@ -14,11 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class SlimefunProtection extends Protection {
     public SlimefunProtection() {
         super(Material.SLIME_BLOCK);
-    }
-
-    @Override
-    public boolean isCompatible() {
-        return getPlugin().getServer().getPluginManager().isPluginEnabled("Slimefun");
+        addDependencies("Slimefun");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

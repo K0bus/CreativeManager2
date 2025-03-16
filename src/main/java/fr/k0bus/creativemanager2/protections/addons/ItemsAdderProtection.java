@@ -15,11 +15,7 @@ import org.bukkit.event.EventPriority;
 public class ItemsAdderProtection extends Protection {
     public ItemsAdderProtection() {
         super(Material.WRITABLE_BOOK);
-    }
-
-    @Override
-    public boolean isCompatible() {
-        return getPlugin().getServer().getPluginManager().isPluginEnabled("ItemsAdder");
+        addDependencies("ItemsAdder");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
