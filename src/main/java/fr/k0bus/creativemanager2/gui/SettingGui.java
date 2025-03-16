@@ -40,21 +40,21 @@ public class SettingGui extends PagedMenu {
             if (protection.isDisabled()) {
                 List<String> missingDependencies = protection.missingDependencies();
                 if (!missingDependencies.isEmpty()) {
-                    menuItems.setDisplayname(StringUtils.translateColor(
+                    menuItems.setDisplayname(StringUtils.parseString(
                             "§7【§6§l\uD83D\uDD25§r§7】 §r§7" + StringUtils.proper(protection.getId())));
                     baseLore.clear();
-                    baseLore.add(StringUtils.translateColor("&l&cMissing plugins : "));
+                    baseLore.add(StringUtils.parseString("&l&cMissing plugins : "));
                     for (String str : missingDependencies) {
-                        baseLore.add(StringUtils.translateColor(" &7- &f" + str));
+                        baseLore.add(StringUtils.parseString(" &7- &f" + str));
                     }
                     menuItems.setNewLore(baseLore);
                 } else {
                     menuItems.setDisplayname(
-                            StringUtils.translateColor("§7【§c§l✘§r§7】 §r§7" + StringUtils.proper(protection.getId())));
+                            StringUtils.parseString("§7【§c§l✘§r§7】 §r§7" + StringUtils.proper(protection.getId())));
                 }
             } else {
                 menuItems.setDisplayname(
-                        StringUtils.translateColor("§7【§a§l✔§r§7】 §r§f" + StringUtils.proper(protection.getId())));
+                        StringUtils.parseString("§7【§a§l✔§r§7】 §r§f" + StringUtils.proper(protection.getId())));
             }
             if (Utils.isPaper())
                 for (ItemFlag flag : ItemFlag.values()) {
@@ -74,7 +74,7 @@ public class SettingGui extends PagedMenu {
                 previous();
                 init();
             });
-            pagePrevious.setDisplayname(StringUtils.translateColor("&6Previous page"));
+            pagePrevious.setDisplayname(StringUtils.parseString("&6Previous page"));
             setItem(20, pagePrevious);
         }
         if (hasNextPage()) {
@@ -82,7 +82,7 @@ public class SettingGui extends PagedMenu {
                 next();
                 init();
             });
-            pageNext.setDisplayname(StringUtils.translateColor("&6Next page"));
+            pageNext.setDisplayname(StringUtils.parseString("&6Next page"));
             setItem(24, pageNext);
         }
 
@@ -91,7 +91,7 @@ public class SettingGui extends PagedMenu {
                 entity.closeInventory();
             }
         });
-        closeItem.setDisplayname(StringUtils.translateColor("&cClose menu"));
+        closeItem.setDisplayname(StringUtils.parseString("&cClose menu"));
         setItem(getInventory().getSize() - 1, closeItem);
         drawContent();
         return this;

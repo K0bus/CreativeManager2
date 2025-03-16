@@ -7,33 +7,21 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
-@SuppressWarnings("deprecation")
 public class StringUtils {
 
     public static String parse(String s) {
-        return Utils.placeholderApiParse(translateColor(s));
+        return Utils.placeholderApiParse(parseString(s));
     }
 
-    public static String translateColor(String s) {
-        Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-        String result = s; // Utilisation d'une variable locale
-
-        for (Matcher matcher = pattern.matcher(result); matcher.find(); matcher = pattern.matcher(result)) {
-            String hexCode = result.substring(matcher.start(), matcher.end());
-            String replaceSharp = hexCode.replace('#', 'x');
-            char[] ch = replaceSharp.toCharArray();
-            StringBuilder builder = new StringBuilder();
-
-            for (char c : ch) {
-                builder.append('&').append(c);
-            }
-
-            result = result.replace(hexCode, builder.toString());
-        }
-
-        return ChatColor.translateAlternateColorCodes('&', result);
+    public static String parseString(String s) {
+        TextComponent builder = LegacyComponentSerializer.legacyAmpersand().deserialize(s);
+        return LegacyComponentSerializer.legacySection().serialize(builder);
+    }
+    public static TextComponent parseComponent(String s) {
+        return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
     }
 
     public static String proper(String str) {
