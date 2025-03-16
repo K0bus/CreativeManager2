@@ -107,10 +107,6 @@ public abstract class Protection implements Listener {
         else return customId;
     }
 
-    public List<String> getDependencies() {
-        return dependencies;
-    }
-
     protected void addDependencies(String... args) {
         dependencies.addAll(Arrays.asList(args));
     }
