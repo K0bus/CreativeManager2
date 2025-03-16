@@ -121,7 +121,11 @@ public abstract class Protection implements Listener {
 
     protected Protection init() {
         if (isCompatible()) {
-            CreativeManager2.getAPI().getInstance().getServer().getPluginManager().registerEvents(this, CreativeManager2.getAPI().getInstance());
+            CreativeManager2.getAPI()
+                    .getInstance()
+                    .getServer()
+                    .getPluginManager()
+                    .registerEvents(this, CreativeManager2.getAPI().getInstance());
             loadSettings();
         }
         return this;

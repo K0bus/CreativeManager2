@@ -64,9 +64,11 @@ public class DataRemoverProtection extends Protection {
             if (!getConfig().getBoolean("type.ENCHANT.allow-unsafe"))
                 maxLevel = enchantmentIntegerEntry.getKey().getMaxLevel();
             else if (getConfig()
-                    .contains("type.ENCHANT.custom-max." + enchantmentIntegerEntry.getKey().getName()))
+                    .contains("type.ENCHANT.custom-max."
+                            + enchantmentIntegerEntry.getKey().getName()))
                 maxLevel = getConfig()
-                        .getInt("type.ENCHANT.custom-max." + enchantmentIntegerEntry.getKey().getName());
+                        .getInt("type.ENCHANT.custom-max."
+                                + enchantmentIntegerEntry.getKey().getName());
 
             if (enchantmentIntegerEntry.getValue() > maxLevel)
                 itemStack.addUnsafeEnchantment(enchantmentIntegerEntry.getKey(), maxLevel);
