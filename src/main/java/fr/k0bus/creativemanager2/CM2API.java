@@ -50,6 +50,8 @@ public class CM2API {
 
     public void loadProtections() {
         this.protections = Protection.loadProtections();
+        int counter = this.protections.size();
+        CM2Logger.info("&7> &6&lProtections loaded &r&7[{0}]", counter);
     }
 
     public CreativeManager2 getInstance() {
@@ -101,7 +103,7 @@ public class CM2API {
                 }
             }
             int size = tagMap.size();
-            CM2Logger.info("&7> &6&lTag loaded from Spigot ! &r&7[{0}]", size);
+            CM2Logger.info("&7> &6&lTag loaded from Spigot &r&7[{0}]", size);
         } catch (Exception e) {
             CM2Logger.info("&7> &c&lThis minecraft version could not use the TAG system.");
         }
