@@ -81,7 +81,9 @@ public class DataRemoverProtection extends Protection {
                     itemFlag.name(),
                     getConfig().getStringList("type.ITEM_FLAG.remover.list"),
                     ListType.fromString(getConfig().getString("type.ITEM_FLAG.remover.list-type")))) {
-                itemStack.removeItemFlags(itemFlag);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.removeItemFlags(itemFlag);
+                itemStack.setItemMeta(itemMeta);
             }
         }
     }

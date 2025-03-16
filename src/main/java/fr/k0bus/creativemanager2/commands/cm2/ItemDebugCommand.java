@@ -54,7 +54,9 @@ public class ItemDebugCommand extends SubCommands {
     }
 
     private void addItemFlag(ItemStack itemStack) {
-        for (ItemFlag itemFlag : ItemFlag.values()) itemStack.addItemFlags(itemFlag);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.addItemFlags(ItemFlag.values());
+        itemStack.setItemMeta(itemMeta);
     }
 
     private void addNBT(ItemStack itemStack) {
