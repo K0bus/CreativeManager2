@@ -101,29 +101,36 @@ public abstract class Protection implements Listener {
         return new AbstractMap.SimpleEntry<>(getCustomId(), this);
     }
 
+    protected Protection init() {
+        if (isCompatible()) {
+            CreativeManager2.getAPI().getInstance().getServer().getPluginManager().registerEvents(this, CreativeManager2.getAPI().getInstance());
+            loadSettings();
+        }
+        return this;
+    }
+
     public static Map<String, Protection> loadProtections() {
         return Map.ofEntries(
-                new AttackMonsterProtection().getMapEntry(),
-                new AttackPlayerProtection().getMapEntry(),
-                new BuildProtection().getMapEntry(),
-                new ClaimProtection().getMapEntry(),
-                new ContainerProtection().getMapEntry(),
-                new CustomProtection().getMapEntry(),
-                new DeathProtection().getMapEntry(),
-                new DropProtection().getMapEntry(),
-                new EffectProtection().getMapEntry(),
-                new EnchantProtection().getMapEntry(),
-                new GuiProtection().getMapEntry(),
-                new InventoryProtection().getMapEntry(),
-                new ItemTrackProtection().getMapEntry(),
-                new LogBlockProtection().getMapEntry(),
-                new LogEntityProtection().getMapEntry(),
-                new PickupProtection().getMapEntry(),
-                new ThrowProtection().getMapEntry(),
-                new DataRemoverProtection().getMapEntry(),
-                new ChestShopProtection().getMapEntry(),
-                new ItemsAdderProtection().getMapEntry(),
-                new SlimefunProtection().getMapEntry());
+                new AttackMonsterProtection().init().getMapEntry(),
+                new AttackPlayerProtection().init().getMapEntry(),
+                new BuildProtection().init().getMapEntry(),
+                new ClaimProtection().init().getMapEntry(),
+                new ContainerProtection().init().getMapEntry(),
+                new CustomProtection().init().getMapEntry(),
+                new DeathProtection().init().getMapEntry(),
+                new DropProtection().init().getMapEntry(),
+                new EffectProtection().init().getMapEntry(),
+                new GuiProtection().init().getMapEntry(),
+                new InventoryProtection().init().getMapEntry(),
+                new ItemTrackProtection().init().getMapEntry(),
+                new LogBlockProtection().init().getMapEntry(),
+                new LogEntityProtection().init().getMapEntry(),
+                new PickupProtection().init().getMapEntry(),
+                new ThrowProtection().init().getMapEntry(),
+                new DataRemoverProtection().init().getMapEntry(),
+                new ChestShopProtection().init().getMapEntry(),
+                new ItemsAdderProtection().init().getMapEntry(),
+                new SlimefunProtection().init().getMapEntry());
     }
 
     public static boolean isCreativePlayer(LivingEntity entity) {
