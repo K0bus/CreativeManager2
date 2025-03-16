@@ -7,7 +7,7 @@ import fr.k0bus.creativemanager2.utils.StringUtils;
 import fr.k0bus.creativemanager2.utils.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
-import net.md_5.bungee.api.ChatColor;
+import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemFlag;
@@ -38,8 +38,20 @@ public class SettingGui extends PagedMenu {
                 init();
             });
             if (protection.isDisabled()) {
-                menuItems.setDisplayname(
-                        StringUtils.translateColor("§7【§c§l✘§r§7】 §r§7" + StringUtils.proper(protection.getId())));
+                List<String> missingDependencies = protection.missingDependencies();
+                if (!missingDependencies.isEmpty()) {
+                    menuItems.setDisplayname(StringUtils.translateColor(
+                            "§7【§6§l\uD83D\uDD25§r§7】 §r§7" + StringUtils.proper(protection.getId())));
+                    baseLore.clear();
+                    baseLore.add(StringUtils.translateColor("&l&cMissing plugins : "));
+                    for (String str : missingDependencies) {
+                        baseLore.add(StringUtils.translateColor(" &7- &f" + str));
+                    }
+                    menuItems.setLore(baseLore);
+                } else {
+                    menuItems.setDisplayname(
+                            StringUtils.translateColor("§7【§c§l✘§r§7】 §r§7" + StringUtils.proper(protection.getId())));
+                }
             } else {
                 menuItems.setDisplayname(
                         StringUtils.translateColor("§7【§a§l✔§r§7】 §r§f" + StringUtils.proper(protection.getId())));
