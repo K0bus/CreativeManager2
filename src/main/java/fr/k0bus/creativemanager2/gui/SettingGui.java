@@ -74,7 +74,7 @@ public class SettingGui extends PagedMenu {
                 previous();
                 init();
             });
-            pagePrevious.setDisplayname(ChatColor.GOLD + "Previous page");
+            pagePrevious.setDisplayname(StringUtils.translateColor("&6Previous page"));
             setItem(20, pagePrevious);
         }
         if (hasNextPage()) {
@@ -82,7 +82,7 @@ public class SettingGui extends PagedMenu {
                 next();
                 init();
             });
-            pageNext.setDisplayname(ChatColor.GOLD + "Next page");
+            pageNext.setDisplayname(StringUtils.translateColor("&6Next page"));
             setItem(24, pageNext);
         }
 
@@ -91,7 +91,7 @@ public class SettingGui extends PagedMenu {
                 entity.closeInventory();
             }
         });
-        closeItem.setDisplayname(ChatColor.RED + "Close menu");
+        closeItem.setDisplayname(StringUtils.translateColor("&cClose menu"));
         setItem(getInventory().getSize() - 1, closeItem);
         drawContent();
         return this;
