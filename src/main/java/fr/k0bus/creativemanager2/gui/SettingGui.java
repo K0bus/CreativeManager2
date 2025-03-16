@@ -47,7 +47,7 @@ public class SettingGui extends PagedMenu {
                     for (String str : missingDependencies) {
                         baseLore.add(StringUtils.translateColor(" &7- &f" + str));
                     }
-                    menuItems.setLore(baseLore);
+                    menuItems.setNewLore(baseLore);
                 } else {
                     menuItems.setDisplayname(
                             StringUtils.translateColor("§7【§c§l✘§r§7】 §r§7" + StringUtils.proper(protection.getId())));

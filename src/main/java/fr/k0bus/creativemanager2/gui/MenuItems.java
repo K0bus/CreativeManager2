@@ -62,12 +62,7 @@ public class MenuItems extends ItemStack {
         this.consumer = consumer;
     }
 
-    public void setSound(Sound sound) {
-        this.sound = sound;
-    }
-
-    @Override
-    public void setLore(List<String> lore) {
+    public void setNewLore(List<String> lore) {
         ItemMeta itemMeta = getItemMeta();
         if (itemMeta != null) {
             itemMeta.setLore(lore);
