@@ -75,10 +75,10 @@ public class DataRemoverProtection extends Protection {
     }
 
     private void checkItemFlag(ItemStack itemStack) {
-        for (ItemFlag itemFlag : itemStack.getItemFlags()) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        for (ItemFlag itemFlag : itemMeta.getItemFlags()) {
             if (ListUtils.inList(
                     itemFlag.name(), ItemDataType.ITEM_FLAG.getList(this), ItemDataType.ITEM_FLAG.getListType(this))) {
-                ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.removeItemFlags(itemFlag);
                 itemStack.setItemMeta(itemMeta);
             }
