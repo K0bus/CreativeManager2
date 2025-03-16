@@ -1,0 +1,6 @@
+<FindBugsFilter>
+    <Match>
+        <Bug pattern="CD_CIRCULAR_DEPENDENCY"/>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+    </Match>
+</FindBugsFilter>

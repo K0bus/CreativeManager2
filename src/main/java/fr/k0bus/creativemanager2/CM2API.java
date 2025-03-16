@@ -3,9 +3,10 @@ package fr.k0bus.creativemanager2;
 import fr.k0bus.creativemanager2.file.Lang;
 import fr.k0bus.creativemanager2.file.Settings;
 import fr.k0bus.creativemanager2.file.language.MinecraftLang;
-import fr.k0bus.creativemanager2.gui.MenuListener;
+import fr.k0bus.creativemanager2.gui.Gui;
+import fr.k0bus.creativemanager2.gui.GuiListener;
 import fr.k0bus.creativemanager2.protections.Protection;
-import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class CM2API {
     private Lang lang;
     private Map<String, Protection> protections;
     private final CreativeManager2 instance;
-    private MenuListener menuListener;
+    private GuiListener guiListener;
     private final Map<String, Set<Material>> tagMap = new HashMap<>();
     private MinecraftLang minecraftLang;
 
@@ -31,7 +32,7 @@ public class CM2API {
     }
 
     public void initialize() {
-        this.menuListener = new MenuListener();
+        this.guiListener = new GuiListener();
         try {
             this.settings = new Settings();
             CM2Logger.info("&7> &6&lConfiguration loaded");
@@ -43,7 +44,7 @@ public class CM2API {
         }
         CM2Logger.info("&7> &b&lLoading Minecraft language file");
         this.minecraftLang = new MinecraftLang(instance, settings.getLang());
-        instance.getServer().getPluginManager().registerEvents(menuListener, instance);
+        instance.getServer().getPluginManager().registerEvents(guiListener, instance);
         this.loadTags();
         this.loadProtections();
     }
@@ -59,7 +60,7 @@ public class CM2API {
     }
 
     public Map<String, Protection> getProtections() {
-        return protections;
+        return new HashMap<>(protections);
     }
 
     public Lang getLang() {
@@ -91,7 +92,7 @@ public class CM2API {
                 "multi-inventories._GLOBAL." + gameMode.name().toLowerCase(Locale.getDefault()));
     }
 
-    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DE_MIGHT_IGNORE")
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings({"DE_MIGHT_IGNORE", "REC_CATCH_EXCEPTION"})
     private void loadTags() {
         try {
             Field[] fieldlist = Tag.class.getDeclaredFields();
@@ -109,12 +110,16 @@ public class CM2API {
         }
     }
 
-    public Map<String, Set<Material>> getTagMap() {
-        return this.tagMap;
+    public void registerGui(Gui gui) {
+        guiListener.add(gui);
     }
 
-    public MenuListener getMenuListener() {
-        return menuListener;
+    public void unregisterGui(Gui gui) {
+        guiListener.remove(gui);
+    }
+
+    public Map<String, Set<Material>> getTagMap() {
+        return new HashMap<>(this.tagMap);
     }
 
     public MinecraftLang getMinecraftLang() {
@@ -126,6 +131,6 @@ public class CM2API {
     }
 
     public String getTag() {
-        return StringUtils.parse(settings.getTag());
+        return TextUtils.parse(settings.getTag());
     }
 }

@@ -7,18 +7,19 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PagedMenu extends Menu {
+public class PagedGui extends Gui {
 
     int page;
     int[] slots;
-    List<MenuItems> content = new ArrayList<>();
+    List<GuiItems> content = new ArrayList<>();
 
-    public PagedMenu(int size, String name, JavaPlugin plugin, MenuListener listener) {
-        super(size, name, plugin, listener);
+    public PagedGui(int size, String name, JavaPlugin plugin) {
+        super(size, name, plugin);
     }
 
     @Override
-    public PagedMenu init() {
+    public PagedGui init() {
+        super.init();
         getInventory().clear();
         return this;
     }
@@ -58,8 +59,8 @@ public class PagedMenu extends Menu {
         this.slots = slots.clone();
     }
 
-    public void add(MenuItems menuItems) {
-        this.content.add(menuItems);
+    public void add(GuiItems guiItems) {
+        this.content.add(guiItems);
     }
 
     public void clearInventoryContent() {

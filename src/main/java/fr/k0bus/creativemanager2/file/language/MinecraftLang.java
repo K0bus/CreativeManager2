@@ -23,7 +23,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MinecraftLang {
+public final class MinecraftLang {
 
     private final String mcVersion;
     private final String lang;

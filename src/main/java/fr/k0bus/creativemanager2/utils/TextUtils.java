@@ -7,18 +7,31 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 
-public class StringUtils {
+public class TextUtils {
 
     public static String parse(String s) {
-        return Utils.placeholderApiParse(parseString(s));
+        return placeholderApiParse(parseString(s));
     }
 
     public static String parseString(String s) {
         TextComponent builder = LegacyComponentSerializer.legacyAmpersand().deserialize(s);
         return LegacyComponentSerializer.legacySection().serialize(builder);
+    }
+
+    public static String placeholderApiParse(String str, OfflinePlayer player) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI"))
+            return PlaceholderAPI.setPlaceholders(player, str);
+        return str;
+    }
+
+    public static String placeholderApiParse(String str) {
+        return placeholderApiParse(str, null);
     }
 
     public static String proper(String str) {

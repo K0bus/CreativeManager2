@@ -4,7 +4,7 @@ import fr.k0bus.creativemanager2.CM2Data;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.SubCommands;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
-import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -34,7 +34,7 @@ public class CheckBlockCommand extends SubCommands {
         }
 
         String locationString = CM2Data.properLocation(block.getLocation());
-        String blockString = StringUtils.proper(block.getType().name());
+        String blockString = TextUtils.proper(block.getType().name());
         String playerString;
         String dateString;
 

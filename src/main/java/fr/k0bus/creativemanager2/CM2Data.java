@@ -1,6 +1,6 @@
 package fr.k0bus.creativemanager2;
 
-import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import org.bukkit.Location;
@@ -150,7 +150,7 @@ public class CM2Data {
     public static String properLocation(Location location) {
         if (location == null) return null;
         if (location.getWorld() == null) return null;
-        return StringUtils.parse(location.getWorld().getName()
+        return TextUtils.parse(location.getWorld().getName()
                 + " ["
                 + location.getBlockX()
                 + " / "

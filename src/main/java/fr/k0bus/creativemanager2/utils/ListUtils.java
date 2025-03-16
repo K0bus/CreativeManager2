@@ -15,7 +15,7 @@ public class ListUtils {
     }
 
     public static boolean inList(String search, List<String> list, ListType listType) {
-        List<String> lowerList = StringUtils.listToLowerCase(list);
+        List<String> lowerList = TextUtils.listToLowerCase(list);
         for (String s : lowerList) {
             if (SEMILICON.equals(s)) return !listType.isBlacklistMode();
             if (s.isEmpty()) continue;

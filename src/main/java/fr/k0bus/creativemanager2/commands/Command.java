@@ -1,6 +1,6 @@
 package fr.k0bus.creativemanager2.commands;
 
-import fr.k0bus.creativemanager2.utils.Utils;
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import java.util.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,7 +45,7 @@ public class Command implements CommandExecutor, TabCompleter {
     }
 
     public Map<String, SubCommands> getSubCommands() {
-        return subCommands;
+        return new HashMap<>(subCommands);
     }
 
     public String getCommandString() {
@@ -148,7 +148,7 @@ public class Command implements CommandExecutor, TabCompleter {
 
     public void register(JavaPlugin plugin) {
 
-        if (Utils.isPaper()) {
+        if (SpigotUtils.isPaper()) {
             PluginCommand cmd = plugin.getCommand(getCommandString());
             if (cmd != null) {
                 cmd.setExecutor(this);

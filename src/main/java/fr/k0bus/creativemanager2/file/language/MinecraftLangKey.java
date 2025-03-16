@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 public class MinecraftLangKey {
-    public static @NotNull String getTranslationKey(ItemStack itemStack) {
+    public static String getTranslationKey(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         Material m = itemStack.getType();
 
@@ -33,29 +33,29 @@ public class MinecraftLangKey {
         return getTranslationKey(m);
     }
 
-    public static @NotNull String getTranslationKey(Material m) {
+    public static String getTranslationKey(@NotNull Material m) {
         String type = "item";
         if (m.isBlock()) type = "block";
         return type + ".minecraft." + m.name().toLowerCase(Locale.getDefault());
     }
 
-    public static @NotNull String getTranslationKey(Enchantment e) {
+    public static String getTranslationKey(Enchantment e) {
         return "enchantment.minecraft." + e.getKey().getKey().toLowerCase(Locale.getDefault());
     }
 
-    public static @NotNull String getTranslationKey(EntityType e) {
+    public static String getTranslationKey(EntityType e) {
         return "entity.minecraft." + e.name().toLowerCase(Locale.getDefault());
     }
 
-    public static @NotNull String getTranslationKey(Effect e) {
+    public static String getTranslationKey(Effect e) {
         return "effect.minecraft." + e.name().toLowerCase(Locale.getDefault());
     }
 
-    public static @NotNull String getTranslationKey(Statistic s) {
+    public static String getTranslationKey(Statistic s) {
         return "stat.minecraft." + s.name().toLowerCase(Locale.getDefault());
     }
 
-    private static @NotNull String getTranslationKey(Material m, PotionEffect potionEffect) {
+    private static String getTranslationKey(Material m, PotionEffect potionEffect) {
         return "item.minecraft."
                 + m.name().toLowerCase(Locale.getDefault())
                 + ".effect."

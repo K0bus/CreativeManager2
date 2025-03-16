@@ -1,16 +1,16 @@
 package fr.k0bus.creativemanager2;
 
 import fr.k0bus.creativemanager2.utils.SpigotUtils;
-import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 
-public class CM2Logger {
+public final class CM2Logger {
     public static void info(String string, Object... args) {
         if (getLogger().isLoggable(Level.INFO))
-            Bukkit.getConsoleSender().sendMessage(StringUtils.parseString(getTag() + formatMessage(string, args)));
+            Bukkit.getConsoleSender().sendMessage(TextUtils.parseString(getTag() + formatMessage(string, args)));
     }
 
     public static void warn(String string, Object... args) {
@@ -19,7 +19,7 @@ public class CM2Logger {
 
     public static void debug(String string, Object... args) {
         if (CreativeManager2.getAPI().getSettings().debugMode() && getLogger().isLoggable(Level.INFO))
-            info("Debug >> " + StringUtils.parse(formatMessage(string, args)));
+            info("Debug >> " + TextUtils.parse(formatMessage(string, args)));
     }
 
     public static void exception(Exception e) {

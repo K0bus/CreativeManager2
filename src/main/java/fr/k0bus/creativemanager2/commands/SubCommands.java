@@ -3,13 +3,10 @@ package fr.k0bus.creativemanager2.commands;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
-import java.util.function.BiConsumer;
 import org.bukkit.command.CommandSender;
 
-@SuppressWarnings({"UnstableApiUsage", "rawtypes", "unused"})
+@SuppressWarnings({"UnstableApiUsage", "rawtypes"})
 public abstract class SubCommands extends Command {
-
-    BiConsumer<CommandSender, String[]> consumer;
 
     public SubCommands(String command, String permission, Class senderClass) {
         super(command, permission, senderClass);
@@ -17,10 +14,6 @@ public abstract class SubCommands extends Command {
 
     public SubCommands(String command, String permission) {
         super(command, permission);
-    }
-
-    public SubCommands(String command) {
-        super(command);
     }
 
     public abstract void execute(CommandSender sender);

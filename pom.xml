@@ -130,6 +130,7 @@
                     <xmlOutput>true</xmlOutput>
                     <effort>Max</effort>
                     <threshold>Medium</threshold>
+                    <excludeFilterFile>${project.basedir}/spotbugs-exclude.xml</excludeFilterFile>
                 </configuration>
             </plugin>
 

@@ -1,9 +1,10 @@
 package fr.k0bus.creativemanager2.gui;
 
-import fr.k0bus.creativemanager2.utils.Utils;
+import fr.k0bus.creativemanager2.CreativeManager2;
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.util.HashMap;
 import java.util.Map;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -14,36 +15,33 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
-public abstract class Menu {
+public abstract class Gui {
 
     private final Inventory inventory;
-    private final Map<Integer, MenuItems> menuItemsHashMap = new HashMap<>();
-
+    private final Map<Integer, GuiItems> menuItemsHashMap = new HashMap<>();
     private final JavaPlugin plugin;
 
-    private final MenuListener listener;
-
-    @SuppressWarnings("deprecation")
-    public Menu(int size, String name, JavaPlugin plugin, MenuListener listener) {
-        inventory = Bukkit.createInventory(null, 9 * size, Utils.placeholderApiParse(name));
+    public Gui(int size, String name, JavaPlugin plugin) {
+        inventory = SpigotUtils.createInventory(size, TextUtils.placeholderApiParse(name));
         this.plugin = plugin;
-        this.listener = listener;
-        listener.add(this);
     }
 
-    public Menu(String name, JavaPlugin pl, MenuListener listener) {
-        this(6, name, pl, listener);
+    public Gui(String name, JavaPlugin pl) {
+        this(6, name, pl);
     }
 
     public JavaPlugin getPlugin() {
         return plugin;
     }
 
-    public abstract Menu init();
+    public Gui init() {
+        CreativeManager2.getAPI().registerGui(this);
+        return this;
+    }
 
-    public void setItem(int slot, MenuItems menuItems) {
-        inventory.setItem(slot, menuItems);
-        menuItemsHashMap.put(slot, menuItems);
+    public void setItem(int slot, GuiItems guiItems) {
+        inventory.setItem(slot, guiItems);
+        menuItemsHashMap.put(slot, guiItems);
     }
 
     public void open(Player p) {
@@ -52,7 +50,7 @@ public abstract class Menu {
 
     public void close(Player p) {
         if (p.getOpenInventory().getTopInventory().equals(inventory)) p.closeInventory();
-        listener.remove(this);
+        CreativeManager2.getAPI().unregisterGui(this);
     }
 
     public Inventory getInventory() {
@@ -61,8 +59,8 @@ public abstract class Menu {
 
     public void onClick(InventoryClickEvent e) {
         if (menuItemsHashMap.containsKey(e.getSlot())) {
-            MenuItems menuItems = menuItemsHashMap.get(e.getSlot());
-            if (menuItems != null) menuItems.onClick(e);
+            GuiItems guiItems = menuItemsHashMap.get(e.getSlot());
+            if (guiItems != null) guiItems.onClick(e);
         }
     }
 

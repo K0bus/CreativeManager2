@@ -11,19 +11,19 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 
-public class MenuListener implements Listener {
+public class GuiListener implements Listener {
 
-    private final Map<Inventory, Menu> menuMap = new HashMap<>();
+    private final Map<Inventory, Gui> menuMap = new HashMap<>();
 
-    public void add(Menu menu) {
-        if (menuMap.containsKey(menu.getInventory())) return;
-        menuMap.put(menu.getInventory(), menu);
+    public void add(Gui gui) {
+        if (menuMap.containsKey(gui.getInventory())) return;
+        menuMap.put(gui.getInventory(), gui);
     }
 
-    public void remove(Menu menu) {
-        if (!menuMap.containsKey(menu.getInventory())) return;
-        if (!menu.getInventory().getViewers().isEmpty()) return;
-        menuMap.remove(menu.getInventory());
+    public void remove(Gui gui) {
+        if (!menuMap.containsKey(gui.getInventory())) return;
+        if (!gui.getInventory().getViewers().isEmpty()) return;
+        menuMap.remove(gui.getInventory());
     }
 
     @EventHandler

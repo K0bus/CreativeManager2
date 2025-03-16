@@ -2,7 +2,7 @@ package fr.k0bus.creativemanager2;
 
 import fr.k0bus.creativemanager2.commands.CM2BrigadierCommand;
 import fr.k0bus.creativemanager2.commands.CM2BukkitCommands;
-import fr.k0bus.creativemanager2.utils.Utils;
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CreativeManager2 extends JavaPlugin {
@@ -28,7 +28,7 @@ public final class CreativeManager2 extends JavaPlugin {
     }
 
     private void registerCommands() {
-        if (Utils.isPaper()) new CM2BrigadierCommand().build();
+        if (SpigotUtils.isPaper()) new CM2BrigadierCommand().build();
         else new CM2BukkitCommands().register(this);
     }
 

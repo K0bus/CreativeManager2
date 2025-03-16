@@ -1,13 +1,15 @@
 package fr.k0bus.creativemanager2.utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Serializer {
+public class GuiUtils {
 
     private static final int MAX_ARGS = 2;
 
+    @SuppressFBWarnings("BX_UNBOXING_IMMEDIATELY_REBOXED")
     public static int[] readIntArray(List<?> objectList) {
         List<Integer> values = new ArrayList<>();
         for (Object o : objectList) {

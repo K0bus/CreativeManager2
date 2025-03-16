@@ -10,12 +10,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class MenuItems extends ItemStack {
+public class GuiItems extends ItemStack {
 
     private Consumer<InventoryClickEvent> consumer;
     private Sound sound;
 
-    public MenuItems(Material m, int size) {
+    public GuiItems(Material m, int size) {
         super(m, size);
         try {
             sound = Sound.UI_BUTTON_CLICK;
@@ -23,12 +23,12 @@ public class MenuItems extends ItemStack {
         }
     }
 
-    public MenuItems(Material m, int size, Consumer<InventoryClickEvent> consumer) {
+    public GuiItems(Material m, int size, Consumer<InventoryClickEvent> consumer) {
         this(m, size);
         this.consumer = consumer;
     }
 
-    public MenuItems(Material m, Consumer<InventoryClickEvent> consumer) {
+    public GuiItems(Material m, Consumer<InventoryClickEvent> consumer) {
         this(m, 1, consumer);
     }
 
@@ -63,7 +63,7 @@ public class MenuItems extends ItemStack {
         consumer.accept(e);
     }
 
-    public static MenuItems create(Material material) {
-        return new MenuItems(material, 1);
+    public static GuiItems create(Material material) {
+        return new GuiItems(material, 1);
     }
 }

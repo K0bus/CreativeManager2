@@ -3,7 +3,7 @@ package fr.k0bus.creativemanager2.protections.generic;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.SpigotUtils;
-import fr.k0bus.creativemanager2.utils.StringUtils;
+import fr.k0bus.creativemanager2.utils.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +48,7 @@ public class ItemTrackProtection extends Protection {
 
         List<String> lore = getConfig().getStringList("lore");
         List<String> tempLore = new ArrayList<>();
-        String displayname = StringUtils.parse(getConfig().getString("displayname"));
+        String displayname = TextUtils.parse(getConfig().getString("displayname"));
 
         if (displayname != null && !displayname.isEmpty()) {
             SpigotUtils.setItemMetaDisplayname(meta, getFinalString(displayname, (Player) p, itemStack));
@@ -63,7 +63,7 @@ public class ItemTrackProtection extends Protection {
     }
 
     private String getFinalString(String string, Player player, ItemStack itemStack) {
-        return StringUtils.parse(StringUtils.replacePlaceholders(
+        return TextUtils.parse(TextUtils.replacePlaceholders(
                 string,
                 Map.of(
                         "PLAYER", player.getName(),
