@@ -50,11 +50,13 @@ protections:
       - Lands
   itemtrack:
     enabled: true
-    displayname: '#e863ff{ITEM}'
+    displayname: '&#73e1ff{ITEM}'
     lore:
-    - '&5Creative {ITEM}'
-    - '&7Generate by {PLAYER}'
-    - '&7{UUID}'
+      - '&6&l💎 Items informations'
+      - ''
+      - ' &7> &f&lItem : &r&7{ITEM}'
+      - ' &7> &f&lCreator &7: &r&7{PLAYER}'
+      - ' &7> &f&lCreator UUID &7: &r&7{UUID}'
   data-remover:
     enabled: false
     type:
