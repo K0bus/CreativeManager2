@@ -13,7 +13,6 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@SuppressWarnings("deprecation")
 public class SettingGui extends PagedMenu {
     public SettingGui(CreativeManager2 plugin) {
         super(

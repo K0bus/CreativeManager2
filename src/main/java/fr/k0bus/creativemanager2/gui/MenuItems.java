@@ -9,7 +9,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@SuppressWarnings({"unused", "deprecation"})
 public class MenuItems extends ItemStack {
 
     private Consumer<InventoryClickEvent> consumer;
