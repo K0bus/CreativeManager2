@@ -15,10 +15,10 @@ public enum ItemDataType {
     }
 
     public ListType getListType(Protection protection) {
-        return ListType.fromString(protection.getConfig().getString("type." + this.name() + ".list-type"));
+        return ListType.fromString(protection.getConfig().getString("type." + this.name() + ".remover.list-type"));
     }
 
     public List<String> getList(Protection protection) {
-        return protection.getConfig().getStringList("type." + this.name() + ".list");
+        return protection.getConfig().getStringList("type." + this.name() + ".remover.list");
     }
 }

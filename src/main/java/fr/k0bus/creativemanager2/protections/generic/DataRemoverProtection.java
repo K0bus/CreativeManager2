@@ -3,7 +3,6 @@ package fr.k0bus.creativemanager2.protections.generic;
 import de.tr7zw.nbtapi.NBT;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.ItemDataType;
-import fr.k0bus.creativemanager2.type.ListType;
 import fr.k0bus.creativemanager2.utils.ListUtils;
 import java.util.Map;
 import org.bukkit.Material;
@@ -55,8 +54,8 @@ public class DataRemoverProtection extends Protection {
                 itemStack.getEnchantments().entrySet()) {
             if (ListUtils.inList(
                     enchantmentIntegerEntry.getKey().getKey().getKey(),
-                    getConfig().getStringList("type.ENCHANT.remover.list"),
-                    ListType.fromString(getConfig().getString("type.ENCHANT.remover.list-type")))) {
+                    ItemDataType.ENCHANT.getList(this),
+                    ItemDataType.ENCHANT.getListType(this))) {
                 itemStack.removeEnchantment(enchantmentIntegerEntry.getKey());
                 continue;
             }
@@ -78,9 +77,7 @@ public class DataRemoverProtection extends Protection {
     private void checkItemFlag(ItemStack itemStack) {
         for (ItemFlag itemFlag : itemStack.getItemFlags()) {
             if (ListUtils.inList(
-                    itemFlag.name(),
-                    getConfig().getStringList("type.ITEM_FLAG.remover.list"),
-                    ListType.fromString(getConfig().getString("type.ITEM_FLAG.remover.list-type")))) {
+                    itemFlag.name(), ItemDataType.ITEM_FLAG.getList(this), ItemDataType.ITEM_FLAG.getListType(this))) {
                 ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.removeItemFlags(itemFlag);
                 itemStack.setItemMeta(itemMeta);
@@ -91,10 +88,7 @@ public class DataRemoverProtection extends Protection {
     private void checkNBT(ItemStack itemStack) {
         NBT.modify(itemStack, nbt -> {
             nbt.getKeys().forEach(nbtKey -> {
-                if (ListUtils.inList(
-                        nbtKey,
-                        getConfig().getStringList("type.NBT.remover.list"),
-                        ListType.fromString(getConfig().getString("type.NBT.remover.list-type")))) {
+                if (ListUtils.inList(nbtKey, ItemDataType.NBT.getList(this), ItemDataType.NBT.getListType(this))) {
                     nbt.removeKey(nbtKey);
                 }
             });
@@ -106,8 +100,8 @@ public class DataRemoverProtection extends Protection {
             for (PotionEffect potionEffect : potionMeta.getCustomEffects()) {
                 if (ListUtils.inList(
                         potionEffect.getType().getKey().getKey(),
-                        getConfig().getStringList("type.POTION_EFFECT.remover.list"),
-                        ListType.fromString(getConfig().getString("type.POTION_EFFECT.remover.list-type")))) {
+                        ItemDataType.POTION_EFFECT.getList(this),
+                        ItemDataType.POTION_EFFECT.getListType(this))) {
                     potionMeta.removeCustomEffect(potionEffect.getType());
                 }
             }
@@ -120,8 +114,8 @@ public class DataRemoverProtection extends Protection {
         itemMeta.getPersistentDataContainer().getKeys().forEach(nms -> {
             if (ListUtils.inList(
                     nms.getKey(),
-                    getConfig().getStringList("type.NAME_SPACED_KEY.remover.list"),
-                    ListType.fromString(getConfig().getString("type.NAME_SPACED_KEY.remover.list-type")))) {
+                    ItemDataType.NAME_SPACED_KEY.getList(this),
+                    ItemDataType.NAME_SPACED_KEY.getListType(this))) {
                 itemMeta.getPersistentDataContainer().remove(nms);
             }
         });
