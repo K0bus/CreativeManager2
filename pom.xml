@@ -6,7 +6,7 @@
 
     <groupId>fr.k0bus</groupId>
     <artifactId>CreativeManager2</artifactId>
-    <version>0.3.3-${build.number}</version>
+    <version>ALPHA-2.0.${build.number}</version>
     <packaging>jar</packaging>
 
     <name>CreativeManager2</name>
@@ -14,7 +14,7 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <build.number>SNAPSHOT</build.number>
+        <build.number>0</build.number>
     </properties>
 
     <build>
