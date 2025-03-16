@@ -54,7 +54,7 @@ public class DataRemoverProtection extends Protection {
         for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry :
                 itemStack.getEnchantments().entrySet()) {
             if (ListUtils.inList(
-                    enchantmentIntegerEntry.getKey().getName(),
+                    enchantmentIntegerEntry.getKey().getKey().getKey(),
                     getConfig().getStringList("type.ENCHANT.remover.list"),
                     ListType.fromString(getConfig().getString("type.ENCHANT.remover.list-type")))) {
                 itemStack.removeEnchantment(enchantmentIntegerEntry.getKey());
@@ -65,10 +65,10 @@ public class DataRemoverProtection extends Protection {
                 maxLevel = enchantmentIntegerEntry.getKey().getMaxLevel();
             else if (getConfig()
                     .contains("type.ENCHANT.custom-max."
-                            + enchantmentIntegerEntry.getKey().getName()))
+                            + enchantmentIntegerEntry.getKey().getKey().getKey()))
                 maxLevel = getConfig()
                         .getInt("type.ENCHANT.custom-max."
-                                + enchantmentIntegerEntry.getKey().getName());
+                                + enchantmentIntegerEntry.getKey().getKey().getKey());
 
             if (enchantmentIntegerEntry.getValue() > maxLevel)
                 itemStack.addUnsafeEnchantment(enchantmentIntegerEntry.getKey(), maxLevel);
@@ -103,7 +103,7 @@ public class DataRemoverProtection extends Protection {
         if (itemStack.getItemMeta() instanceof PotionMeta potionMeta) {
             for (PotionEffect potionEffect : potionMeta.getCustomEffects()) {
                 if (ListUtils.inList(
-                        potionEffect.getType().getName(),
+                        potionEffect.getType().getKey().getKey(),
                         getConfig().getStringList("type.POTION_EFFECT.remover.list"),
                         ListType.fromString(getConfig().getString("type.POTION_EFFECT.remover.list-type")))) {
                     potionMeta.removeCustomEffect(potionEffect.getType());
