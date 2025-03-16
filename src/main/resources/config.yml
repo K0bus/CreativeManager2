@@ -55,12 +55,6 @@ protections:
     - '&5Creative {ITEM}'
     - '&7Generate by {PLAYER}'
     - '&7{UUID}'
-  enchant:
-    enabled: true
-    allow-unsafe: false
-    custom-max:
-      MENDING: 10
-    blacklist: []
   data-remover:
     enabled: false
     type:
