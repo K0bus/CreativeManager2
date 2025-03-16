@@ -14,8 +14,7 @@ import org.bukkit.event.EventPriority;
 
 public class ItemsAdderProtection extends Protection {
     public ItemsAdderProtection() {
-        super(Material.WRITABLE_BOOK);
-        addDependencies("ItemsAdder");
+        super(Material.WRITABLE_BOOK, "ItemsAdder");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

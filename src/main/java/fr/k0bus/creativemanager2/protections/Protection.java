@@ -22,18 +22,19 @@ public abstract class Protection implements Listener {
     protected Section config;
     private final CreativeManager2 plugin = CreativeManager2.getAPI().getInstance();
     private final String customId;
-    private final List<String> dependencies = new ArrayList<>();
+    private final List<String> dependencies;
 
     private final Material icon;
 
-    public Protection(Material icon, String customId) {
+    public Protection(String customId, Material icon, String... dependencies) {
         id = this.getClass().getSimpleName().replace("Protection", "").toLowerCase(Locale.getDefault());
         this.customId = customId;
         this.icon = icon;
+        this.dependencies = List.of(dependencies);
     }
 
-    public Protection(Material icon) {
-        this(icon, null);
+    public Protection(Material icon, String... dependencies) {
+        this(null, icon, dependencies);
     }
 
     public void loadSettings() {
@@ -105,10 +106,6 @@ public abstract class Protection implements Listener {
     public String getCustomId() {
         if (customId == null) return id;
         else return customId;
-    }
-
-    protected void addDependencies(String... args) {
-        dependencies.addAll(Arrays.asList(args));
     }
 
     protected Map.Entry<String, Protection> getMapEntry() {

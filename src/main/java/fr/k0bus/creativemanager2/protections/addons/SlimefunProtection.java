@@ -13,8 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class SlimefunProtection extends Protection {
     public SlimefunProtection() {
-        super(Material.SLIME_BLOCK);
-        addDependencies("Slimefun");
+        super(Material.SLIME_BLOCK, "Slimefun");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

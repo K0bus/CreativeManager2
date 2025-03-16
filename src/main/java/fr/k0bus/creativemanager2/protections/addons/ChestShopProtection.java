@@ -8,9 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
 public class ChestShopProtection extends Protection {
+
     public ChestShopProtection() {
-        super(Material.GOLD_NUGGET);
-        addDependencies("ChestShop");
+        super(Material.GOLD_NUGGET, "ChestShop");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

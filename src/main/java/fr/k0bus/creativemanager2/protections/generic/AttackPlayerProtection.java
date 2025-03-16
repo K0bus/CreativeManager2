@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class AttackPlayerProtection extends Protection {
     public AttackPlayerProtection() {
-        super(Material.GOLDEN_SWORD, "combat.pvp");
+        super("combat.pvp", Material.GOLDEN_SWORD);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

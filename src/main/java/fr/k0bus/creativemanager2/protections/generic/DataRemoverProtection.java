@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class DataRemoverProtection extends Protection {
     public DataRemoverProtection() {
-        super(Material.NAME_TAG, "data-remover");
+        super("data-remover", Material.NAME_TAG);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

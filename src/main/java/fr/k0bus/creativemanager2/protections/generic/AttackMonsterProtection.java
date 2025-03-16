@@ -11,7 +11,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class AttackMonsterProtection extends Protection {
     public AttackMonsterProtection() {
-        super(Material.GOLDEN_SWORD, "combat.pve");
+        super("combat.pve", Material.GOLDEN_SWORD);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
