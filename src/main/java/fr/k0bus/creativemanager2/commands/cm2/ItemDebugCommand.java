@@ -49,7 +49,7 @@ public class ItemDebugCommand extends SubCommands {
     }
 
     private void addEnchant(ItemStack itemStack) {
-        itemStack.addEnchantment(Enchantment.MENDING, Enchantment.MENDING.getMaxLevel());
+        itemStack.addUnsafeEnchantment(Enchantment.MENDING, Enchantment.MENDING.getMaxLevel());
         itemStack.addUnsafeEnchantment(Enchantment.UNBREAKING, Enchantment.UNBREAKING.getMaxLevel() * 2);
     }
 
@@ -70,13 +70,22 @@ public class ItemDebugCommand extends SubCommands {
         if (itemStack.getItemMeta() instanceof PotionMeta potionMeta) {
             potionMeta.addCustomEffect(PotionEffectType.ABSORPTION.createEffect(10, 100), true);
             potionMeta.addCustomEffect(PotionEffectType.REGENERATION.createEffect(10, 100), true);
+            itemStack.setItemMeta(potionMeta);
         }
     }
 
     private void addNMS(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(CreativeManager2.getAPI().getInstance(), "test-nms-string"), PersistentDataType.STRING, "Test");
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(CreativeManager2.getAPI().getInstance(), "test-nms-int"), PersistentDataType.INTEGER, 2);
+        itemMeta.getPersistentDataContainer()
+                .set(
+                        new NamespacedKey(CreativeManager2.getAPI().getInstance(), "test-nms-string"),
+                        PersistentDataType.STRING,
+                        "Test");
+        itemMeta.getPersistentDataContainer()
+                .set(
+                        new NamespacedKey(CreativeManager2.getAPI().getInstance(), "test-nms-int"),
+                        PersistentDataType.INTEGER,
+                        2);
         itemStack.setItemMeta(itemMeta);
     }
 }
