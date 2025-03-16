@@ -13,7 +13,7 @@ public final class CreativeManager2 extends JavaPlugin {
     public void onEnable() {
         setApi(this);
         long timestamp = System.currentTimeMillis();
-        String separator = "▬".repeat(40);
+        String separator = "-".repeat(10);
         CM2Logger.info("&8{0}", separator);
         CM2Logger.info("&bStart initialization...");
         registerCommands();
