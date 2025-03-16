@@ -101,4 +101,12 @@ public class MenuItems extends ItemStack {
         if (sound != null) p.playSound(p.getLocation(), sound, 0.5f, 1);
         consumer.accept(e);
     }
+
+    public static MenuItems create(Material material, int amount) {
+        return new MenuItems(material, amount);
+    }
+
+    public static MenuItems create(Material material) {
+        return new MenuItems(material, 1);
+    }
 }

@@ -26,8 +26,10 @@ public class SettingGui extends PagedMenu {
     @Override
     public SettingGui init() {
         clearContent();
+        List<String> baseLore = new ArrayList<>();
         for (Protection protection : CreativeManager2.getAPI().getProtections().values()) {
-            MenuItems menuItems = new MenuItems(protection.getIcon(), 1, inventoryClickEvent -> {
+            MenuItems menuItems = MenuItems.create(protection.getIcon());
+            menuItems.setConsumer(inventoryClickEvent -> {
                 protection.setEnabled(protection.isDisabled());
                 CreativeManager2.getAPI()
                         .getSettings()
