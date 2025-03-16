@@ -6,6 +6,7 @@ import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.CustomType;
 import fr.k0bus.creativemanager2.type.ListType;
 import fr.k0bus.creativemanager2.utils.ListUtils;
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import java.util.List;
 import java.util.Locale;
 import org.bukkit.Material;
@@ -77,7 +78,7 @@ public class CustomProtection extends Protection {
                 NBT.get(itemStack, nbt -> {
                     nbt.getKeys().forEach(key -> {
                         if (needCancel(player, key, CustomType.NBT)) {
-                            String playerName = player.getDisplayName();
+                            String playerName = SpigotUtils.getPlayerDisplayname(player);
                             String materialName = itemStack.getType().name();
                             CM2Logger.debug(
                                     "Remove key '{0}' from '{1}' in player inventory '{2}'",

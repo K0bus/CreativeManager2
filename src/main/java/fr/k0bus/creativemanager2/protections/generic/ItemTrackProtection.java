@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,26 +41,25 @@ public class ItemTrackProtection extends Protection {
         }.runTaskLaterAsynchronously(CreativeManager2.getAPI().getInstance(), 2L);
     }
 
-    private ItemStack addLore(ItemStack itemStack, HumanEntity p) {
-        if (itemStack == null || p == null) return itemStack;
+    private void addLore(ItemStack itemStack, HumanEntity p) {
+        if (itemStack == null || p == null) return;
         ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) return itemStack;
+        if (meta == null) return;
 
         List<String> lore = getConfig().getStringList("lore");
         List<String> tempLore = new ArrayList<>();
         String displayname = StringUtils.parse(getConfig().getString("displayname"));
 
         if (displayname != null && !displayname.isEmpty()) {
-            meta.setDisplayName(getFinalString(displayname, (Player) p, itemStack));
+            SpigotUtils.setItemMetaDisplayname(meta, getFinalString(displayname, (Player) p, itemStack));
         }
         if (!lore.isEmpty()) {
             for (String line : lore) {
                 tempLore.add(getFinalString(line, (Player) p, itemStack));
             }
-            meta.setLore(tempLore);
+            SpigotUtils.setItemMetaLore(meta, tempLore);
         }
         itemStack.setItemMeta(meta);
-        return itemStack;
     }
 
     private String getFinalString(String string, Player player, ItemStack itemStack) {

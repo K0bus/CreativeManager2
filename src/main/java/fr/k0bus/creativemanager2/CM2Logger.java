@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2;
 
+import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import fr.k0bus.creativemanager2.utils.StringUtils;
 import java.text.MessageFormat;
 import java.util.logging.Level;
@@ -16,10 +17,6 @@ public class CM2Logger {
         if (getLogger().isLoggable(Level.WARNING)) getLogger().warning(formatMessage(string, args));
     }
 
-    public static void severe(String string, Object... args) {
-        if (getLogger().isLoggable(Level.SEVERE)) getLogger().severe(formatMessage(string, args));
-    }
-
     public static void debug(String string, Object... args) {
         if (CreativeManager2.getAPI().getSettings().debugMode() && getLogger().isLoggable(Level.INFO))
             info("Debug >> " + StringUtils.parse(formatMessage(string, args)));
@@ -34,8 +31,7 @@ public class CM2Logger {
     }
 
     private static String getTag() {
-        return "&7[&b"
-                + CreativeManager2.getAPI().getInstance().getDescription().getName() + "&7]&r ";
+        return "&7[&b" + SpigotUtils.getPluginName() + "&7]&r ";
     }
 
     public static String formatMessage(String template, Object... args) {
