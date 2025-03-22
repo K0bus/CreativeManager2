@@ -32,7 +32,7 @@ public class LogBlockProtection extends Protection {
         super(Material.MAP);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
         if (isDisabled()) return;
         if (!Protection.isCreativePlayer(event.getPlayer())) return;
@@ -42,7 +42,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onMultiPlace(BlockMultiPlaceEvent event) {
         if (isDisabled()) return;
         if (!Protection.isCreativePlayer(event.getPlayer())) return;
@@ -51,7 +51,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBreak(BlockBreakEvent event) {
         if (Protection.isCreativePlayer(event.getPlayer()) || hasPermission(event.getPlayer())) {
             List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
@@ -122,7 +122,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFallBlock(EntityChangeBlockEvent event) {
 
         UUID uuid = CM2Data.findPlayer(event.getBlock());
@@ -136,7 +136,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onLeaveDecay(LeavesDecayEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid == null) return;
@@ -144,7 +144,7 @@ public class LogBlockProtection extends Protection {
         event.getBlock().setType(Material.AIR);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onFallBlockStop(EntityChangeBlockEvent event) {
         if (event.getEntity() instanceof FallingBlock fallingBlock) {
             UUID uuid = CM2Data.findPlayer(fallingBlock);
@@ -155,7 +155,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onEntityBreak(EntityChangeBlockEvent event) {
         if (event.getTo().equals(Material.AIR)) {
             UUID uuid = CM2Data.findPlayer(event.getBlock());
@@ -166,7 +166,7 @@ public class LogBlockProtection extends Protection {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onExtend(BlockPistonExtendEvent event) {
         BlockFace pistonDirection = event.getDirection();
         List<Block> blocks = new ArrayList<>(event.getBlocks());
