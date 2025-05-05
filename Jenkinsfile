@@ -4,6 +4,10 @@ pipeline {
         maven "3.9.9"
         jdk "openjdk-23.0.2"
     }
+    environment {
+        BASE_VERSION = "ALPHA-2.0"
+        REVISION = "${BASE_VERSION}.${BUILD_NUMBER}"
+    }
     options {
         disableConcurrentBuilds()
     }
@@ -36,7 +40,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package -B -Dbuild.number=${BUILD_NUMBER}'
+                sh 'mvn clean package -B -Drevision=${REVISION}'
             }
         }
     }
