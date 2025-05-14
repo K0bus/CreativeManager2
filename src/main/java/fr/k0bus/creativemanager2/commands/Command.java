@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.commands;
 
+import fr.k0bus.creativemanager2.utils.MessageUtils;
 import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import java.util.*;
 import org.bukkit.command.CommandExecutor;
@@ -78,7 +79,7 @@ public class Command implements CommandExecutor, TabCompleter {
             @NotNull String label,
             @NotNull String[] args) {
         if (!isAllowed(sender)) {
-            sender.sendMessage("Not allowed");
+            MessageUtils.sendMessage(sender, "commands.deny");
             return true;
         }
         if (!subCommands.isEmpty()) {

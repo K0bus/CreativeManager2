@@ -27,6 +27,10 @@ public class CM2BukkitCommands extends Command {
     }
 
     private static void sendMainMessage(CommandSender sender) {
+        if (sender.hasPermission("cm2.admin")) {
+            MessageUtils.sendMessage(sender, "commands.deny");
+            return;
+        }
         MessageUtils.sendRawMessage(
                 sender, CreativeManager2.getAPI().getTag() + " CreativeManager2 loaded in the server !");
     }
