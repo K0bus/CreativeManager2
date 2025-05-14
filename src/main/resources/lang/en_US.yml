@@ -19,5 +19,6 @@ permission:
     store-item: '{TAG} &cYou can''t store this item in Creative'
     nbt: '{TAG} &cSome illegal data removed from your items because you are on Creative'
 commands:
+  deny: '{TAG} &cYou can''t use this command'
   iteminfos:
     no-items: '{TAG} &cYou need an items to inspect'
