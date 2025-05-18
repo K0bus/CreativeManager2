@@ -18,6 +18,7 @@ public class CM2BrigadierCommand {
         LifecycleEventManager<Plugin> manager = getPlugin().getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("cm2")
+                    .requires(source -> source.getSender().hasPermission("cm2.admin"))
                     .executes(ctx -> {
                         sendMainMessage(ctx.getSource().getSender());
                         return Command.SINGLE_SUCCESS;
@@ -37,10 +38,6 @@ public class CM2BrigadierCommand {
     }
 
     private static void sendMainMessage(CommandSender sender) {
-        if (sender.hasPermission("cm2.admin")) {
-            MessageUtils.sendMessage(sender, "commands.deny");
-            return;
-        }
         MessageUtils.sendRawMessage(
                 sender, CreativeManager2.getAPI().getTag() + " CreativeManager2 loaded in the server !");
     }
