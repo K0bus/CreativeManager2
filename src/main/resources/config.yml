@@ -72,7 +72,13 @@ protections:
         enabled: true
         remover:
           list-type: WHITELIST
-          list: []
+          list:
+            - 'down'
+            - 'east'
+            - 'north'
+            - 'south'
+            - 'up'
+            - 'west'
       POTION_EFFECT:
         enabled: true
         remover:
@@ -143,12 +149,3 @@ protections:
     store-item:
       type: BLACKLIST
       list: []
-    nbt:
-      type: WHITELIST
-      list:
-        - 'down'
-        - 'east'
-        - 'north'
-        - 'south'
-        - 'up'
-        - 'west'

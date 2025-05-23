@@ -72,25 +72,6 @@ public class CustomProtection extends Protection {
             event.setCursor(new ItemStack(Material.AIR));
             sendPermissionMessage(event.getWhoClicked(), CustomType.STORE_ITEM.getId());
         }
-        if (event.getInventory().getHolder() instanceof Player player) {
-            for (ItemStack itemStack : player.getInventory().getContents()) {
-                if (itemStack == null) continue;
-                NBT.get(itemStack, nbt -> {
-                    nbt.getKeys().forEach(key -> {
-                        if (needCancel(player, key, CustomType.NBT)) {
-                            String playerName = SpigotUtils.getPlayerDisplayname(player);
-                            String materialName = itemStack.getType().name();
-                            CM2Logger.debug(
-                                    "Remove key '{0}' from '{1}' in player inventory '{2}'",
-                                    key, materialName, playerName);
-                            NBT.modify(itemStack, nbtModify -> {
-                                nbtModify.removeKey(key);
-                            });
-                        }
-                    });
-                });
-            }
-        }
     }
 
     @EventHandler
