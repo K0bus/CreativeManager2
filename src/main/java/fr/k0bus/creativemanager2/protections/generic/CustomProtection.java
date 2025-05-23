@@ -1,17 +1,13 @@
 package fr.k0bus.creativemanager2.protections.generic;
 
-import de.tr7zw.nbtapi.NBT;
-import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.type.CustomType;
 import fr.k0bus.creativemanager2.type.ListType;
 import fr.k0bus.creativemanager2.utils.ListUtils;
-import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import java.util.List;
 import java.util.Locale;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
