@@ -4,7 +4,6 @@ import fr.k0bus.creativemanager2.CreativeManager2;
 import java.util.ArrayList;
 import java.util.List;
 
-import jdk.jfr.Experimental;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
