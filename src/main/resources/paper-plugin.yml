@@ -1,26 +1,18 @@
 name: CreativeManager2
 version: '${project.version}'
+authors:
+  - K0bus
+website: https://github.com/K0bus/CreativeManager2/
 main: fr.k0bus.creativemanager2.CreativeManager2
-api-version: '1.20'
+api-version: '1.19'
 dependencies:
-  server:
-    WorldGuard:
-      load: BEFORE
-      required: false
-      join-classpath: true
-    Lands:
-      load: BEFORE
-      required: false
-      join-classpath: true
-    GriefPrevention:
-      load: BEFORE
-      required: false
-      join-classpath: true
-    PlaceholderAPI:
-      load: BEFORE
-      required: false
-      join-classpath: true
-    NBTAPI:
-      load: BEFORE
-      required: true
-      join-classpath: true
+  - name: WorldGuard
+    required: false
+  - name: Lands
+    required: false
+  - name: GriefPrevention
+    required: false
+  - name: PlaceholderAPI
+    required: false
+  - name: NBTAPI
+    required: true
