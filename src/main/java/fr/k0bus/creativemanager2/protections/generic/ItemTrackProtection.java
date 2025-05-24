@@ -36,6 +36,7 @@ public class ItemTrackProtection extends Protection {
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (event.getSlot() > player.getInventory().getSize()) return;
                 addLore(player.getInventory().getItem(event.getSlot()), player);
             }
         }.runTaskLaterAsynchronously(CreativeManager2.getAPI().getInstance(), 2L);
