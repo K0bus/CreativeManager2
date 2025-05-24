@@ -3,7 +3,6 @@ package fr.k0bus.creativemanager2.utils;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
