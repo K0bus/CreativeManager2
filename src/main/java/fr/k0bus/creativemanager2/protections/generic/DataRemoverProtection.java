@@ -69,8 +69,7 @@ public class DataRemoverProtection extends Protection {
         if (isMaterialFiltered(itemStack)) return true;
         if (isIAFiltered(itemStack)) return true;
         if (isOraxenFiltered(itemStack)) return true;
-        if (isItemJoinFiltered(itemStack)) return true;
-        return false;
+        return isItemJoinFiltered(itemStack);
     }
 
     private boolean isMaterialFiltered(ItemStack itemStack) {
