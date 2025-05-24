@@ -28,7 +28,7 @@ public final class CreativeManager2 extends JavaPlugin {
     }
 
     private void registerCommands() {
-        if (SpigotUtils.isPaper()) new CM2BrigadierCommand().build();
+        if (SpigotUtils.isPaper() && SpigotUtils.isBrigadier()) new CM2BrigadierCommand().build();
         else new CM2BukkitCommands().register(this);
     }
 
