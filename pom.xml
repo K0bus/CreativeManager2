@@ -238,19 +238,32 @@
             <url>https://repo.codemc.io/repository/maven-public/</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>matteodev</id>
+            <url>https://maven.devs.beer/</url>
+        </repository>
+        <repository>
+            <id>oraxen</id>
+            <name>Oraxen Repository</name>
+            <url>https://repo.oraxen.com/releases</url>
+        </repository>
+        <repository>
+            <id>CraftationGaming-chaos</id>
+            <url>https://repo.craftationgaming.com/chaos</url>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.21.5-R0.1-SNAPSHOT</version>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21-R0.1-SNAPSHOT</version>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -310,6 +323,24 @@
             <groupId>dev.dejvokep</groupId>
             <artifactId>boosted-yaml-spigot</artifactId>
             <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <version>4.0.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.th0rgal</groupId>
+            <artifactId>oraxen</artifactId>
+            <version>1.190.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.RockinChaos.itemjoin</groupId>
+            <artifactId>ItemJoin</artifactId>
+            <version>6.1.2-RELEASE</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Unit test dependencies -->

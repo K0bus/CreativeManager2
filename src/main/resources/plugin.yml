@@ -12,6 +12,9 @@ softdepend:
   - Lands
   - GriefPrevention
   - PlaceholderAPI
+  - ItemsAdder
+  - Oraxen
+  - ItemJoin
 commands:
   cm2:
     usage: "/cm2"
