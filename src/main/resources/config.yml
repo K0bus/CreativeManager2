@@ -59,6 +59,13 @@ protections:
       - ' &7> &f&lCreator UUID &7: &r&7{UUID}'
   data-remover:
     enabled: false
+    filter:
+      type: WHITELIST
+      list:
+        - "material:STONE"
+        - "ia:items_adder_item"
+        - "ox:oraxen_item"
+        - "ij:item_join_item"
     type:
       ENCHANT:
         enabled: true
