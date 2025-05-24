@@ -54,4 +54,13 @@ public class SpigotUtils {
         if (!isPaper()) return Bukkit.createInventory(null, 9 * row, title);
         else return Bukkit.createInventory(null, 9 * row, Component.text(title));
     }
+
+    public static boolean isBrigadier() {
+        try {
+            Class.forName("io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents");
+            return true;
+        } catch (ClassNotFoundException ignored) {
+        }
+        return false;
+    }
 }
