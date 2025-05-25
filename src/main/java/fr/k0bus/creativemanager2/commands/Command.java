@@ -1,7 +1,7 @@
 package fr.k0bus.creativemanager2.commands;
 
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
-import fr.k0bus.creativemanager2.utils.SpigotUtils;
 import java.util.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -148,19 +148,13 @@ public class Command implements CommandExecutor, TabCompleter {
     }
 
     public void register(JavaPlugin plugin) {
-
-        if (SpigotUtils.isPaper()) {
-            PluginCommand cmd = plugin.getCommand(getCommandString());
-            if (cmd != null) {
-                cmd.setExecutor(this);
-                cmd.setTabCompleter(this);
-            }
+        PluginCommand cmd = plugin.getCommand(commandString);
+        if (cmd != null) {
+            cmd.setExecutor(this);
+            cmd.setTabCompleter(this);
+            CM2Logger.info("  &7> &a&lCommand '{0}' registered", commandString);
         } else {
-            PluginCommand cmd = plugin.getCommand(getCommandString());
-            if (cmd != null) {
-                cmd.setExecutor(this);
-                cmd.setTabCompleter(this);
-            }
+            CM2Logger.info("  &7> &cCan't register '{0}' command in CreativeManager", commandString);
         }
     }
 

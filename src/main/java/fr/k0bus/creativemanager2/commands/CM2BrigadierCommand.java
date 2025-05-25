@@ -2,6 +2,7 @@ package fr.k0bus.creativemanager2.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.cm2.*;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 @SuppressWarnings("UnstableApiUsage")
 public class CM2BrigadierCommand {
     public void build() {
+        CM2Logger.info("&7> &6&lLoading command with Bukkit API");
         LifecycleEventManager<Plugin> manager = getPlugin().getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("cm2")
@@ -31,6 +33,7 @@ public class CM2BrigadierCommand {
                     .build();
             commands.registrar().register(buildCommand);
         });
+        CM2Logger.info("  &7> &a&lCommand loaded successfully");
     }
 
     private CreativeManager2 getPlugin() {

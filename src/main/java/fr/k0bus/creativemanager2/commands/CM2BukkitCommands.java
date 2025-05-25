@@ -1,5 +1,6 @@
 package fr.k0bus.creativemanager2.commands;
 
+import fr.k0bus.creativemanager2.CM2Logger;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.commands.cm2.*;
 import fr.k0bus.creativemanager2.utils.MessageUtils;
@@ -8,7 +9,9 @@ import org.bukkit.command.CommandSender;
 public class CM2BukkitCommands extends Command {
     public CM2BukkitCommands() {
         super("cm2", "cm2.admin");
+        CM2Logger.info("&7> &6&lLoading command with Bukkit API");
         this.init();
+        CM2Logger.info("  &7> &a&lCommand loaded successfully");
     }
 
     private void init() {
