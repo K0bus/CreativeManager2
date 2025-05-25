@@ -17,8 +17,8 @@ dependencies:
   - name: NBTAPI
     required: true
   - name: ItemsAdder
-    required: true
+    required: false
   - name: Oraxen
-    required: true
+    required: false
   - name: ItemJoin
-    required: true
+    required: false
