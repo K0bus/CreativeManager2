@@ -10,6 +10,7 @@ import io.th0rgal.oraxen.api.OraxenItems;
 import java.util.List;
 import java.util.Map;
 import me.RockinChaos.itemjoin.api.ItemJoinAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -80,6 +81,7 @@ public class DataRemoverProtection extends Protection {
     }
 
     private boolean isIAFiltered(ItemStack itemStack) {
+        if (!Bukkit.getPluginManager().isPluginEnabled("ItemsAdder")) return false;
         CustomStack customStack = CustomStack.byItemStack(itemStack);
         if (customStack == null) return false;
         return ListUtils.inList(
@@ -88,6 +90,7 @@ public class DataRemoverProtection extends Protection {
                 getFilterType());
     }
     private boolean isOraxenFiltered(ItemStack itemStack) {
+        if (!Bukkit.getPluginManager().isPluginEnabled("Oraxen")) return false;
         String oraxenItemsID = OraxenItems.getIdByItem(itemStack);
         if (oraxenItemsID == null) return false;
         return ListUtils.inList(
@@ -96,6 +99,7 @@ public class DataRemoverProtection extends Protection {
                 getFilterType());
     }
     private boolean isItemJoinFiltered(ItemStack itemStack) {
+        if (!Bukkit.getPluginManager().isPluginEnabled("ItemJoin")) return false;
         ItemJoinAPI itemAPI = new ItemJoinAPI();
         String itemJoinID = itemAPI.getNode(itemStack);
         if (itemJoinID == null) return false;
