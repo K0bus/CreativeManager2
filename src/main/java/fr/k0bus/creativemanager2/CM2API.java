@@ -17,6 +17,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
 
 public class CM2API {
     private Settings settings;
@@ -82,6 +83,7 @@ public class CM2API {
         }
     }
 
+    @NotNull
     public String getInventoryName(World world, GameMode gameMode) {
         if (this.settings.isString(
                 "multi-inventories." + world.getName() + "." + gameMode.name().toLowerCase(Locale.getDefault()))) {
