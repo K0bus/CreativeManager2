@@ -77,7 +77,7 @@ public class Command implements CommandExecutor, TabCompleter {
             @NotNull CommandSender sender,
             @NotNull org.bukkit.command.Command command,
             @NotNull String label,
-            @NotNull String[] args) {
+            String @NotNull [] args) {
         if (!isAllowed(sender)) {
             MessageUtils.sendMessage(sender, "commands.deny");
             return true;
@@ -106,7 +106,7 @@ public class Command implements CommandExecutor, TabCompleter {
             @NotNull CommandSender sender,
             @NotNull org.bukkit.command.Command command,
             @NotNull String label,
-            @NotNull String[] args) {
+            String @NotNull [] args) {
         List<String> complete = new ArrayList<>();
         if (!subCommands.isEmpty()) {
             if (args.length == FIRST_ARGS) {
@@ -141,7 +141,7 @@ public class Command implements CommandExecutor, TabCompleter {
     public org.bukkit.command.Command getRawCommand() {
         return new org.bukkit.command.Command(this.commandString, description, usage, new ArrayList<>()) {
             @Override
-            public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings) {
+            public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, String @NotNull [] strings) {
                 return onCommand(commandSender, this, s, strings);
             }
         };
