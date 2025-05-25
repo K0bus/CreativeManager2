@@ -12,10 +12,12 @@ multi-inventories:
     survival: survival
     adventure: survival
     creative: creative
+    spectator: creative
   world_nether:
     survival: survival_nether
     adventure: survival_nether
     creative: creative_nether
+    spectator: creative_nether
 
 protections:
   logblock:
