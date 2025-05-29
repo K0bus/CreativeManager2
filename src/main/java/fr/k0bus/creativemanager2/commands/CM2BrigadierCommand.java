@@ -16,7 +16,7 @@ import org.bukkit.plugin.Plugin;
 @SuppressWarnings("UnstableApiUsage")
 public class CM2BrigadierCommand {
     public void build() {
-        CM2Logger.info("&7> &6&lLoading command with Bukkit API");
+        CM2Logger.info("&7> &6&lLoading command with Brigadier API");
         LifecycleEventManager<Plugin> manager = getPlugin().getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("cm2")
