@@ -16,14 +16,7 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockGrowEvent;
-import org.bukkit.event.block.BlockMultiPlaceEvent;
-import org.bukkit.event.block.BlockPistonExtendEvent;
-import org.bukkit.event.block.BlockPistonRetractEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.BlockSpreadEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 
@@ -164,6 +157,41 @@ public class LogBlockProtection extends Protection {
                 event.getBlock().setType(Material.AIR);
             }
         }
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onBlockPhysics(BlockPhysicsEvent event) {
+        Block block = event.getBlock();
+        if (!block.getType().isAir()) return; // Évite les faux positifs
+
+        UUID uuid = CM2Data.findPlayer(block);
+        if (uuid != null) {
+            block.setType(Material.AIR);
+            CM2Data.unregister(block);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onBlockFromTo(BlockFromToEvent event) {
+        Block toBlock = event.getToBlock();
+        UUID uuid = CM2Data.findPlayer(toBlock);
+        if (uuid != null && !toBlock.getType().isAir()) {
+            toBlock.setType(Material.AIR);
+            CM2Data.unregister(toBlock);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onBlockExplode(BlockExplodeEvent event) {
+        event.blockList().removeIf(block -> {
+            UUID uuid = CM2Data.findPlayer(block);
+            if (uuid != null) {
+                block.setType(Material.AIR);
+                CM2Data.unregister(block);
+                return true;
+            }
+            return false;
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
