@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryCreativeEvent;
@@ -50,8 +51,10 @@ public class CustomProtection extends Protection {
         if (event.getClickedBlock() != null
                 && needCancel(
                         event.getPlayer(), event.getClickedBlock().getType().name(), CustomType.BLOCK_USE)) {
-            event.setCancelled(true);
-            sendPermissionMessage(event.getPlayer(), CustomType.BLOCK_USE.getId());
+            if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                event.setCancelled(true);
+                sendPermissionMessage(event.getPlayer(), CustomType.BLOCK_USE.getId());
+            }
         }
         if (event.getItem() != null
                 && needCancel(event.getPlayer(), event.getItem().getType().name(), CustomType.ITEM_USE)) {
