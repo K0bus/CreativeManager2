@@ -6,6 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 public class EntityInteractionProtection extends Protection {
@@ -14,7 +15,16 @@ public class EntityInteractionProtection extends Protection {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void inInteract(PlayerInteractEntityEvent event) {
+    public void onInteract(PlayerInteractEntityEvent event) {
+        run(event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onInteract(PlayerInteractAtEntityEvent event) {
+        run(event);
+    }
+
+    public void run(PlayerInteractEntityEvent event) {
         if (isDisabled()) return;
         Player player = event.getPlayer();
         if (!(event.getRightClicked() instanceof LivingEntity)) return;
