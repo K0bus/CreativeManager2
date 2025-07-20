@@ -1,6 +1,7 @@
 permission:
   attackmonster: '{TAG} &cYou can''t attack in Creative'
   attackplayer: '{TAG} &cYou can''t attack in Creative'
+  entityinteraction: '{TAG} &cYou can''t interact with entity in Creative'
   build: '{TAG} &cYou can''t build in Creative'
   claim: '{TAG} &cYou can''t build outside of your claim in Creative'
   container: '{TAG} &cYou can''t use container'

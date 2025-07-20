@@ -135,6 +135,7 @@ public abstract class Protection implements Listener {
                 new DeathProtection().init().getMapEntry(),
                 new DropProtection().init().getMapEntry(),
                 new EffectProtection().init().getMapEntry(),
+                new EntityInteractionProtection().init().getMapEntry(),
                 new GuiProtection().init().getMapEntry(),
                 new InventoryProtection().init().getMapEntry(),
                 new ItemTrackProtection().init().getMapEntry(),
