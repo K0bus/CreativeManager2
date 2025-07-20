@@ -22,6 +22,8 @@ multi-inventories:
 protections:
   logblock:
     enabled: true
+  logblockpaper:
+    enabled: true
   inventory:
     enabled: false
   build:

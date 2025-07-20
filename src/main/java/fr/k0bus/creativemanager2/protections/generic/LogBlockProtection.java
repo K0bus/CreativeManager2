@@ -2,14 +2,12 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CM2Data;
 import fr.k0bus.creativemanager2.CM2Logger;
-import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -35,7 +33,7 @@ public class LogBlockProtection extends Protection {
         if (!Protection.isCreativePlayer(event.getPlayer())) return;
         List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
         for (Block block : blocks) {
-            CM2Logger.debug("[onPlace] Block placed by " + event.getPlayer().getUniqueId().toString());
+            CM2Logger.debug("[onPlace] Block placed by " + event.getPlayer().getUniqueId());
             CM2Data.register(block, event.getPlayer());
         }
     }
@@ -45,7 +43,7 @@ public class LogBlockProtection extends Protection {
         if (isDisabled()) return;
         if (!Protection.isCreativePlayer(event.getPlayer())) return;
         for (BlockState state : event.getReplacedBlockStates()) {
-            CM2Logger.debug("[onMultiPlace] Block placed by " + event.getPlayer().getUniqueId().toString());
+            CM2Logger.debug("[onMultiPlace] Block placed by " + event.getPlayer().getUniqueId());
             CM2Data.register(state.getBlock(), event.getPlayer());
         }
     }
@@ -55,7 +53,7 @@ public class LogBlockProtection extends Protection {
         if (Protection.isCreativePlayer(event.getPlayer()) || hasPermission(event.getPlayer())) {
             List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
             for (Block block : blocks) {
-                CM2Logger.debug("[onBreak] Block broken by " + event.getPlayer().getUniqueId().toString());
+                CM2Logger.debug("[onBreak] Block broken by " + event.getPlayer().getUniqueId());
                 CM2Data.unregister(block);
             }
             return;
@@ -67,7 +65,7 @@ public class LogBlockProtection extends Protection {
         event.getBlock().setType(Material.AIR);
         List<Block> blocks = BlockUtils.getBlockStructure(event.getBlock());
         for (Block block : blocks) {
-            CM2Logger.debug("[onBreak 2]Block broken by " + uuid.toString());
+            CM2Logger.debug("[onBreak 2]Block broken by " + uuid);
             CM2Data.unregister(block);
         }
     }
@@ -80,7 +78,7 @@ public class LogBlockProtection extends Protection {
         if (material.equals(Material.CACTUS) || material.equals(Material.SUGAR_CANE)) {
             uuid = CM2Data.findPlayer(block.getRelative(BlockFace.DOWN));
             if (uuid != null) {
-                CM2Logger.debug("[onBlockGrow] Block grown by " + uuid.toString());
+                CM2Logger.debug("[onBlockGrow] Block grown by " + uuid);
                 CM2Data.register(block, uuid);
             }
         } else if (material.equals(Material.PUMPKIN) || material.equals(Material.MELON)) {
@@ -88,7 +86,7 @@ public class LogBlockProtection extends Protection {
                 if (b.getType().equals(Material.PUMPKIN_STEM) || b.getType().equals(Material.MELON_STEM)) {
                     uuid = CM2Data.findPlayer(b);
                     if (uuid != null) {
-                        CM2Logger.debug("[onBlockGrow 2] Block grown by " + uuid.toString());
+                        CM2Logger.debug("[onBlockGrow 2] Block grown by " + uuid);
                         CM2Data.register(block, uuid);
                         break;
                     }
@@ -99,7 +97,7 @@ public class LogBlockProtection extends Protection {
                 if (b.getType().equals(Material.CHORUS_FLOWER) || b.getType().equals(Material.CHORUS_PLANT)) {
                     uuid = CM2Data.findPlayer(b);
                     if (uuid != null) {
-                        CM2Logger.debug("[onBlockGrow 3] Block grown by " + uuid.toString());
+                        CM2Logger.debug("[onBlockGrow 3] Block grown by " + uuid);
                         CM2Data.register(block, uuid);
                         break;
                     }
@@ -113,7 +111,7 @@ public class LogBlockProtection extends Protection {
         UUID uuid = CM2Data.findPlayer(event.getLocation());
         if (uuid != null) {
             for (BlockState block : event.getBlocks()) {
-                CM2Logger.debug("[onStructureGrow] Block grown by " + uuid.toString());
+                CM2Logger.debug("[onStructureGrow] Block grown by " + uuid);
                 CM2Data.register(block.getBlock(), uuid);
             }
         }
@@ -123,7 +121,7 @@ public class LogBlockProtection extends Protection {
     void onBlockSpread(BlockSpreadEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getSource());
         if (uuid != null) {
-            CM2Logger.debug("[onBlockSpread] Block spread by " + uuid.toString());
+            CM2Logger.debug("[onBlockSpread] Block spread by " + uuid);
             CM2Data.register(event.getBlock(), uuid);
         }
     }
@@ -134,7 +132,7 @@ public class LogBlockProtection extends Protection {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid == null) return;
         if (event.getEntity() instanceof FallingBlock fallingBlock) {
-            CM2Logger.debug("[onFallBlock] Block falling by " + uuid.toString());
+            CM2Logger.debug("[onFallBlock] Block falling by " + uuid);
             CM2Data.register(fallingBlock, uuid);
             fallingBlock.setDropItem(false);
         }
@@ -149,7 +147,7 @@ public class LogBlockProtection extends Protection {
         if (uuid == null) return;
         event.setCancelled(true);
         event.getBlock().setType(Material.AIR);
-        CM2Logger.debug("[onLeaveDecay] Block decayed by " + uuid.toString());
+        CM2Logger.debug("[onLeaveDecay] Block decayed by " + uuid);
         CM2Data.unregister(event.getBlock());
     }
 
@@ -160,7 +158,7 @@ public class LogBlockProtection extends Protection {
             if (uuid == null) return;
             if (!event.getTo().equals(Material.AIR)) {
                 CM2Data.register(event.getBlock(), uuid);
-                CM2Logger.debug("[onFallBlockStop] Block fall stopped by " + uuid.toString());
+                CM2Logger.debug("[onFallBlockStop] Block fall stopped by " + uuid);
             }
         }
     }
@@ -172,35 +170,12 @@ public class LogBlockProtection extends Protection {
             if (uuid != null) {
                 event.setCancelled(true);
                 event.getBlock().setType(Material.AIR);
-                CM2Logger.debug("[onEntityBreak] Block broken by " + uuid.toString());
+                CM2Logger.debug("[onEntityBreak] Block broken by " + uuid);
                 CM2Data.unregister(event.getBlock());
             }
         }
     }
 
-    // 🔁 Destruction par update physique (torches, rails, etc)
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onBlockPhysics(BlockPhysicsEvent event) {
-        Block block = event.getBlock();
-
-        // On ne gère que les blocs fragiles : torches, rails, etc.
-        if (!block.getType().isAir()) return;
-
-        UUID uuid = CM2Data.findPlayer(block);
-        if (uuid == null) return;
-
-        // Ne pas utiliser setCancelled -> ça ne sert à rien ici
-        Bukkit.getScheduler().runTaskLater(CreativeManager2.getAPI().getInstance(), () -> {
-            // Recheck pour éviter faux positifs si déjà supprimé
-            if (block.getType() != Material.AIR) {
-                block.setType(Material.AIR, false); // Supprime sans drop
-                CM2Data.unregister(block);
-                CM2Logger.debug("[onBlockPhysics] Bloc supprimé sans drop via scheduler");
-            }
-        }, 1L); // attendre 1 tick pour ne pas bloquer la physique
-    }
-
-    // 🌊 Destruction via propagation de liquide (eau/lave)
     @EventHandler(ignoreCancelled = true)
     public void onBlockFromTo(BlockFromToEvent event) {
         Block toBlock = event.getToBlock();
@@ -210,11 +185,10 @@ public class LogBlockProtection extends Protection {
         if (uuid != null) {
             toBlock.setType(Material.AIR);
             CM2Data.unregister(toBlock);
-            CM2Logger.debug("[onBlockFromTo] Block destroyed by " + uuid.toString());
+            CM2Logger.debug("[onBlockFromTo] Block destroyed by " + uuid);
         }
     }
 
-    // 💣 Explosion naturelle
     @EventHandler(ignoreCancelled = true)
     public void onBlockExplode(BlockExplodeEvent event) {
         event.blockList().removeIf(block -> {
@@ -222,14 +196,13 @@ public class LogBlockProtection extends Protection {
             if (uuid != null) {
                 block.setType(Material.AIR);
                 CM2Data.unregister(block);
-                CM2Logger.debug("[onBlockExplode] Block destroyed by " + uuid.toString());
+                CM2Logger.debug("[onBlockExplode] Block destroyed by " + uuid);
                 return true;
             }
             return false;
         });
     }
 
-    // 💥 Explosion d’entité (creeper, TNT…)
     @EventHandler(ignoreCancelled = true)
     public void onEntityExplode(EntityExplodeEvent event) {
         event.blockList().removeIf(block -> {
@@ -237,14 +210,13 @@ public class LogBlockProtection extends Protection {
             if (uuid != null) {
                 block.setType(Material.AIR);
                 CM2Data.unregister(block);
-                CM2Logger.debug("[onEntityExplode] Block destroyed by " + uuid.toString());
+                CM2Logger.debug("[onEntityExplode] Block destroyed by " + uuid);
                 return true;
             }
             return false;
         });
     }
 
-    // 🧊 Fonte de blocs (neige, glace)
     @EventHandler(ignoreCancelled = true)
     public void onBlockFade(BlockFadeEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
@@ -252,7 +224,7 @@ public class LogBlockProtection extends Protection {
             event.setCancelled(true);
             event.getBlock().setType(Material.AIR);
             CM2Data.unregister(event.getBlock());
-            CM2Logger.debug("[onBlockFade] Block destroyed by " + uuid.toString());
+            CM2Logger.debug("[onBlockFade] Block destroyed by " + uuid);
         }
     }
 
@@ -264,17 +236,16 @@ public class LogBlockProtection extends Protection {
             event.setCancelled(true);
             event.getBlock().setType(Material.AIR);
             CM2Data.unregister(event.getBlock());
-            CM2Logger.debug("[onBlockBurn] Block destroyed by " + uuid.toString());
+            CM2Logger.debug("[onBlockBurn] Block destroyed by " + uuid);
         }
     }
 
-    // 🔥 Bloc qui s’enflamme
     @EventHandler(ignoreCancelled = true)
     public void onBlockIgnite(BlockIgniteEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid != null) {
             event.setCancelled(true);
-            CM2Logger.debug("[onBlockIgnite] Block ignited by " + uuid.toString());
+            CM2Logger.debug("[onBlockIgnite] Block ignited by " + uuid);
         }
     }
 
