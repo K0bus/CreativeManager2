@@ -183,9 +183,8 @@ public class LogBlockProtection extends Protection {
 
         UUID uuid = CM2Data.findPlayer(toBlock);
         if (uuid != null) {
-            toBlock.setType(Material.AIR);
-            CM2Data.unregister(toBlock);
-            CM2Logger.debug("[onBlockFromTo] Block destroyed by " + uuid);
+            event.setCancelled(true);
+            CM2Logger.debug("[onBlockFromTo] Block flow cancelled for block placed by " + uuid);
         }
     }
 
