@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 public class EntityInteractionProtection extends Protection {
     public EntityInteractionProtection() {
-        super("entity.interact", Material.VILLAGER_SPAWN_EGG);
+        super("entity", Material.VILLAGER_SPAWN_EGG);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
