@@ -177,15 +177,13 @@ public class LogBlockProtection extends Protection {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBlockFromTo(BlockFromToEvent event) {
-        Block toBlock = event.getToBlock();
-        if (toBlock.getType().isAir()) return;
-
-        UUID uuid = CM2Data.findPlayer(toBlock);
+    public void onBlockFormTo(BlockFromToEvent event) {
+        UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid != null) {
-            toBlock.setType(Material.AIR);
-            CM2Data.unregister(toBlock);
-            CM2Logger.debug("[onBlockFromTo] Block destroyed by " + uuid);
+            event.setCancelled(true);
+            event.getBlock().setType(event.getToBlock().getType());
+            event.getBlock().setBlockData(event.getToBlock().getBlockData());
+            CM2Logger.debug("[onBlockFromTo] Block flow cancelled for block placed by " + uuid);
         }
     }
 
@@ -246,16 +244,6 @@ public class LogBlockProtection extends Protection {
         if (uuid != null) {
             event.setCancelled(true);
             CM2Logger.debug("[onBlockIgnite] Block ignited by " + uuid);
-        }
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    public void onBlockFormTo(BlockFromToEvent event) {
-        UUID uuid = CM2Data.findPlayer(event.getBlock());
-        if (uuid != null) {
-            event.setCancelled(true);
-            event.getBlock().setType(event.getToBlock().getType());
-            CM2Logger.debug("[onBlockFormTo] Block destroyed by " + uuid);
         }
     }
 

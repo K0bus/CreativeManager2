@@ -25,6 +25,17 @@ public class LogEntityProtection extends Protection {
     }
 
     @EventHandler
+    public void onHangingPlace(EntityPlaceEvent event) {
+        if (event.getPlayer() == null) return;
+        if (isDisabled()) return;
+        if (!Protection.isCreativePlayer(event.getPlayer())) return;
+        if (hasPermission(event.getPlayer())) return;
+
+        CM2Data.register(event.getEntity(), event.getPlayer());
+        CM2Logger.debug("Registered hanging entity " + event.getEntity().getType().name() + " for player " + event.getPlayer().getName());
+    }
+
+    @EventHandler
     public void onEntityDie(EntityDeathEvent event) {
         if (CM2Data.findPlayer(event.getEntity()) == null) return;
         CM2Data.unregister(event.getEntity());
