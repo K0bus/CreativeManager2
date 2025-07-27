@@ -250,6 +250,16 @@ public class LogBlockProtection extends Protection {
     }
 
     @EventHandler(ignoreCancelled = true)
+    public void onBlockFormTo(BlockFromToEvent event) {
+        UUID uuid = CM2Data.findPlayer(event.getBlock());
+        if (uuid != null) {
+            event.setCancelled(true);
+            event.getBlock().setType(event.getToBlock().getType());
+            CM2Logger.debug("[onBlockFormTo] Block destroyed by " + uuid);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
     public void onExtend(BlockPistonExtendEvent event) {
         BlockFace pistonDirection = event.getDirection();
         List<Block> blocks = new ArrayList<>(event.getBlocks());
