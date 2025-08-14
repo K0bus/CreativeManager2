@@ -180,9 +180,10 @@ public class LogBlockProtection extends Protection {
     public void onBlockFormTo(BlockFromToEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid != null) {
+            event.getToBlock().setType(Material.AIR);
+            CM2Data.unregister(event.getToBlock());
+            CM2Logger.debug("[onBlockFromTo] Block destroyed by " + uuid);
             event.setCancelled(true);
-            event.getBlock().setType(event.getToBlock().getType());
-            event.getBlock().setBlockData(event.getToBlock().getBlockData());
             CM2Logger.debug("[onBlockFromTo] Block flow cancelled for block placed by " + uuid);
         }
     }
