@@ -2,12 +2,14 @@ package fr.k0bus.creativemanager2.protections.generic;
 
 import fr.k0bus.creativemanager2.CM2Data;
 import fr.k0bus.creativemanager2.CM2Logger;
+import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.Protection;
 import fr.k0bus.creativemanager2.utils.BlockUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -220,6 +222,17 @@ public class LogBlockProtection extends Protection {
     public void onBlockFade(BlockFadeEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
         if (uuid != null) {
+            Material fromMaterial = event.getBlock().getType();
+            Material toMaterial = event.getNewState().getType();
+            
+            if ((fromMaterial == Material.GRASS_BLOCK || fromMaterial == Material.MYCELIUM) && toMaterial == Material.DIRT) {
+                CM2Data.unregister(event.getBlock());
+                CM2Logger.debug("[onBlockFade] " + fromMaterial + " faded to dirt by " + uuid);
+                Bukkit.getScheduler().runTaskAsynchronously(CreativeManager2.getAPI().getInstance(), 
+                    () -> CM2Data.register(event.getBlock(), uuid));
+                return;
+            }
+            
             event.setCancelled(true);
             event.getBlock().setType(Material.AIR);
             CM2Data.unregister(event.getBlock());
