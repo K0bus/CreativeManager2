@@ -219,11 +219,11 @@ public class LogBlockProtection extends Protection {
     @EventHandler(ignoreCancelled = true)
     public void onBlockFade(BlockFadeEvent event) {
         UUID uuid = CM2Data.findPlayer(event.getBlock());
-        if (uuid != null) {
+        if (uuid != null && event.getNewState().getType().isAir()) {
             event.setCancelled(true);
             event.getBlock().setType(Material.AIR);
             CM2Data.unregister(event.getBlock());
-            CM2Logger.debug("[onBlockFade] Block destroyed by " + uuid);
+            CM2Logger.debug("[onBlockFade] Block placed by " + uuid + " faded !");
         }
     }
 
