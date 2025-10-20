@@ -39,6 +39,8 @@ protections:
     enabled: true
   pickup:
     enabled: true
+  pickitem:
+    enabled: true
   entity:
     enabled: true
   combat:
