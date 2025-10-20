@@ -143,6 +143,7 @@ public abstract class Protection implements Listener {
                 new LogBlockPaperProtection().init().getMapEntry(),
                 new LogEntityProtection().init().getMapEntry(),
                 new PickupProtection().init().getMapEntry(),
+                new PickItemProtection().init().getMapEntry(),
                 new ThrowProtection().init().getMapEntry(),
                 new DataRemoverProtection().init().getMapEntry(),
                 new ChestShopProtection().init().getMapEntry(),
