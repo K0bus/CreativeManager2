@@ -26,6 +26,10 @@ public final class CM2Logger {
         if (getLogger().isLoggable(Level.SEVERE)) getLogger().log(Level.SEVERE, "An error has occurred.", e);
     }
 
+    public static void exception(String message, Exception e) {
+        if (getLogger().isLoggable(Level.SEVERE)) getLogger().log(Level.SEVERE, message, e);
+    }
+
     private static Logger getLogger() {
         return CreativeManager2.getAPI().getInstance().getLogger();
     }
