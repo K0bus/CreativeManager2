@@ -24,7 +24,13 @@ public class FAWEProtection extends Protection {
         super(Material.WOODEN_AXE, "FastAsyncWorldEdit");
     }
 
-    @SuppressWarnings("checkstyle:LeftCurly")
+    @Override
+    public Protection init() {
+        super.init();
+        WorldEdit.getInstance().getEventBus().register(this);
+        return this;
+    }
+
     @Subscribe
     public void onEditSessionEnd(EditSessionEvent e) {
         if (e.getStage() != EditSession.Stage.BEFORE_CHANGE) return;

@@ -3,6 +3,7 @@ package fr.k0bus.creativemanager2.protections;
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import fr.k0bus.creativemanager2.CreativeManager2;
 import fr.k0bus.creativemanager2.protections.addons.ChestShopProtection;
+import fr.k0bus.creativemanager2.protections.addons.FAWEProtection;
 import fr.k0bus.creativemanager2.protections.addons.ItemsAdderProtection;
 import fr.k0bus.creativemanager2.protections.addons.SlimefunProtection;
 import fr.k0bus.creativemanager2.protections.generic.*;
@@ -147,7 +148,8 @@ public abstract class Protection implements Listener {
                 new DataRemoverProtection().init().getMapEntry(),
                 new ChestShopProtection().init().getMapEntry(),
                 new ItemsAdderProtection().init().getMapEntry(),
-                new SlimefunProtection().init().getMapEntry());
+                new SlimefunProtection().init().getMapEntry(),
+                new FAWEProtection().init().getMapEntry());
     }
 
     public static boolean isCreativePlayer(LivingEntity entity) {
